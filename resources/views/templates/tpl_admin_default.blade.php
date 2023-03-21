@@ -15,7 +15,7 @@
 
     <link rel="canonical" href="https://demo.adminkit.io/dashboard-ecommerce.html" />
 
-    <title>{{$title}}</title>
+    <title>{{ $title }}</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
@@ -61,10 +61,14 @@
         <div class="main">
             @include('includes.header-admin')
 
-            @yield('content')
+            <main>
+                <div class="container-fluid p-4">
+                    @yield('content')
+                </div>
+            </main>
 
             @include('includes.footer-admin')
-           
+
         </div>
     </div>
 

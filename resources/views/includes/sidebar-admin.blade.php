@@ -56,13 +56,35 @@
             </li>
 
             <li class="sidebar-item">
-                <a data-bs-target="#pages" href="" data-bs-toggle="collapse" class="sidebar-link collapsed">
+                <span data-bs-target="#pages" href="" data-bs-toggle="collapse" class="sidebar-link collapsed">
                     <i class="align-middle" data-feather="layout"></i> <span
-                        class="align-middle">Danh mục sản phẩm</span>
-                </a>
+                        class="align-middle">Quản trị danh mục</span>
+                </span>
                 <ul id="pages" class="sidebar-dropdown list-unstyled collapse "
                     data-bs-parent="#sidebar">
-                    <li class="sidebar-item"><a class="sidebar-link" href="pages-settings.html">Settings</a>
+                    <li class="sidebar-item"><a class="sidebar-link" href="">Loại danh mục</a>
+                    </li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="">Sản Phẩm</a>
+                    </li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="">Bài viết</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="sidebar-item">
+                <span data-bs-target="#setting" href="" data-bs-toggle="collapse" class="sidebar-link collapsed">
+                    <i class="align-middle" data-feather="layout"></i> <span
+                        class="align-middle">Quản trị giao diện</span>
+                </span>
+                <ul id="setting" class="sidebar-dropdown list-unstyled collapse "
+                    data-bs-parent="#sidebar">
+                    <li class="sidebar-item"><a class="sidebar-link" href="">Hình ảnh</a>
+                    </li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="">Hỗ trợ trực tuyến</a>
+                    </li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="">Thông tin</a>
+                    </li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="">Nội dung khác</a>
                     </li>
                 </ul>
             </li>

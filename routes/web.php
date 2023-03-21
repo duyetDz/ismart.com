@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\DashboardsController;
+use App\Http\Controllers\admin\directory_management\CategoryController;
 use App\Http\Controllers\admin\LoginController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\HomeController;
@@ -65,4 +66,8 @@ Route::get('/admin/login', [LoginController::class, 'login'])->name('admin.user.
 
 Route::post('/admin/login', [LoginController::class, 'store'])->name('admin.user.store');
 
+// Quản trị danh mục
+
+
+Route::get('/admin/category', [CategoryController::class, 'index'])->name('admin.category');
 
