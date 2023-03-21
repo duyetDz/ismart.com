@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\DashboardsController;
+use App\Http\Controllers\admin\LoginController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsersController;
@@ -60,4 +61,8 @@ Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 
 Route::get('/admin/index', [DashboardsController::class, 'index'])->name('admin.index');
 
-Route::get('/admin/login', [UserController::class, 'login'])->name('admin.user.login');
+Route::get('/admin/login', [LoginController::class, 'login'])->name('admin.user.login');
+
+Route::post('/admin/login', [LoginController::class, 'store'])->name('admin.user.store');
+
+

@@ -11,6 +11,7 @@ class DashboardsController extends Controller
     public function index()
     {
         # code...
-        return view('admin/dashboards/index');
+        $title = "Trang Dashboards";
+        return view('admin/dashboards/index',compact('title'));
     }
 }
