@@ -94,7 +94,7 @@
                                         <div>
                                             <label class="form-check">
                                                 <input class="form-check-input" type="checkbox"
-                                                    name="remember-me" >
+                                                    name="remember">
                                                 <span class="form-check-label">
                                                     Remember me
                                                 </span>

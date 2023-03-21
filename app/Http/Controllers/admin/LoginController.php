@@ -17,17 +17,10 @@ class LoginController extends Controller
         return view('admin/user/login',compact('title'));
     }
 
-    public function store(Request $request)
+    public function store(LoginRequest $request)
     {
-        $value = $request->input();
-        $email = $value['email'];
-        $password = $value['password'];
-        $remember = $value['remember'];
-        
-        // if (Auth::attempt(['email' => $email, 'password' => $password], $remember)) {
-        //     // The user is being remembered...
-            
-        // }
-        dd($value['email']);
+        $validated = $request->validated();
+        $remember = $request->boolean('remember');
+        dd($remember);
     }
 }
