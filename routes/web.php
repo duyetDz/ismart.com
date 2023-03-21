@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\admin\DashboardsController;
+use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\BlogController;
@@ -54,4 +56,8 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart');
 
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 
+// Admin
 
+Route::get('/admin/index', [DashboardsController::class, 'index'])->name('admin.index');
+
+Route::get('/admin/login', [UserController::class, 'login'])->name('admin.user.login');
