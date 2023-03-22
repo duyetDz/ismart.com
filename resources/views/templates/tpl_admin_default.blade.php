@@ -27,6 +27,10 @@
     <!-- Remove this after purchasing -->
     <link class="js-stylesheet" href="css/light.css" rel="stylesheet">
     <script src="js/settings.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet" />
     <style>
         body {
             opacity: 0;

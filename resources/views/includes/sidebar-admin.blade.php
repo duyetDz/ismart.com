@@ -62,11 +62,11 @@
                 </span>
                 <ul id="pages" class="sidebar-dropdown list-unstyled collapse "
                     data-bs-parent="#sidebar">
-                    <li class="sidebar-item"><a class="sidebar-link" href="">Loại danh mục</a>
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{route('admin.category')}}">Loại danh mục</a>
                     </li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="">Sản Phẩm</a>
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{route('admin.product')}}">Sản Phẩm</a>
                     </li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="">Bài viết</a>
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{route('admin.blog')}}">Bài viết</a>
                     </li>
                 </ul>
             </li>

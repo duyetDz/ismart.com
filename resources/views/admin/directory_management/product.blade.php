@@ -1,7 +1,7 @@
 @extends('templates.tpl_admin_default')
 
 @section('content')
-    @include('includes.header-main-admin', ['name' => 'Quản trị danh mục', 'key' => 'Loại danh mục'])
+    @include('includes.header-main-admin', ['name' => 'Quản trị danh mục', 'key' => 'Sản phẩm'])
 
     <!-- Modal add user -->
 
@@ -10,7 +10,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Student</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Add product</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="saveStudent">

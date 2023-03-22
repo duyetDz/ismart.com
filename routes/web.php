@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\admin\DashboardsController;
+use App\Http\Controllers\admin\directory_management\BlogController as Directory_managementBlogController;
 use App\Http\Controllers\admin\directory_management\CategoryController;
+use App\Http\Controllers\admin\directory_management\ProductController;
 use App\Http\Controllers\admin\LoginController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\HomeController;
@@ -70,4 +72,10 @@ Route::post('/admin/login', [LoginController::class, 'store'])->name('admin.user
 
 
 Route::get('/admin/category', [CategoryController::class, 'index'])->name('admin.category');
+
+Route::get('/admin/product', [ProductController::class, 'index'])->name('admin.product');
+
+Route::get('/admin/blog', [Directory_managementBlogController::class, 'index'])->name('admin.blog');
+
+
 
