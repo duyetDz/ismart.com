@@ -36,7 +36,7 @@
                             <td>HCA00031</td>
                             <td>
                                 <a href="" title="" class="thumb">
-                                    <img src="images/img-pro-11.png" alt="">
+                                    <img src="client/images/img-pro-11.png" alt="">
                                 </a>
                             </td>
                             <td>
@@ -55,7 +55,7 @@
                             <td>HCA00032</td>
                             <td>
                                 <a href="" title="" class="thumb">
-                                    <img src="images/img-pro-23.png" alt="">
+                                    <img src="client/images/img-pro-23.png" alt="">
                                 </a>
                             </td>
                             <td>

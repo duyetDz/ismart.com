@@ -40,7 +40,7 @@
                     <ul class="list-item clearfix">
                         <li>
                             <a href="{{route('products.detail')}}" title="" class="thumb">
-                                <img src="images/img-pro-17.png">
+                                <img src="client/images/img-pro-17.png">
                             </a>
                             <a href="{{route('products.detail')}}" title="" class="product-name">Laptop HP Probook 4430s</a>
                             <div class="price">
@@ -219,7 +219,7 @@
             <div class="section" id="banner-wp">
                 <div class="section-detail">
                     <a href="{{route('products.detail')}}" title="" class="thumb">
-                        <img src="images/banner.png" alt="">
+                        <img src="client/images/banner.png" alt="">
                     </a>
                 </div>
             </div>

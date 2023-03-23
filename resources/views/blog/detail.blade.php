@@ -38,7 +38,7 @@
                                 vừa là CEO của Tesla, nói về lý do tại sao tầm nhìn của ông ấy về điện năng lượng mặt trời
                                 tại Mỹ sâu xa hơn sẽ có nhiều việc cho các công lưới điện chứ không phải ít hơn</p>
                             <p style="text-align: center;">
-                                <img src="images/img-detail.jpg" alt="">
+                                <img src="client/images/img-detail.jpg" alt="">
                             </p>
                             <p>Một trong số đó là nhiều tiểu bang có luật “mua lại điện” đỏi hỏi các công ty lưới điện phải
                                 mua lại lượng điện dư thừa mà khách hàng tạo ra bởi năng lượng mặt trời. Cũng có những lo
@@ -91,7 +91,7 @@
                         <ul class="list-item">
                             <li class="clearfix">
                                 <a href="?page=detail_product" title="" class="thumb fl-left">
-                                    <img src="{{asset('')}}images/img-pro-13.png" alt="">
+                                    <img src="{{asset('')}}client/images/img-pro-13.png" alt="">
                                 </a>
                                 <div class="info fl-right">
                                     <a href="?page=detail_product" title="" class="product-name">Laptop Asus A540UP
@@ -110,7 +110,7 @@
                 <div class="section" id="banner-wp">
                     <div class="section-detail">
                         <a href="?page=detail_product" title="" class="thumb">
-                            <img src="images/banner.png" alt="">
+                            <img src="client/images/banner.png" alt="">
                         </a>
                     </div>
                 </div>

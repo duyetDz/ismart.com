@@ -8,13 +8,13 @@
             <div class="section" id="slider-wp">
                 <div class="section-detail">
                     <div class="item">
-                        <img src="images/slider-01.png" alt="">
+                        <img src="{{asset('')}}client/images/slider-01.png" alt="">
                     </div>
                     <div class="item">
-                        <img src="images/slider-02.png" alt="">
+                        <img src="{{asset('')}}client/images/slider-02.png" alt="">
                     </div>
                     <div class="item">
-                        <img src="images/slider-03.png" alt="">
+                        <img src="{{asset('')}}client/images/slider-03.png" alt="">
                     </div>
                 </div>
             </div>
@@ -23,35 +23,35 @@
                     <ul class="list-item clearfix">
                         <li>
                             <div class="thumb">
-                                <img src="images/icon-1.png">
+                                <img src="client/images/icon-1.png">
                             </div>
                             <h3 class="title">Miễn phí vận chuyển</h3>
                             <p class="desc">Tới tận tay khách hàng</p>
                         </li>
                         <li>
                             <div class="thumb">
-                                <img src="images/icon-2.png">
+                                <img src="client/images/icon-2.png">
                             </div>
                             <h3 class="title">Tư vấn 24/7</h3>
                             <p class="desc">1900.9999</p>
                         </li>
                         <li>
                             <div class="thumb">
-                                <img src="images/icon-3.png">
+                                <img src="client/images/icon-3.png">
                             </div>
                             <h3 class="title">Tiết kiệm hơn</h3>
                             <p class="desc">Với nhiều ưu đãi cực lớn</p>
                         </li>
                         <li>
                             <div class="thumb">
-                                <img src="images/icon-4.png">
+                                <img src="client/images/icon-4.png">
                             </div>
                             <h3 class="title">Thanh toán nhanh</h3>
                             <p class="desc">Hỗ trợ nhiều hình thức</p>
                         </li>
                         <li>
                             <div class="thumb">
-                                <img src="images/icon-5.png">
+                                <img src="client/images/icon-5.png">
                             </div>
                             <h3 class="title">Đặt hàng online</h3>
                             <p class="desc">Thao tác đơn giản</p>
@@ -67,7 +67,7 @@
                     <ul class="list-item">
                         <li>
                             <a href="{{route('products.detail')}}" title="" class="thumb">
-                                <img src="images/img-pro-05.png">
+                                <img src="client/images/img-pro-05.png">
                             </a>
                             <a href="{{route('products.detail')}}" title="" class="product-name">Laptop Lenovo IdeaPad 120S</a>
                             <div class="price">
@@ -90,7 +90,7 @@
                     <ul class="list-item clearfix">
                         <li>
                             <a href="{{route('products.detail')}}" title="" class="thumb">
-                                <img src="images/img-pro-16.png">
+                                <img src="client/images/img-pro-16.png">
                             </a>
                             <a href="{{route('products.detail')}}" title="" class="product-name">Motorola Moto G5S Plus</a>
                             <div class="price">
@@ -114,7 +114,7 @@
                     <ul class="list-item clearfix">
                         <li>
                             <a href="" title="" class="thumb">
-                                <img src="images/img-pro-17.png">
+                                <img src="client/images/img-pro-17.png">
                             </a>
                             <a href="" title="" class="product-name">Laptop Asus X441NA</a>
                             <div class="price">
@@ -195,7 +195,7 @@
                     <ul class="list-item">
                         <li class="clearfix">
                             <a href="{{route('products.detail')}}" title="" class="thumb fl-left">
-                                <img src="images/img-pro-13.png" alt="">
+                                <img src="client/images/img-pro-13.png" alt="">
                             </a>
                             <div class="info fl-right">
                                 <a href="{{route('products.detail')}}" title="" class="product-name">Laptop Asus A540UP I5</a>
@@ -206,104 +206,14 @@
                                 <a href="" title="" class="buy-now">Mua ngay</a>
                             </div>
                         </li>
-                        <li class="clearfix">
-                            <a href="{{route('products.detail')}}" title="" class="thumb fl-left">
-                                <img src="images/img-pro-11.png" alt="">
-                            </a>
-                            <div class="info fl-right">
-                                <a href="{{route('products.detail')}}" title="" class="product-name">Iphone X Plus</a>
-                                <div class="price">
-                                    <span class="new">15.190.000đ</span>
-                                    <span class="old">17.190.000đ</span>
-                                </div>
-                                <a href="" title="" class="buy-now">Mua ngay</a>
-                            </div>
-                        </li>
-                        <li class="clearfix">
-                            <a href="{{route('products.detail')}}" title="" class="thumb fl-left">
-                                <img src="images/img-pro-12.png" alt="">
-                            </a>
-                            <div class="info fl-right">
-                                <a href="{{route('products.detail')}}" title="" class="product-name">Iphone X Plus</a>
-                                <div class="price">
-                                    <span class="new">15.190.000đ</span>
-                                    <span class="old">17.190.000đ</span>
-                                </div>
-                                <a href="" title="" class="buy-now">Mua ngay</a>
-                            </div>
-                        </li>
-                        <li class="clearfix">
-                            <a href="{{route('products.detail')}}" title="" class="thumb fl-left">
-                                <img src="images/img-pro-05.png" alt="">
-                            </a>
-                            <div class="info fl-right">
-                                <a href="{{route('products.detail')}}" title="" class="product-name">Iphone X Plus</a>
-                                <div class="price">
-                                    <span class="new">15.190.000đ</span>
-                                    <span class="old">17.190.000đ</span>
-                                </div>
-                                <a href="" title="" class="buy-now">Mua ngay</a>
-                            </div>
-                        </li>
-                        <li class="clearfix">
-                            <a href="{{route('products.detail')}}" title="" class="thumb fl-left">
-                                <img src="images/img-pro-22.png" alt="">
-                            </a>
-                            <div class="info fl-right">
-                                <a href="{{route('products.detail')}}" title="" class="product-name">Iphone X Plus</a>
-                                <div class="price">
-                                    <span class="new">15.190.000đ</span>
-                                    <span class="old">17.190.000đ</span>
-                                </div>
-                                <a href="" title="" class="buy-now">Mua ngay</a>
-                            </div>
-                        </li>
-                        <li class="clearfix">
-                            <a href="{{route('products.detail')}}" title="" class="thumb fl-left">
-                                <img src="images/img-pro-23.png" alt="">
-                            </a>
-                            <div class="info fl-right">
-                                <a href="{{route('products.detail')}}" title="" class="product-name">Iphone X Plus</a>
-                                <div class="price">
-                                    <span class="new">15.190.000đ</span>
-                                    <span class="old">17.190.000đ</span>
-                                </div>
-                                <a href="" title="" class="buy-now">Mua ngay</a>
-                            </div>
-                        </li>
-                        <li class="clearfix">
-                            <a href="{{route('products.detail')}}" title="" class="thumb fl-left">
-                                <img src="images/img-pro-18.png" alt="">
-                            </a>
-                            <div class="info fl-right">
-                                <a href="{{route('products.detail')}}" title="" class="product-name">Iphone X Plus</a>
-                                <div class="price">
-                                    <span class="new">15.190.000đ</span>
-                                    <span class="old">17.190.000đ</span>
-                                </div>
-                                <a href="" title="" class="buy-now">Mua ngay</a>
-                            </div>
-                        </li>
-                        <li class="clearfix">
-                            <a href="{{route('products.detail')}}" title="" class="thumb fl-left">
-                                <img src="images/img-pro-15.png" alt="">
-                            </a>
-                            <div class="info fl-right">
-                                <a href="{{route('products.detail')}}" title="" class="product-name">Iphone X Plus</a>
-                                <div class="price">
-                                    <span class="new">15.190.000đ</span>
-                                    <span class="old">17.190.000đ</span>
-                                </div>
-                                <a href="" title="" class="buy-now">Mua ngay</a>
-                            </div>
-                        </li>
+
                     </ul>
                 </div>
             </div>
             <div class="section" id="banner-wp">
                 <div class="section-detail">
                     <a href="" title="" class="thumb">
-                        <img src="https://i.imgur.com/p3FURJD.jpg" alt="">
+                        <img src="https://i.pinimg.com/236x/09/5c/9d/095c9dbe831339e5d924b238edb3c481.jpg" alt="">
                     </a>
                 </div>
             </div>
