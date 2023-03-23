@@ -63,7 +63,7 @@
         <div id="head-body" class="clearfix">
             <div class="wp-inner">
                 <a href="{{route('index')}}" title="" id="logo" class="fl-left"><img
-                        src="{{ asset('images/logo.png') }}" /></a>
+                        src="{{ asset('client/images/logo.png') }}" /></a>
                 <div id="search-wp" class="fl-left">
                     <form method="POST" action="">
                         <input type="text" name="s" id="s"
@@ -92,7 +92,7 @@
                             <ul class="list-cart">
                                 <li class="clearfix">
                                     <a  title="" class="thumb fl-left">
-                                        <img src="images/img-pro-11.png" alt="">
+                                        <img src="client/images/img-pro-11.png" alt="">
                                     </a>
                                     <div class="info fl-right">
                                         <a  title="" class="product-name">Sony Express X6</a>
@@ -102,7 +102,7 @@
                                 </li>
                                 <li class="clearfix">
                                     <a  title="" class="thumb fl-left">
-                                        <img src="images/img-pro-23.png" alt="">
+                                        <img src="client/images/img-pro-23.png" alt="">
                                     </a>
                                     <div class="info fl-right">
                                         <a  title="" class="product-name">Laptop Lenovo 10</a>

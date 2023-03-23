@@ -6,14 +6,12 @@ use App\Http\Controllers\admin\directory_management\CategoryController;
 use App\Http\Controllers\admin\directory_management\ProductController;
 use App\Http\Controllers\admin\LoginController;
 use App\Http\Controllers\admin\UserController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\UsersController;
-use App\Http\Controllers\BlogController;
-use App\Http\Controllers\ProductsController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\CheckoutController;
-
-
+use App\Http\Controllers\client\BlogController;
+use App\Http\Controllers\client\CartController;
+use App\Http\Controllers\client\CheckoutController;
+use App\Http\Controllers\client\HomeController;
+use App\Http\Controllers\client\ProductsController;
+use App\Http\Controllers\client\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*

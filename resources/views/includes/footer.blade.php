@@ -6,7 +6,7 @@
                 <p class="desc">ISMART luôn cung cấp luôn là sản phẩm chính hãng có thông tin rõ ràng, chính sách ưu đãi cực lớn cho khách hàng có thẻ thành viên.</p>
                 <div id="payment">
                     <div class="thumb">
-                        <img src="images/img-foot.png" alt="">
+                        <img src="client/images/img-foot.png" alt="">
                     </div>
                 </div>
             </div>
@@ -107,5 +107,5 @@
         </ul>
     </div>
 </div>
-<div id="btn-top"><img src="images/icon-to-top.png" alt=""/></div>
+<div id="btn-top"><img src="client/images/icon-to-top.png" alt=""/></div>
 <div id="fb-root"></div>

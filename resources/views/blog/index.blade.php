@@ -24,7 +24,7 @@
                     <ul class="list-item">
                         <li class="clearfix">
                             <a href="{{route('blog.detail')}}" title="" class="thumb fl-left">
-                                <img src="images/img-post-01.jpg" alt="">
+                                <img src="client/images/img-post-01.jpg" alt="">
                             </a>
                             <div class="info fl-right">
                                 <a href="{{route('blog.detail')}}" title="" class="title">Mời gọi kiều bào hiến kế, chung sức xây dựng phát triển TP. Hồ Chí Minh</a>
@@ -61,7 +61,7 @@
                     <ul class="list-item">
                         <li class="clearfix">
                             <a href="{{route('products.detail')}}" title="" class="thumb fl-left">
-                                <img src="images/img-pro-13.png" alt="">
+                                <img src="client/images/img-pro-13.png" alt="">
                             </a>
                             <div class="info fl-right">
                                 <a href="{{route('products.detail')}}" title="" class="product-name">Laptop Asus A540UP I5</a>
@@ -79,7 +79,7 @@
             <div class="section" id="banner-wp">
                 <div class="section-detail">
                     <a href="?page=detail_blog_product" title="" class="thumb">
-                        <img src="images/banner.png" alt="">
+                        <img src="client/images/banner.png" alt="">
                     </a>
                 </div>
             </div>
