@@ -12,6 +12,7 @@ use App\Http\Controllers\client\CheckoutController;
 use App\Http\Controllers\client\HomeController;
 use App\Http\Controllers\client\ProductsController;
 use App\Http\Controllers\client\UsersController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -77,3 +78,11 @@ Route::get('/admin/blog', [Directory_managementBlogController::class, 'index'])-
 
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
