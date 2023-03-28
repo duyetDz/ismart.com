@@ -66,7 +66,7 @@ Route::middleware(['auth'])->group(function () {
 
 // Admin
 
-Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
+Route::prefix('admin')->middleware(['is_admin'])->group(function () {
 
     Route::get('/index', [DashboardsController::class, 'index'])->name('admin.index');
 
