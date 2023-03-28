@@ -1,9 +1,18 @@
 <div id="site">
     <div id="container">
+        @if (session('status'))
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Xin chào!</strong> {{session('status')}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @endif
         <div id="header-wp">
             <div id="head-top" class="clearfix">
                 <div class="wp-inner">
-                    <a href="{{ route('index') }}" title="" id="payment-link" class="fl-left">Hình thức thanh toán</a>
+                    <a href="{{ route('index') }}" title="" id="payment-link" class="fl-left">Hình thức thanh
+                        toán</a>
                     <div id="main-menu-wp" class="fl-right">
                         <ul id="main-menu" class="clearfix">
                             <li>

@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 class UsersController extends Controller
 {
     //
+
+    public function profile()
+    {
+        # code...
+        return view('users/profile');
+    }
+
     public function email()
     {
         # code...

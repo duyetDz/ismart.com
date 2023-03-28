@@ -48,6 +48,7 @@
                                         {{ __('Remember Me') }}
                                     </label>
                                 </div>
+                                <div>Admin123@</div>
                             </div>
                         </div>
 
