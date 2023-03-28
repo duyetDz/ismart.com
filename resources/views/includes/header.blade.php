@@ -1,25 +1,34 @@
 <div id="site">
     <div id="container">
+        @if (session('status'))
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Xin chào!</strong> {{session('status')}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @endif
         <div id="header-wp">
             <div id="head-top" class="clearfix">
                 <div class="wp-inner">
-                    <a href="{{route('index')}}" title="" id="payment-link" class="fl-left">Hình thức thanh toán</a>
+                    <a href="{{ route('index') }}" title="" id="payment-link" class="fl-left">Hình thức thanh
+                        toán</a>
                     <div id="main-menu-wp" class="fl-right">
                         <ul id="main-menu" class="clearfix">
                             <li>
-                                <a href="{{route('index')}}" title="">Trang chủ</a>
+                                <a href="{{ route('index') }}" title="">Trang chủ</a>
                             </li>
                             <li>
-                                <a href="{{route('products')}}" title="">Sản phẩm</a>
+                                <a href="{{ route('products') }}" title="">Sản phẩm</a>
                             </li>
                             <li>
-                                <a href="{{route('blog')}}" title="">Blog</a>
+                                <a href="{{ route('blog') }}" title="">Blog</a>
                             </li>
                             <li>
-                                <a href="{{route('index')}}" title="">Giới thiệu</a>
+                                <a href="{{ route('index') }}" title="">Giới thiệu</a>
                             </li>
                             <li>
-                                <a href="{{route('index')}}" title="">Liên hệ</a>
+                                <a href="{{ route('index') }}" title="">Liên hệ</a>
                             </li>
                             <li>
                                 <div class="dropdown">
@@ -27,15 +36,23 @@
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                         style="background-color: #d9263c; color : #fff; padding-top: 10px;">
                                         <?php
-                                            if (!empty($_SESSION['username'])) {
-                                                echo $_SESSION['username'];
+                                            if (!empty( Auth::user()->name )) {
+                                               echo Auth::user()->name
                                             ?>
                                     </button>
                                     <div id="dropdown-menu" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" id="dropdown-item" href="#">Hồ sơ</a>
-                                        <a class="dropdown-item" id="dropdown-item" >Đơn mua</a>
-                                        <a class="dropdown-item" id="dropdown-item"
-                                            href="?mod=users&controller=index&action=logout">Đăng xuất</a>
+                                        <a class="dropdown-item" id="dropdown-item">Đơn mua</a>
+                                        <a id="dropdown-item" class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            class="d-none">
+                                            @csrf
+                                        </form>
                                     </div>
                                 </div>
                                 <?php
@@ -44,9 +61,9 @@
                                             ?>
                                 </button>
                                 <div id="dropdown-menu" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" id="dropdown-item" href="{{route('users.login')}}">Đăng
+                                    <a class="dropdown-item" id="dropdown-item" href="{{ route('login') }}">Đăng
                                         nhập</a>
-                                    <a class="dropdown-item" id="dropdown-item" href="{{route('users.reg')}}">Đăng
+                                    <a class="dropdown-item" id="dropdown-item" href="{{ route('register') }}">Đăng
                                         ký</a>
                                 </div>
                     </div>
@@ -62,7 +79,7 @@
         </div>
         <div id="head-body" class="clearfix">
             <div class="wp-inner">
-                <a href="{{route('index')}}" title="" id="logo" class="fl-left"><img
+                <a href="{{ route('index') }}" title="" id="logo" class="fl-left"><img
                         src="{{ asset('client/images/logo.png') }}" /></a>
                 <div id="search-wp" class="fl-left">
                     <form method="POST" action="">
@@ -83,7 +100,7 @@
                     </a>
                     <div id="cart-wp" class="fl-right">
                         <div id="btn-cart">
-                            <a  style="color: #fff"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            <a style="color: #fff"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                 <span id="num">2</span></a>
 
                         </div>
@@ -91,21 +108,21 @@
                             <p class="desc">Có <span>2 sản phẩm</span> trong giỏ hàng</p>
                             <ul class="list-cart">
                                 <li class="clearfix">
-                                    <a  title="" class="thumb fl-left">
+                                    <a title="" class="thumb fl-left">
                                         <img src="client/images/img-pro-11.png" alt="">
                                     </a>
                                     <div class="info fl-right">
-                                        <a  title="" class="product-name">Sony Express X6</a>
+                                        <a title="" class="product-name">Sony Express X6</a>
                                         <p class="price">6.250.000đ</p>
                                         <p class="qty">Số lượng: <span>1</span></p>
                                     </div>
                                 </li>
                                 <li class="clearfix">
-                                    <a  title="" class="thumb fl-left">
+                                    <a title="" class="thumb fl-left">
                                         <img src="client/images/img-pro-23.png" alt="">
                                     </a>
                                     <div class="info fl-right">
-                                        <a  title="" class="product-name">Laptop Lenovo 10</a>
+                                        <a title="" class="product-name">Laptop Lenovo 10</a>
                                         <p class="price">16.250.000đ</p>
                                         <p class="qty">Số lượng: <span>1</span></p>
                                     </div>
@@ -116,8 +133,10 @@
                                 <p class="price fl-right">18.500.000đ</p>
                             </div>
                             <div class="action-cart clearfix">
-                                <a href="{{route('cart')}}" title="Giỏ hàng" class="view-cart fl-left">Giỏ hàng</a>
-                                <a href="{{route('checkout')}}" title="Thanh toán" class="checkout fl-right">Thanh toán</a>
+                                <a href="{{ route('cart') }}" title="Giỏ hàng" class="view-cart fl-left">Giỏ
+                                    hàng</a>
+                                <a href="{{ route('checkout') }}" title="Thanh toán" class="checkout fl-right">Thanh
+                                    toán</a>
                             </div>
                         </div>
                     </div>
