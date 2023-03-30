@@ -75,6 +75,14 @@ Route::prefix('admin')->middleware(['is_admin'])->group(function () {
 
     Route::get('/category', [CategoryController::class, 'index'])->name('admin.category');
 
+    Route::post('/category/store', [CategoryController::class, 'store'])->name('admin.category.store');
+
+    Route::get('/category/update/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');
+
+    Route::post('/category/update/{id}', [CategoryController::class, 'update'])->name('admin.category.update');
+
+    Route::get('/category/delete/{id}', [CategoryController::class, 'delete'])->name('admin.category.delete');
+
     Route::get('/product', [ProductController::class, 'index'])->name('admin.product');
 
     Route::get('/blog', [Directory_managementBlogController::class, 'index'])->name('admin.blog');
