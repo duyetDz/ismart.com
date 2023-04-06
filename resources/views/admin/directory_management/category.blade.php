@@ -217,7 +217,6 @@
                             // console.log(response.errors)
 
                         } else if (response.status == 200) {
-                            console.log(response)
                             $('#userAddModal').modal('hide');
                             toastr.options = {
                                 "closeButton": true,
