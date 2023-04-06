@@ -5,6 +5,9 @@ use App\Http\Controllers\admin\directory_management\BlogController as Directory_
 use App\Http\Controllers\admin\directory_management\CategoryController;
 use App\Http\Controllers\admin\directory_management\ProductController;
 use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\admin\Customer_Management\UserController as Customer_ManagementUserController;
+
+
 use App\Http\Controllers\client\BlogController;
 use App\Http\Controllers\client\CartController;
 use App\Http\Controllers\client\CheckoutController;
@@ -98,4 +101,18 @@ Route::prefix('admin')->middleware(['is_admin'])->group(function () {
     Route::get('/product/delete/{id}', [ProductController::class, 'destroy'])->name('admin.product.delete');
 
     Route::get('/blog', [Directory_managementBlogController::class, 'index'])->name('admin.blog');
+
+
+    Route::get('/member', [Customer_ManagementUserController::class, 'list_member'])->name('admin.member.list');
+
+    Route::get('/member/create', [Customer_ManagementUserController::class, 'create'])->name('admin.member.create');
+
+    Route::post('/member/store', [Customer_ManagementUserController::class, 'store'])->name('admin.member.store');
+
+    Route::get('/member/update/{id}', [Customer_ManagementUserController::class, 'edit'])->name('admin/member/edit');
+
+    Route::post('/member/update/{id}', [Customer_ManagementUserController::class, 'update'])->name('admin/member/update');
+
+    Route::get('/member/destroy/{id}', [Customer_ManagementUserController::class, 'destroy'])->name('admin/member/destroy');
+
 });
