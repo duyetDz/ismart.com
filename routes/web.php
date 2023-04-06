@@ -61,7 +61,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 });
 
-
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
 
 
 // Admin
@@ -84,6 +86,16 @@ Route::prefix('admin')->middleware(['is_admin'])->group(function () {
     Route::get('/category/delete/{id}', [CategoryController::class, 'delete'])->name('admin.category.delete');
 
     Route::get('/product', [ProductController::class, 'index'])->name('admin.product');
+
+    Route::get('/product/create', [ProductController::class, 'create'])->name('admin.product.create');
+
+    Route::post('/product/store', [ProductController::class, 'store'])->name('admin.product.store');
+
+    Route::get('/product/update/{id}', [ProductController::class, 'edit'])->name('admin.product.edit');
+
+    Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('admin.product.update');
+
+    Route::get('/product/delete/{id}', [ProductController::class, 'destroy'])->name('admin.product.delete');
 
     Route::get('/blog', [Directory_managementBlogController::class, 'index'])->name('admin.blog');
 });

@@ -91,7 +91,7 @@
                         <ul class="list-item">
                             <li class="clearfix">
                                 <a href="?page=detail_product" title="" class="thumb fl-left">
-                                    <img src="{{asset('')}}client/images/img-pro-13.png" alt="">
+                                    <img src="{{asset('client/images/img-pro-13.png')}}" alt="">
                                 </a>
                                 <div class="info fl-right">
                                     <a href="?page=detail_product" title="" class="product-name">Laptop Asus A540UP

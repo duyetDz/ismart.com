@@ -2,109 +2,84 @@
 
 @section('content')
     @include('includes.header-main-admin', ['name' => 'Quản trị danh mục', 'key' => 'Sản phẩm'])
+    <style>
+        /* The switch - the box around the slider */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
 
-    <!-- Modal add user -->
+        /* Hide default HTML checkbox */
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
 
+        /* The slider */
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
 
-    <div class="modal fade" id="userAddModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add product</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form id="saveStudent">
-                    <div class="modal-body">
+        .slider.round {
+            border-radius: 34px;
+        }
 
-                        <div id="errorMessage" class="alert alert-warning d-none"></div>
+        input:focus+.slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
 
-                        <div class="mb-3">
-                            <label for="">Name</label>
-                            <input type="text" name="name" class="form-control" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="">Main_major</label>
-                            <input type="text" name="main_major" class="form-control" />
-                        </div>
-                        <div class="mb-3">
-                            <label class="col-sm-3 col-form-lable" for="validationDefault04">Ngôn
-                                ngữ</label>
-                            <div class="col-sm-6">
-                                <select class="custom-select" id="validationDefault04" name="class_id" required>
-                                    <option value="">
-                                        1
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Create User</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+        input:checked+.slider {
+            background-color: #2196F3;
+        }
 
-    <!-- End modal User -->
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
 
+        
 
-    <!-- Edit Student Modal -->
-    <div class="modal fade" id="studentEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Update User</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form id="updateUser">
-                    <div class="modal-body">
+        
+        input:checked+.slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
 
-                        <div id="errorMessage" class="alert alert-warning d-none"></div>
-                        <input type="hidden" name="id" id="id" class="form-control" />
+        
 
-                        <div class="mb-3">
-                            <label for="">Name</label>
-                            <input type="text" name="name" id="view_name" class="form-control" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="">Main_major</label>
-                            <input type="text" name="main_major" id="view_main_major" class="form-control" />
-                        </div>
-                        <div class="mb-3">
-                            <label class="col-sm-3 col-form-lable" for="view_class_id">Ngôn ngữ</label>
-                            <div class="col-sm-6">
-                                <select class="custom-select" id="view_class_id" name="class_id" required>
-
-                                    <option value="">
-                                        1
-                                    </option>
-
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Update User</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- End modal Update user -->
-
+        .slider.round:before {
+            border-radius: 50%;
+        }
+    </style>
 
     <div class="container">
         <div class="d-flex float-end" style="margin-bottom: 10px;">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#userAddModal" style="
+            <a href="{{ route('admin.product.create') }}" class="btn btn-primary"
+                style="
                 height: 32px;
                 margin-right: 5px;
                 ">
                 <i class="fa-sharp fa-solid fa-plus"></i> Add
-            </button>
+            </a>
 
             <form action="" method="GET" class="">
                 <input type="text" value="" placeholder="Search" name="ValuetoSearch" class="form-control">
@@ -124,35 +99,52 @@
                         <input class="form-check-input me-1" id="checkboxAll" type="checkbox">
                         All
                     </th>
-                    <th scope="col" class="col-2 text-center">ID</th>
+                    <th scope="col" class="col-1 text-center">ID</th>
+                    <th scope="col" class="col text-center">Ảnh avatar</th>
+                    <th scope="col" class="col text-center">Tên sản phẩm</th>
                     <th scope="col" class="col text-center">Tên danh mục</th>
+                    <th scope="col" class="col text-center">Trạng thái</th>
                     <th scope="col" class="col text-center">Tác vụ</th>
                 </tr>
             </thead>
             <tbody>
+
+                @foreach ($products as $product)
                     <tr id="">
                         <td class="text-center">
-                            <input class="form-check-input me-1" id="chkboxname" value=""
-                                type="checkbox">
+                            <input class="form-check-input me-1" id="chkboxname" value="" type="checkbox">
                         </td>
                         <td class="text-center">
-                            1
+                            {{ $product->id }}
                         </td>
                         <td class="text-center">
-                            Điện thoại
+                            <img src="{{ asset('') }}{{ $product->feature_image }}" class="img-thumbnail"
+                                style="width: 70px; height: 70px;" alt="...">
+                        </td>
+                        <td class="text-center">
+                            {{ $product->name }}
+                        </td>
+                        <td class="text-center">
+                            {{ $product->category->name }}
+                        </td>
+                        <td class="text-center">
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
                         </td>
                         <td class="d-flex justify-content-center">
-
                             <!-- Update user -->
+                            <a href="product/update/{{$product->id}}" class="btn btn-primary" value=""
+                                name="btn_update" id="btn_update" style="margin-right: 7px;"><i
+                                    class="fa-solid fa-pen-to-square"></i></a>
 
-                            <button type="button" class="btn btn-primary" value="" name="btn_update"
-                                id="btn_update" data-bs-toggle="modal" data-bs-target="#studentEditModal"
-                                style="margin-right: 7px;"><i class="fa-solid fa-pen-to-square"></i></button>
-
-                            <button type="button" class="btn btn-danger" name="btn_delete" id="btn_delete"><i
-                                    class="fa-solid fa-xmark"></i></button>
+                            <a href="product/delete/{{$product->id}}" class="btn btn-danger" name="btn_delete" id="btn_delete"><i
+                                    class="fa-solid fa-xmark"></i></a>
                         </td>
                     </tr>
+                @endforeach
+
             </tbody>
         </table>
         <nav aria-label="...">
@@ -169,4 +161,8 @@
             </ul>
         </nav>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
 @endsection
+

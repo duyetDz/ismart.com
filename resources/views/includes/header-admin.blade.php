@@ -102,7 +102,7 @@
                         <a href="#" class="list-group-item">
                             <div class="row g-0 align-items-center">
                                 <div class="col-2">
-                                    <img src="img/avatars/avatar-5.jpg"
+                                    <img src="{{asset('admin/img/avatars/avatar-5.jpg')}}"
                                         class="avatar img-fluid rounded-circle" alt="Vanessa Tucker">
                                 </div>
                                 <div class="col-10 ps-2">
@@ -116,7 +116,7 @@
                         <a href="#" class="list-group-item">
                             <div class="row g-0 align-items-center">
                                 <div class="col-2">
-                                    <img src="img/avatars/avatar-2.jpg"
+                                    <img src="{{asset('admin/img/avatars/avatar-2.jpg')}}"
                                         class="avatar img-fluid rounded-circle" alt="William Harris">
                                 </div>
                                 <div class="col-10 ps-2">
@@ -130,7 +130,7 @@
                         <a href="#" class="list-group-item">
                             <div class="row g-0 align-items-center">
                                 <div class="col-2">
-                                    <img src="img/avatars/avatar-4.jpg"
+                                    <img src="{{asset('admin/img/avatars/avatar-4.jpg')}}"
                                         class="avatar img-fluid rounded-circle" alt="Christina Mason">
                                 </div>
                                 <div class="col-10 ps-2">
@@ -144,7 +144,7 @@
                         <a href="#" class="list-group-item">
                             <div class="row g-0 align-items-center">
                                 <div class="col-2">
-                                    <img src="img/avatars/avatar-3.jpg"
+                                    <img src="{{asset('admin/img/avatars/avatar-3.jpg')}}"
                                         class="avatar img-fluid rounded-circle" alt="Sharon Lessman">
                                 </div>
                                 <div class="col-10 ps-2">
@@ -163,7 +163,7 @@
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-icon pe-md-0 dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                    <img src="img/avatars/avatar.jpg" class="avatar img-fluid rounded"
+                    <img src="{{asset('admin/img/avatars/avatar.jpg')}}" class="avatar img-fluid rounded"
                         alt="Charles Hall" />
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
