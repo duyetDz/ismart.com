@@ -16,15 +16,13 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        # code...
-        // dd($products);
+       
         return view('admin/directory_management/product', ['title' => 'Trang sản phẩm', 'products' => $products]);
     }
 
     public function create()
     {
-        # code...
-        // dd(1);
+       
         $users = User::where('is_admin', 1)->get();
         $category = Category::all();
 
@@ -66,18 +64,16 @@ class ProductController extends Controller
             return back()->with('status', "Bạn đã Không thành công");
         }
 
-        // dd($request);
+       
     }
 
 
     public function edit($id)
     {
-        // dd("OK");
+        
         $users = User::where('is_admin', 1)->get();
         $category = Category::all();
         $product = Product::find($id);
-        // dd($product);
-        // # code...
         return view('admin.directory_management.update_product', ['title' => 'Update sản phẩm', 'users' => $users, 'category' => $category,  'product' => $product]);
     }
 
