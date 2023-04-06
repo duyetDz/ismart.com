@@ -67,7 +67,7 @@ class UserController extends Controller
             'email' => 'required|email',
             'adress' => 'required',
             'phone_number' => 'required',
-            'is_admin' => 'required',
+            
         ], [
             'name.required' => "Bạn không được để trống tên người dùng",
             'email.required' => "Bạn không được để trống email người dùng",
@@ -81,7 +81,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->adress = $request->adress;
         $user->phone_number = $request->phone_number;
-        $user->is_admin = $request->is_admin;
+        
         if ($user->save()) {
             return redirect(route('admin.member.list'))->with('status', "Bạn đã update thành công");
         } else {

@@ -41,13 +41,7 @@
                     @enderror
                 </div>
 
-                <div class="mb-3">
-                    <label for="is_admin">Quyền</label>
-                    <input type="text" id="is_admin" name="is_admin" value="{{$user->is_admin}}"  class="form-control" />
-                    @error('is_admin')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                </div>
+               
 
                 <div class="mb-3"><button name="btn-add" class="btn btn-primary" value="true" type="submit">Update thông tin</button></div>
             </div>
