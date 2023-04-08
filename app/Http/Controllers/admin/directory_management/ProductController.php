@@ -31,21 +31,21 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        # link anh feature image http://127.0.0.1:8000/storage/photos/2/10.jpg
-        # code...
-
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'price' => 'required|numeric|min:0',
             'quantity' => 'required|numeric|min:0',
-            'feature_image' => 'required',
+            'feature_image' => 'required|image|max:2048',
             'configuration' => 'required',
             'description' => 'required',
             "user_id" => 'required',
             "category_id" => 'required'
         ], [
             'name.required' => "Bạn không được để trống tên sản phẩm",
-            'name.max' => "Tên sản phẩm không được vượt quá 255 kí tự"
+            'name.max' => "Tên sản phẩm không được vượt quá 255 kí tự",
+            'feature_image.required' => "Bạn không được để trống hình ảnh sản phẩm",
+            'feature_image.image' => "Tệp thêm vào phải là hình ảnh",
+            'feature_image.max' =>"Hình ảnh thêm vào có kích thước k vượt quá 2048 KB"
         ]);
         $path = $request->file('feature_image')->store('images', 'public');
         $product = new Product();
@@ -84,23 +84,38 @@ class ProductController extends Controller
             'name' => 'required|max:255',
             'price' => 'required|numeric|min:0',
             'quantity' => 'required|numeric|min:0',
-            'feature_image' => 'required',
             'configuration' => 'required',
             'description' => 'required',
             "user_id" => 'required',
             "category_id" => 'required'
         ], [
             'name.required' => "Bạn không được để trống tên sản phẩm",
-            'name.max' => "Tên sản phẩm không được vượt quá 255 kí tự"
+            'name.max' => "Tên sản phẩm không được vượt quá 255 kí tự",
+            'feature_image.required' => "Bạn không được để trống hình ảnh sản phẩm",
+            'feature_image.image' => "Tệp thêm vào phải là hình ảnh",
+            'feature_image.max' =>"Hình ảnh thêm vào có kích thước k vượt quá 2048 KB"
         ]);
         $product = Product::find($id);
+        if ($request->hasFile('feature_image')) {
+            // Trường hợp có thêm ảnh mới
+            $validatedData = $request->validate([        
+                'feature_image' => 'required|image|max:2048',
+            ], [
+                'feature_image.required' => "Bạn không được để trống hình ảnh sản phẩm",
+                'feature_image.image' => "Tệp thêm vào phải là hình ảnh",
+                'feature_image.max' =>"Hình ảnh thêm vào có kích thước k vượt quá 2048 KB"
+            ]);
+            if (file_exists($product->feature_image)) {
+                unlink($product->feature_image);
+            }
+            $path = $request->file('feature_image')->store('images', 'public');
+            $product->feature_image = 'storage/images/' . basename($path);
+        } 
+        
+        
         $product->name = $request->name;
         $product->price = $request->price;
         $product->quantity = $request->quantity;
-
-        $path = $request->file('feature_image')->store('images', 'public');
-        $product->feature_image = 'storage/images/' . basename($path);
-
         $product->configuration = $request->configuration;
         $product->content = $request->description;
         $product->user_id = $request->user_id;
@@ -118,6 +133,11 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::find($id);
+
+        if (file_exists($product->feature_image)) {
+            unlink($product->feature_image);
+        }
+
         if ($product) {
             $product->delete();
             return redirect(route('admin.product'))->with('status', 'Sản Phẩm đã bị xóa');
