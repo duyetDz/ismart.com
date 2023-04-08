@@ -102,6 +102,23 @@ Route::prefix('admin')->middleware(['is_admin'])->group(function () {
 
     Route::get('/blog', [Directory_managementBlogController::class, 'index'])->name('admin.blog');
 
+    Route::get('/blog/create', [Directory_managementBlogController::class, 'create'])->name('admin.blog.create');
+
+    Route::post('/blog/store', [Directory_managementBlogController::class, 'store'])->name('admin.blog.store');
+
+    Route::get('/blog/update/{id}', [Directory_managementBlogController::class, 'edit'])->name('admin.blog.edit');
+
+    Route::post('/blog/update/{id}', [Directory_managementBlogController::class, 'update'])->name('admin.blog.update');
+
+    Route::delete('/blog/destroy/{id}', [Directory_managementBlogController::class, 'destroy'])->name('admin.blog.destroy');
+
+
+
+
+
+
+
+
 
     Route::get('/member', [Customer_ManagementUserController::class, 'list_member'])->name('admin.member.list');
 
