@@ -6,8 +6,7 @@ use App\Http\Controllers\admin\directory_management\CategoryController;
 use App\Http\Controllers\admin\directory_management\ProductController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\Customer_Management\UserController as Customer_ManagementUserController;
-
-
+use App\Http\Controllers\admin\interface_management\InterfaceManagementController;
 use App\Http\Controllers\client\BlogController;
 use App\Http\Controllers\client\CartController;
 use App\Http\Controllers\client\CheckoutController;
@@ -114,12 +113,6 @@ Route::prefix('admin')->middleware(['is_admin'])->group(function () {
 
 
 
-
-
-
-
-
-
     Route::get('/member', [Customer_ManagementUserController::class, 'list_member'])->name('admin.member.list');
 
     Route::get('/member/create', [Customer_ManagementUserController::class, 'create'])->name('admin.member.create');
@@ -128,8 +121,23 @@ Route::prefix('admin')->middleware(['is_admin'])->group(function () {
 
     Route::get('/member/update/{id}', [Customer_ManagementUserController::class, 'edit'])->name('admin/member/edit');
 
-    Route::post('/member/update/{id}', [Customer_ManagementUserController::class, 'update'])->name('admin/member/update');
+    Route::post('/member/update/{id}', [Customer_ManagementUserController::class, 'update']);
 
-    Route::get('/member/destroy/{id}', [Customer_ManagementUserController::class, 'destroy'])->name('admin/member/destroy');
+    Route::get('/member/destroy/{id}', [Customer_ManagementUserController::class, 'destroy']);
+
+
+    Route::get('/product/upload/{id}', [InterfaceManagementController::class, 'add']);
+
+    Route::post('/product/upload_img/store', [InterfaceManagementController::class, 'store'])->name('admin.upload.store');
+
+
+    Route::get('/interface', [InterfaceManagementController::class, 'index'])->name('admin.product_image');
+
+    Route::get('/interface/update/{id}', [InterfaceManagementController::class, 'edit'])->name('admin.product_image.edit');
+
+    Route::post('/interface/update/{id}', [InterfaceManagementController::class, 'update'])->name('admin.product_image.update');
+
+    Route::get('/interface/delete/{id}', [InterfaceManagementController::class, 'delete'])->name('admin.product_image.delete');
+
 
 });

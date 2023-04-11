@@ -1,18 +1,10 @@
 @extends('templates.tpl_admin_default')
 
 @section('content')
-    @include('includes.header-main-admin', ['name' => 'Quản trị danh mục', 'key' => 'Sản phẩm'])
-
+    @include('includes.header-main-admin', ['name' => 'Quản lý Ảnh', 'key' => 'Danh sách hình ảnh'])
 
     <div class="container">
         <div class="d-flex float-end" style="margin-bottom: 10px;">
-            <a href="{{ route('admin.product.create') }}" class="btn btn-primary"
-                style="
-                height: 32px;
-                margin-right: 5px;
-                ">
-                <i class="fa-sharp fa-solid fa-plus"></i> Add
-            </a>
 
             <form action="" method="GET" class="">
                 <input type="text" value="" placeholder="Search" name="ValuetoSearch" class="form-control">
@@ -27,6 +19,7 @@
 
         <table id="myTable" class="table table-bordered caption-top">
             <thead>
+
                 <tr>
                     <th scope="col" class="col-1 text-center">
                         <input class="form-check-input me-1" id="checkboxAll" type="checkbox">
@@ -35,44 +28,41 @@
                     <th scope="col" class="col-1 text-center">ID</th>
                     <th scope="col" class="col text-center">Ảnh avatar</th>
                     <th scope="col" class="col text-center">Tên sản phẩm</th>
-                    <th scope="col" class="col text-center">Tên danh mục</th>
-                    <th scope="col" class="col text-center">Số lượng</th>
+                    <th scope="col" class="col text-center">Ngày tạo</th>
+                    <th scope="col" class="col text-center">Ngày update</th>
                     <th scope="col" class="col text-center">Tác vụ</th>
                 </tr>
             </thead>
             <tbody>
 
-                @foreach ($products as $product)
+                @foreach ($product_images as $product_image)
                     <tr id="">
                         <td class="text-center">
                             <input class="form-check-input me-1" id="chkboxname" value="" type="checkbox">
                         </td>
                         <td class="text-center">
-                            {{ $product->id }}
+                            {{$product_image->id}}
                         </td>
                         <td class="text-center">
-                            <img src="{{ asset('') }}{{ $product->feature_image }}" class="img-thumbnail"
-                                style="width: 70px; height: 70px;" alt="...">
+                            <img src="{{asset('')}}{{$product_image->image}}" class="img-thumbnail" style="width: 70px; height: 70px;" alt="...">
                         </td>
                         <td class="text-center">
-                            {{ $product->name }}
+                            {{$product_image->product->name}}
                         </td>
                         <td class="text-center">
-                            {{ $product->category->name }}
+                            {{$product_image->created_at}}
                         </td>
                         <td class="text-center">
-                            {{ $product->quantity }}
+                            {{$product_image->updated_at}}
                         </td>
                         <td class="text-center">
-                            <a href="product/upload/{{ $product->id }}" class="btn btn-success" name="btn_=upload"
-                                id="btn_=upload"><i class="fa-solid fa-image"></i></a>
-                            <a href="product/update/{{ $product->id }}" class="btn btn-primary" value=""
-                                name="btn_update" id="btn_update" style="margin-right: 7px;
-                                margin-left: 7px;"><i
+                            <a href="interface/update/{{$product_image->id}}" class="btn btn-primary" value="" name="btn_update"
+                                id="btn_update" style="margin-right: 7px;
+                            margin-left: 7px;"><i
                                     class="fa-solid fa-pen-to-square"></i></a>
 
-                            <a href="product/delete/{{ $product->id }}" class="btn btn-danger" name="btn_delete"
-                                id="btn_delete"><i class="fa-solid fa-xmark"></i></a>
+                            <a href="interface/delete/{{$product_image->id}}" class="btn btn-danger" name="btn_delete" id="btn_delete"><i
+                                    class="fa-solid fa-xmark"></i></a>
                         </td>
                     </tr>
                 @endforeach
@@ -93,6 +83,4 @@
             </ul>
         </nav>
     </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 @endsection
