@@ -5,9 +5,8 @@ use App\Http\Controllers\admin\directory_management\BlogController as Directory_
 use App\Http\Controllers\admin\directory_management\CategoryController;
 use App\Http\Controllers\admin\directory_management\ProductController;
 use App\Http\Controllers\admin\UserController;
-use App\Http\Controllers\admin\Customer_Management\UserController as Customer_ManagementUserController;
-
-
+use App\Http\Controllers\admin\CustomerManagement\UserController as CustomerManagementUserController;
+use App\Http\Controllers\admin\interface_management\InterfaceManagementController;
 use App\Http\Controllers\client\BlogController;
 use App\Http\Controllers\client\CartController;
 use App\Http\Controllers\client\CheckoutController;
@@ -114,22 +113,31 @@ Route::prefix('admin')->middleware(['is_admin'])->group(function () {
 
 
 
+    Route::get('/member', [CustomerManagementUserController::class, 'list_member'])->name('admin.member.list');
+
+    Route::get('/member/create', [CustomerManagementUserController::class, 'create'])->name('admin.member.create');
+
+    Route::post('/member/store', [CustomerManagementUserController::class, 'store'])->name('admin.member.store');
+
+    Route::get('/member/update/{id}', [CustomerManagementUserController::class, 'edit'])->name('admin/member/edit');
+
+    Route::post('/member/update/{id}', [CustomerManagementUserController::class, 'update']);
+
+    Route::get('/member/destroy/{id}', [CustomerManagementUserController::class, 'destroy']);
 
 
+    Route::get('/product/upload/{id}', [InterfaceManagementController::class, 'add']);
+
+    Route::post('/product/upload_img/store', [InterfaceManagementController::class, 'store'])->name('admin.upload.store');
 
 
+    Route::get('/interface', [InterfaceManagementController::class, 'index'])->name('admin.product_image');
 
+    Route::get('/interface/update/{id}', [InterfaceManagementController::class, 'edit'])->name('admin.product_image.edit');
 
-    Route::get('/member', [Customer_ManagementUserController::class, 'list_member'])->name('admin.member.list');
+    Route::post('/interface/update/{id}', [InterfaceManagementController::class, 'update'])->name('admin.product_image.update');
 
-    Route::get('/member/create', [Customer_ManagementUserController::class, 'create'])->name('admin.member.create');
+    Route::get('/interface/delete/{id}', [InterfaceManagementController::class, 'delete'])->name('admin.product_image.delete');
 
-    Route::post('/member/store', [Customer_ManagementUserController::class, 'store'])->name('admin.member.store');
-
-    Route::get('/member/update/{id}', [Customer_ManagementUserController::class, 'edit'])->name('admin/member/edit');
-
-    Route::post('/member/update/{id}', [Customer_ManagementUserController::class, 'update'])->name('admin/member/update');
-
-    Route::get('/member/destroy/{id}', [Customer_ManagementUserController::class, 'destroy'])->name('admin/member/destroy');
 
 });

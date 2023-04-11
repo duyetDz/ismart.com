@@ -78,7 +78,7 @@
                 </span>
                 <ul id="setting" class="sidebar-dropdown list-unstyled collapse "
                     data-bs-parent="#sidebar">
-                    <li class="sidebar-item"><a class="sidebar-link" href="">Hình ảnh</a>
+                    <li class="sidebar-item"><a href="{{route('admin.product_image')}}" class="sidebar-link" href="">Hình ảnh</a>
                     </li>
                     <li class="sidebar-item"><a class="sidebar-link" href="">Hỗ trợ trực tuyến</a>
                     </li>

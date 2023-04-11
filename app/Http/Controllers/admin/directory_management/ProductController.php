@@ -52,7 +52,7 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->price = $request->price;
         $product->quantity = $request->quantity;
-        $product->feature_image = 'storage/images/' . basename($path);;
+        $product->feature_image = 'storage/images/' . basename($path);
         $product->configuration = $request->configuration;
         $product->content = $request->description;
         $product->user_id = $request->user_id;
