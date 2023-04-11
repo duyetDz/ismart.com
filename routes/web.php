@@ -5,7 +5,7 @@ use App\Http\Controllers\admin\directory_management\BlogController as Directory_
 use App\Http\Controllers\admin\directory_management\CategoryController;
 use App\Http\Controllers\admin\directory_management\ProductController;
 use App\Http\Controllers\admin\UserController;
-use App\Http\Controllers\admin\Customer_Management\UserController as Customer_ManagementUserController;
+use App\Http\Controllers\admin\CustomerManagement\UserController as CustomerManagementUserController;
 use App\Http\Controllers\admin\interface_management\InterfaceManagementController;
 use App\Http\Controllers\client\BlogController;
 use App\Http\Controllers\client\CartController;
@@ -113,17 +113,17 @@ Route::prefix('admin')->middleware(['is_admin'])->group(function () {
 
 
 
-    Route::get('/member', [Customer_ManagementUserController::class, 'list_member'])->name('admin.member.list');
+    Route::get('/member', [CustomerManagementUserController::class, 'list_member'])->name('admin.member.list');
 
-    Route::get('/member/create', [Customer_ManagementUserController::class, 'create'])->name('admin.member.create');
+    Route::get('/member/create', [CustomerManagementUserController::class, 'create'])->name('admin.member.create');
 
-    Route::post('/member/store', [Customer_ManagementUserController::class, 'store'])->name('admin.member.store');
+    Route::post('/member/store', [CustomerManagementUserController::class, 'store'])->name('admin.member.store');
 
-    Route::get('/member/update/{id}', [Customer_ManagementUserController::class, 'edit'])->name('admin/member/edit');
+    Route::get('/member/update/{id}', [CustomerManagementUserController::class, 'edit'])->name('admin/member/edit');
 
-    Route::post('/member/update/{id}', [Customer_ManagementUserController::class, 'update']);
+    Route::post('/member/update/{id}', [CustomerManagementUserController::class, 'update']);
 
-    Route::get('/member/destroy/{id}', [Customer_ManagementUserController::class, 'destroy']);
+    Route::get('/member/destroy/{id}', [CustomerManagementUserController::class, 'destroy']);
 
 
     Route::get('/product/upload/{id}', [InterfaceManagementController::class, 'add']);
