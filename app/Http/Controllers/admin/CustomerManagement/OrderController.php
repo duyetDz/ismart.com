@@ -19,6 +19,24 @@ class OrderController extends Controller
         return view('admin.customer_management.order', ['title' => 'Danh sách đơn hàng', 'orders' => $orders]);
     }
 
+    public function edit($id)
+    {
+        $order = Order::find($id);
+        return view('admin.customer_management.order_edit', ['title' => 'Update đơn hàng','order' => $order]);
+    }
+
+    public function update(Request $request,$id)
+    {
+        $order = Order::find($id);
+        $order->status = $request->status;
+
+        if ($order->save()) {
+            return redirect(route('admin.order.list'))->with('status', "Bạn đã update thành công");
+        } else {
+            return back()->with('status', "Bạn Không update thành công");
+        }
+    }
+
     public function total($id)
     {
         $orderItems = Order_item::where('order_id', $id)->get();

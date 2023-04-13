@@ -4,7 +4,7 @@
     @include('includes.header-main-admin', ['name' => 'Quản lý đơn hàng', 'key' => 'Chi tiết đơn hàng'])
 
     <div class="container">
-
+        <h3>Mã đơn hàng: {{$order->order_code}}</h3>
         <div class="d-flex justify-content-xl-between">
             <div>
                 <div>Thông tin người nhận</div>
@@ -54,7 +54,7 @@
                                 {{$item->quantity}}
                             </td>
                             <td class="text-center">
-                                {{$item->quantity*$item->product->price}}
+                                {{ number_format($item->quantity*$item->product->price, 0, ',', '.') }}đ
                             </td>
                             <td class="text-center">
                                 {{$order->status}}

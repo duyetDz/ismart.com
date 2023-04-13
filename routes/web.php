@@ -148,5 +148,10 @@ Route::prefix('admin')->middleware(['is_admin'])->group(function () {
 
 
     Route::get('/order/list',[OrderController::class ,'index'])->name('admin.order.list');
+
+    Route::get('/order/update/{id}',[OrderController::class ,'edit'])->name('admin.order.edit');
+
+    Route::post('/order/update/{id}',[OrderController::class ,'update'])->name('admin.order.update');
+
     Route::get('/order/detail/{id}',[OrderController::class ,'detail'])->name('admin.order.detail');
 });

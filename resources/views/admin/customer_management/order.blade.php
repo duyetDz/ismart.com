@@ -28,6 +28,7 @@
             <thead>
                 <tr>
                     <th scope="col" class="col-1 text-center">STT</th>
+                    <th scope="col" class="col-1 text-center">Mã đơn hàng</th>
                     <th scope="col" class="col text-center">Tên người dùng</th>
                     <th scope="col" class="col text-center">Địa chỉ</th>
                     <th scope="col" class="col text-center">Phương thức thanh toán</th>
@@ -44,6 +45,9 @@
                         
                         <td class="text-center">
                             {{ $key += 1 }}
+                        </td>
+                        <td class="text-center">
+                            {{ $order->order_code }}
                         </td>
                         <td class="text-center">
                             {{ $order->name }}
@@ -64,7 +68,7 @@
                             {{ $order->updated_at }}
                         </td>
                         <td class="d-flex justify-content-center">
-                            <a href="" class="btn btn-primary" value="" name="btn_update" id="btn_update"
+                            <a href="update/{{$order->id}}" class="btn btn-primary" value="" name="btn_update" id="btn_update"
                                 style="margin-right: 7px;"><i class="fa-solid fa-pen-to-square"></i></a>
 
                             <a href="detail/{{$order->id}}" class="btn btn-info" value="" name="btn_update" id="btn_update"
