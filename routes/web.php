@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\CustomerManagement\OrderController;
 use App\Http\Controllers\admin\DashboardsController;
 use App\Http\Controllers\admin\directory_management\BlogController as Directory_managementBlogController;
 use App\Http\Controllers\admin\directory_management\CategoryController;
@@ -89,6 +90,8 @@ Route::prefix('admin')->middleware(['is_admin'])->group(function () {
 
     Route::get('/product', [ProductController::class, 'index'])->name('admin.product');
 
+    Route::get('/product/search', [ProductController::class, 'search'])->name('admin.product.search');
+
     Route::get('/product/create', [ProductController::class, 'create'])->name('admin.product.create');
 
     Route::post('/product/store', [ProductController::class, 'store'])->name('admin.product.store');
@@ -100,6 +103,8 @@ Route::prefix('admin')->middleware(['is_admin'])->group(function () {
     Route::get('/product/delete/{id}', [ProductController::class, 'destroy'])->name('admin.product.delete');
 
     Route::get('/blog', [Directory_managementBlogController::class, 'index'])->name('admin.blog');
+
+    Route::get('/blog/search', [Directory_managementBlogController::class, 'search'])->name('admin.blog.search');
 
     Route::get('/blog/create', [Directory_managementBlogController::class, 'create'])->name('admin.blog.create');
 
@@ -133,6 +138,8 @@ Route::prefix('admin')->middleware(['is_admin'])->group(function () {
 
     Route::get('/interface', [InterfaceManagementController::class, 'index'])->name('admin.product_image');
 
+    Route::get('/interface/search', [InterfaceManagementController::class, 'search'])->name('admin.product_image.search');
+
     Route::get('/interface/update/{id}', [InterfaceManagementController::class, 'edit'])->name('admin.product_image.edit');
 
     Route::post('/interface/update/{id}', [InterfaceManagementController::class, 'update'])->name('admin.product_image.update');
@@ -140,4 +147,6 @@ Route::prefix('admin')->middleware(['is_admin'])->group(function () {
     Route::get('/interface/delete/{id}', [InterfaceManagementController::class, 'delete'])->name('admin.product_image.delete');
 
 
+    Route::get('/order/list',[OrderController::class ,'index'])->name('admin.order.list');
+    Route::get('/order/detail/{id}',[OrderController::class ,'detail'])->name('admin.order.detail');
 });

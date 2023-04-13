@@ -12,17 +12,49 @@ use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
 {
+    public function __construct() {
+        
+    }
     //
     public function index()
     {
         $products = Product::all();
-       
-        return view('admin/directory_management/product', ['title' => 'Trang sản phẩm', 'products' => $products]);
+        $category = Category::all();
+        return view('admin/directory_management/product', ['title' => 'Trang sản phẩm', 'products' => $products, 'category' => $category]);
+    }
+
+    public function search(Request $request)
+    {
+        
+        $category = Category::all();
+        $input = $request->input('ValuetoSearch');
+        $select = $request->input('select');
+        $products = null;
+        if($select == 'name'){
+            if(!empty($input)){
+                $products = Product::where('name', $input)->get();
+            } else {
+                $products = Product::all();
+            }
+        } else {
+            if(!empty($input)){
+                
+                $categories = Category::select('id')-> where('name','Like','%' . $input . '%')->get();
+                $categoryIds = $categories->pluck('id')->toArray();            
+                $products = Product::where('name', 'LIKE', '%' . $input . '%')->orwhereIn('category_id', $categoryIds)->get();  
+            } else {
+                $products = Product::all();
+                
+            }
+        }
+
+        
+        return view('admin/directory_management/product',['title' => 'Trang sản phẩm','products' => $products, 'category' => $category]);
     }
 
     public function create()
     {
-       
+
         $users = User::where('is_admin', 1)->get();
         $category = Category::all();
 
@@ -45,7 +77,7 @@ class ProductController extends Controller
             'name.max' => "Tên sản phẩm không được vượt quá 255 kí tự",
             'feature_image.required' => "Bạn không được để trống hình ảnh sản phẩm",
             'feature_image.image' => "Tệp thêm vào phải là hình ảnh",
-            'feature_image.max' =>"Hình ảnh thêm vào có kích thước k vượt quá 2048 KB"
+            'feature_image.max' => "Hình ảnh thêm vào có kích thước k vượt quá 2048 KB"
         ]);
         $path = $request->file('feature_image')->store('images', 'public');
         $product = new Product();
@@ -63,14 +95,12 @@ class ProductController extends Controller
         } else {
             return back()->with('status', "Bạn đã Không thành công");
         }
-
-       
     }
 
 
     public function edit($id)
     {
-        
+
         $users = User::where('is_admin', 1)->get();
         $category = Category::all();
         $product = Product::find($id);
@@ -93,26 +123,26 @@ class ProductController extends Controller
             'name.max' => "Tên sản phẩm không được vượt quá 255 kí tự",
             'feature_image.required' => "Bạn không được để trống hình ảnh sản phẩm",
             'feature_image.image' => "Tệp thêm vào phải là hình ảnh",
-            'feature_image.max' =>"Hình ảnh thêm vào có kích thước k vượt quá 2048 KB"
+            'feature_image.max' => "Hình ảnh thêm vào có kích thước k vượt quá 2048 KB"
         ]);
         $product = Product::find($id);
         if ($request->hasFile('feature_image')) {
             // Trường hợp có thêm ảnh mới
-            $validatedData = $request->validate([        
+            $validatedData = $request->validate([
                 'feature_image' => 'required|image|max:2048',
             ], [
                 'feature_image.required' => "Bạn không được để trống hình ảnh sản phẩm",
                 'feature_image.image' => "Tệp thêm vào phải là hình ảnh",
-                'feature_image.max' =>"Hình ảnh thêm vào có kích thước k vượt quá 2048 KB"
+                'feature_image.max' => "Hình ảnh thêm vào có kích thước k vượt quá 2048 KB"
             ]);
             if (file_exists($product->feature_image)) {
                 unlink($product->feature_image);
             }
             $path = $request->file('feature_image')->store('images', 'public');
             $product->feature_image = 'storage/images/' . basename($path);
-        } 
-        
-        
+        }
+
+
         $product->name = $request->name;
         $product->price = $request->price;
         $product->quantity = $request->quantity;

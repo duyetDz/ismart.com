@@ -1,51 +1,89 @@
 @extends('templates.tpl_default')
 
 @section('content')
-    <div id="main-content-wp" class="clearfix category-product-page">
-        <section class="box-content">
-            <div class="wrapper">
-                <form action="https://mobileworld.com.vn/tai-khoan.html" id="account-form" class="account-form" method="post"
-                    accept-charset="utf-8"> <input type="hidden" name="action" value="member_account">
-                    <div class="form-wrap">
-                        <div class="col-left">
-                            <div class="avatar"> <a href="javascript:void(0)" class="avatar-img"> <img
-                                        src="https://mobileworld.com.vn/uploads/noavatar.png" alt="Giang Văn Duyệt"></a>
-                                <div class="username">Giang Văn Duyệt</div> <button type="button" id="btn-avatar"
-                                    class="fa-upload hide">Tải ảnh lên</button>
-                            </div>
-                        </div>
-                        <div class="account col-right">
-                            <div class="form-row">
-                                <div id="field-display_name" class="form-field field-display_name fa-user"> <input
-                                        type="text" name="display_name" value="Giang Văn Duyệt" required="1"
-                                        autofocus="1" minlength="2" id="display_name" class="form-control"> </div>
-                                <div id="field-gender" class="form-field field-gender fa-venus"> <select name="gender"
-                                        id="gendeer" class="form-control">
-                                        <option value="male" selected="selected">Nam</option>
-                                        <option value="female">Nữ</option>
-                                    </select> </div>
-                            </div>
-                            <div id="field-address" class="form-field field-address fa-map-marker"> <input type="text"
-                                    name="address" value="Xóm 3, Thái Thượng, Thái Thụy, Thái Bình" id="address"
-                                    class="form-control"> </div>
-                            <div id="field-phone" class="form-field field-phone fa-phone"> <input type="text"
-                                    name="phone" value="0354374284" id="phone" class="form-control"> </div>
-                            <div id="field-user_email" class="form-field field-user_email fa-envelope-o"> <input
-                                    type="email" name="user_email" value="giangvanduyet@gmail.com" required="1"
-                                    id="user_email" class="form-control"> </div>
-                            <div id="field-company" class="form-field field-company fa-home"> <input type="text"
-                                    name="company" value="nooo" id="company" class="form-control"> </div>
-                            <div class="form-row">
-                                <div id="field-birthday" class="form-field field-birthday fa-calendar"> <input
-                                        type="text" name="birthday" value="24/05/2001" id="birthday"
-                                        class="form-control"> </div>
-                            </div>
-                            <div id="field-button" class="form-field field-button form-button"> <button type="submit"
-                                    class="button btn-save">Lưu thay đổi</button> </div>
+    <section style="background-color: #eee;">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col">
+                    <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">User</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card mb-4">
+                        <div class="card-body text-center">
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                                alt="avatar" class="rounded-circle img-fluid"
+                                style="width: 150px;justify-content: center;margin: 0px auto;">
+                            <h5 class="my-3">John Smith</h5>
+                            <p class="text-muted mb-1">Full Stack Developer</p>
+                            <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
+
                         </div>
                     </div>
-                </form>
+
+                </div>
+
+                <div class="col-lg-8">
+                    <form action="">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <p class="mb-0">Họ và tên</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input class="form-control " type="text">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <p class="mb-0">Email</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input class="form-control " type="text">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <p class="mb-0">Số điện thoại</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input class="form-control " type="text">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <p class="mb-0">Mobile</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input class="form-control " type="text">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <p class="mb-0">Address</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input class="form-control " type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
 @endsection

@@ -98,7 +98,7 @@
                     data-bs-parent="#client">
                     <li class="sidebar-item"><a class="sidebar-link" href="{{route('admin.member.list')}}">Danh sách thanh viên</a>
                     </li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="">Quản lý đơn hàng</a>
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{route('admin.order.list')}}">Quản lý đơn hàng</a>
                     </li>
                     
                 </ul>

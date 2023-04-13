@@ -26,9 +26,9 @@
 
 
                 <div class="mb-3">
-                    <label for="adress">Địa chỉ</label>
-                    <input type="text" id="adress" name="adress" value="{{$user->adress}}"  class="form-control" />
-                    @error('adress')
+                    <label for="address">Địa chỉ</label>
+                    <input type="text" id="address" name="address" value="{{$user->address}}"  class="form-control" />
+                    @error('address')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>

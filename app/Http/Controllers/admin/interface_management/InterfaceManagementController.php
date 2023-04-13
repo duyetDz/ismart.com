@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin\interface_management;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\Product_image;
 use Illuminate\Http\Request;
@@ -13,7 +14,8 @@ class InterfaceManagementController extends Controller
     public function index()
     {
         $product_images = Product_image::all();
-        return view('admin.interface_management.index', ['title' => "Danh sách hình ảnh", 'product_images' => $product_images]);
+        $categories = Category::all();
+        return view('admin.interface_management.index', ['title' => "Danh sách hình ảnh", 'product_images' => $product_images, 'categories' => $categories]);
     }
     public function add($id)
     {
@@ -99,5 +101,47 @@ class InterfaceManagementController extends Controller
             return redirect(route('admin.product_image'))->with('status', 'Hình ảnh đã bị xóa');
         }
         return redirect(route('admin.product_image'))->with('status', 'Hình ảnh chưa bị xóa');
+    }
+
+    public function search(Request $request)
+    {
+        $category = Category::all();
+        $input = $request->input('ValuetoSearch');
+        $select = $request->input('select');
+        $products = null;
+        $product_images = null;
+        if($select == 'name'){
+            if(!empty($input)){
+                $products = Product::where('name', $input)->get();
+            } else {
+                $products = Product::all();
+            }
+        } else if($select == 'updated_at'){
+            
+            if(!empty($input)){
+               
+                $product_images = Product_image::where('updated_at','LIKE', '%' . $input . '%')->get();
+            } else {
+                $product_images = Product_image::all();
+            }
+           
+            return view('admin.interface_management.index', ['title' => "Danh sách hình ảnh", 'product_images' => $product_images, 'categories' => $category]);
+        }
+        else {
+            if(!empty($input)){
+                
+                $categories = Category::select('id')-> where('name','Like',$input)->get();
+                $categoryIds = $categories->pluck('id')->toArray();            
+                $products = Product::where('name', 'LIKE', '%' . $input . '%')->orwhereIn('category_id', $categoryIds)->get();  
+            } else {
+                $products = Product::all();
+                
+            }
+        }
+
+        $productIds = $products->pluck('id')->toArray();
+        $product_images = Product_image::whereIn('product_id',$productIds)->get();
+
+        return view('admin.interface_management.index', ['title' => "Danh sách hình ảnh", 'product_images' => $product_images, 'categories' => $category]);
     }
 }

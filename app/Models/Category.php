@@ -14,4 +14,11 @@ class Category extends Model
         'slug',
         'parent_id',
     ];
+
+    public function products()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+
 }
