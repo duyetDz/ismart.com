@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddUserIdToOrdersTable extends Migration
+class AddOrderCodeToOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,8 +15,7 @@ class AddUserIdToOrdersTable extends Migration
     {
         Schema::table('orders', function (Blueprint $table) {
             //
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('order_code')->unique();
         });
     }
 

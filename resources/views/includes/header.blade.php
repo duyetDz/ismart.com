@@ -33,7 +33,7 @@
                                             ?>
                                     </button>
                                     <div id="dropdown-menu" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" id="dropdown-item" href="#">Hồ sơ</a>
+                                        <a class="dropdown-item" id="dropdown-item" href="{{route('users.profile')}}">Hồ sơ</a>
                                         <a class="dropdown-item" id="dropdown-item">Đơn mua</a>
                                         <a id="dropdown-item" class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

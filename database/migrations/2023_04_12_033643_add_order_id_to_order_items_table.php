@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddUserIdToOrderItemsTable extends Migration
+class AddOrderIdToOrderItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,8 @@ class AddUserIdToOrderItemsTable extends Migration
     public function up()
     {
         Schema::table('order_items', function (Blueprint $table) {
-            //
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('order_id');
+            $table->foreign('order_id')->references('id')->on('orders');
         });
     }
 
@@ -28,7 +27,8 @@ class AddUserIdToOrderItemsTable extends Migration
     public function down()
     {
         Schema::table('order_items', function (Blueprint $table) {
-            //
+            $table->dropForeign(['order_id']);
+            $table->dropColumn('order_id');
         });
     }
 }

@@ -19,13 +19,13 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'email' => 'required',
-            'adress' => 'required',
+            'address' => 'required',
             'password' => 'required|min:8',
             'phone_number' => 'required',
         ], [
             'name.required' => "Bạn không được để trống tên người dùng",
             'email.required' => "Bạn không được để trống email người dùng",
-            'adress.required' => "Bạn không được để trống địa chỉ người dùng",
+            'address.required' => "Bạn không được để trống địa chỉ người dùng",
             'password.required' => "Bạn không được để trống mật khẩu người dùng",
             'phone_number.required' => "Bạn không được để trống số điện thoại người dùng",
         ]);
@@ -33,7 +33,7 @@ class UserController extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->adress = $request->adress;
+        $user->address = $request->address;
         $user->password = Hash::make($request->password);
         $user->phone_number = $request->phone_number;
         
@@ -65,13 +65,13 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'email' => 'required|email',
-            'adress' => 'required',
+            'address' => 'required',
             'phone_number' => 'required',
             
         ], [
             'name.required' => "Bạn không được để trống tên người dùng",
             'email.required' => "Bạn không được để trống email người dùng",
-            'adress.required' => "Bạn không được để trống địa chỉ người dùng",
+            'address.required' => "Bạn không được để trống địa chỉ người dùng",
             'phone_number.required' => "Bạn không được để trống số điện thoại người dùng",
         ]);
 
@@ -79,7 +79,7 @@ class UserController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->adress = $request->adress;
+        $user->address = $request->address;
         $user->phone_number = $request->phone_number;
         
         if ($user->save()) {

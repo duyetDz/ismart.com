@@ -19,7 +19,7 @@
                         <ul id="save_msgList"></ul>
 
                         <div class="mb-3">
-                            <label for="">Name</label>
+                            <label for="">Tên danh mục</label>
                             <input type="text" name="name" id="name_add" class="form-control" />
                             @error('name')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -32,7 +32,8 @@
                         <div class="mb-3">
                             <label class="col-sm-3 col-form-lable" for="parent_id_add">Danh mục cha</label>
                             <div class="col-sm-6">
-                                <select class="custom-select" id="parent_id_add" name="parent_id" required>
+                                <select class="form-select" aria-label="Default select example" id="parent_id_add" name="parent_id" >
+                                    <option value="0" selected>...</option>
                                     @foreach ($list_category as $category)
                                         <option value="{{ $category->id }}">
                                             {{ $category->name }}
@@ -41,6 +42,8 @@
                                 </select>
                             </div>
                         </div>
+
+                        
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -108,18 +111,18 @@
 
     <div class="container">
         <div class="d-flex float-end" style="margin-bottom: 10px;">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#userAddModal"
-                style="
-                height: 32px;
-                margin-right: 5px;
-                ">
-                <i class="fa-sharp fa-solid fa-plus"></i> Add
-            </button>
+            
 
-            <form action="" method="GET" class="">
-                <input type="text" value="" placeholder="Search" name="ValuetoSearch" class="form-control">
-                <!-- End Modal add user  -->
-
+            <form action="" method="GET" >
+                <div class="d-flex">
+                    <input type="text" value="" placeholder="Search" name="ValuetoSearch" class="form-control">
+                    <!-- End Modal add user  -->
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+                <select name="select" class="form-select d-flex mt-2" aria-label="Default select example">
+                    <option value="title" selected>Tiêu đề</option>
+                    <option value="updated_at" >Thời gian cập nhập</option>
+                </select>
             </form>
         </div>
 
@@ -134,20 +137,20 @@
                         <input class="form-check-input me-1" id="checkboxAll" type="checkbox">
                         All
                     </th>
-                    <th scope="col" class="col-2 text-center">ID</th>
+                    <th scope="col" class="col-2 text-center">STT</th>
                     <th scope="col" class="col text-center">Tên danh mục</th>
                     <th scope="col" class="col text-center">Tác vụ</th>
                 </tr>
             </thead>
             <tbody>
-
-                @foreach ($list_category as $category)
+                
+                @foreach ($list_category as $key => $category)
                     <tr id="">
                         <td class="text-center">
                             <input class="form-check-input me-1" id="chkboxname" value="" type="checkbox">
                         </td>
                         <td class="text-center">
-                            {{ $category->id }}
+                            {{ $key += 1 }}
                         </td>
                         <td class="text-center">
                             {{ $category->name }}
@@ -188,7 +191,7 @@
 @section('js')
     <script>
         $(document).ready(function() {
-            // add category admin
+  
             $(document).on('submit', '#saveCategory', function(e) {
                 e.preventDefault();
 
@@ -214,8 +217,6 @@
                                     '</li>');
                                 i++;
                             });
-                            // console.log(response.errors)
-
                         } else if (response.status == 200) {
                             $('#userAddModal').modal('hide');
                             toastr.options = {
@@ -299,8 +300,6 @@
             $(document).on('click', '#btn_delete', function(e) {
                 e.preventDefault();
                 var id = $(this).val();
-                alert(id)
-
                 $.ajax({
                     type: "GET",
                     url: "category/delete/" + id,

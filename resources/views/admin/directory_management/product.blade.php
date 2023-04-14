@@ -14,11 +14,21 @@
                 <i class="fa-sharp fa-solid fa-plus"></i> Add
             </a>
 
-            <form action="" method="GET" class="">
-                <input type="text" value="" placeholder="Search" name="ValuetoSearch" class="form-control">
-                <!-- End Modal add user  -->
-
+            <form action="{{ route('admin.product.search') }}" method="get">
+               
+                <div class="d-flex">
+                    <input type="text" value="" placeholder="Search" name="ValuetoSearch" class="form-control">
+                    <!-- End Modal add user  -->
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+                <select name="select" class="form-select d-flex mt-2" aria-label="Default select example">
+                    <option value="name" selected>Tên sản phẩm</option>
+                    @foreach ($category as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
             </form>
+
         </div>
 
 
@@ -32,23 +42,24 @@
                         <input class="form-check-input me-1" id="checkboxAll" type="checkbox">
                         All
                     </th>
-                    <th scope="col" class="col-1 text-center">ID</th>
+                    <th scope="col" class="col-1 text-center">STT</th>
                     <th scope="col" class="col text-center">Ảnh avatar</th>
                     <th scope="col" class="col text-center">Tên sản phẩm</th>
                     <th scope="col" class="col text-center">Tên danh mục</th>
+                    <th scope="col" class="col text-center">Giá</th>
                     <th scope="col" class="col text-center">Số lượng</th>
                     <th scope="col" class="col text-center">Tác vụ</th>
                 </tr>
             </thead>
             <tbody>
 
-                @foreach ($products as $product)
+                @foreach ($products as $key => $product)
                     <tr id="">
                         <td class="text-center">
                             <input class="form-check-input me-1" id="chkboxname" value="" type="checkbox">
                         </td>
                         <td class="text-center">
-                            {{ $product->id }}
+                            {{ $key += 1 }}
                         </td>
                         <td class="text-center">
                             <img src="{{ asset('') }}{{ $product->feature_image }}" class="img-thumbnail"
@@ -61,13 +72,17 @@
                             {{ $product->category->name }}
                         </td>
                         <td class="text-center">
+                            {{ number_format($product->price, 0, ',', '.') }}đ
+                        </td>
+                        <td class="text-center">
                             {{ $product->quantity }}
                         </td>
                         <td class="text-center">
                             <a href="product/upload/{{ $product->id }}" class="btn btn-success" name="btn_=upload"
                                 id="btn_=upload"><i class="fa-solid fa-image"></i></a>
                             <a href="product/update/{{ $product->id }}" class="btn btn-primary" value=""
-                                name="btn_update" id="btn_update" style="margin-right: 7px;
+                                name="btn_update" id="btn_update"
+                                style="margin-right: 7px;
                                 margin-left: 7px;"><i
                                     class="fa-solid fa-pen-to-square"></i></a>
 

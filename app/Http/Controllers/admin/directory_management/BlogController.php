@@ -18,6 +18,31 @@ class BlogController extends Controller
         return view('admin/directory_management/blog', ['title' => 'Danh sách bài viết', 'blogs' => $blogs]);
     }
 
+    public function search(Request $request)
+    {
+        $blogs = null;
+        $input = $request->input('ValuetoSearch');
+        $select = $request->input('select');
+
+        if($select == 'title'){
+            if(!empty($input)){
+                $blogs = Blog::Where('title','LIKE', '%' . $input . '%')->get();
+            } else {
+                $blogs = Blog::all();
+            }
+            
+        } else if($select == 'updated_at'){
+            
+            if(!empty($input)){
+                $blogs = Blog::Where('updated_at','LIKE', '%' . $input . '%')->get();
+            } else {
+                $blogs = Blog::all();
+            }
+        }
+
+        return view('admin/directory_management/blog', ['title' => 'Danh sách bài viết', 'blogs' => $blogs]);
+    }
+
     public function create()
     {
         $user = Auth::user();
@@ -79,7 +104,7 @@ class BlogController extends Controller
             $path = $request->file('feature_img')->store('images', 'public');
             $blog->feature_img = 'storage/images/' . basename($path);
         } 
-        
+
         $blog->content = $request->content;
         $blog->title = $request->title;
         if ($blog->save()) {

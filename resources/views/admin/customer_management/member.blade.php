@@ -126,7 +126,7 @@
                             {{ $user->email }}
                         </td>
                         <td class="text-center">
-                            {{ $user->adress }}
+                            {{ $user->address }}
                         </td>
 
                         <td class="text-center">
