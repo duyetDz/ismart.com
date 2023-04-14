@@ -29,7 +29,6 @@ class OrderController extends Controller
     {
         $order = Order::find($id);
         $order->status = $request->status;
-
         if ($order->save()) {
             return redirect(route('admin.order.list'))->with('status', "Bạn đã update thành công");
         } else {

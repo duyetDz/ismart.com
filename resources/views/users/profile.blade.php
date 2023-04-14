@@ -22,9 +22,9 @@
                             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
                                 alt="avatar" class="rounded-circle img-fluid"
                                 style="width: 150px;justify-content: center;margin: 0px auto;">
-                            <h5 class="my-3">John Smith</h5>
-                            <p class="text-muted mb-1">Full Stack Developer</p>
-                            <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
+                            <h5 class="my-3">{{ $user->name }}</h5>
+                            <p class="text-muted mb-1">Đẹp trai dễ mến</p>
+                            <p class="text-muted mb-4">Chúa tể săn sale</p>
 
                         </div>
                     </div>
@@ -32,7 +32,8 @@
                 </div>
 
                 <div class="col-lg-8">
-                    <form action="">
+                    <form action="{{ route('users.profile.update') }}" method="post">
+                        @csrf
                         <div class="card mb-4">
                             <div class="card-body">
                                 <div class="row">
@@ -40,7 +41,11 @@
                                         <p class="mb-0">Họ và tên</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input class="form-control " type="text">
+                                        <input name="name" value="{{ $user->name }}" class="form-control "
+                                            type="text">
+                                        @error('name')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <hr>
@@ -49,7 +54,11 @@
                                         <p class="mb-0">Email</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input class="form-control " type="text">
+                                        <input name="email" value="{{ $user->email }}" class="form-control "
+                                            type="text">
+                                        @error('email')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <hr>
@@ -58,17 +67,13 @@
                                         <p class="mb-0">Số điện thoại</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input class="form-control " type="text">
+                                        <input name="phone_number" value="{{ $user->phone_number }}" class="form-control "
+                                            type="text">
+                                        @error('phone_number')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <p class="mb-0">Mobile</p>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <input class="form-control " type="text">
-                                    </div>
+
                                 </div>
                                 <hr>
                                 <div class="row">
@@ -76,11 +81,18 @@
                                         <p class="mb-0">Address</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input class="form-control " type="text">
+                                        <input name="address" value="{{ $user->address }}" class="form-control "
+                                            type="text">
+                                        @error('address')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
+                                <button name="btn-add" class="btn btn-primary" value="true" type="submit">Update sản
+                                    phẩm</button>
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>
