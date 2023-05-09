@@ -18,75 +18,56 @@
             <div class="main-content fl-right">
                 <div class="section" id="detail-product-wp">
                     <div class="section-detail clearfix">
-                        <div class="thumb-wp fl-left">
+                        <div class="thumb-wp fl-left" style="width: 100%; max-width: 350px; ">
                             <a href="" title="" id="main-thumb">
-                                <img id="zoom"
-                                    src="https://media3.scdn.vn/img2/2017/10_30/sxlpFs_simg_ab1f47_350x350_maxb.jpg"
-                                    data-zoom-image="https://media3.scdn.vn/img2/2017/10_30/sxlpFs_simg_70aaf2_700x700_maxb.jpg" />
+                                <img id="zoom" src="{{ asset('') }}{{ $product->feature_image }}"
+                                    data-zoom-image="{{ asset('') }}{{ $product->image_zoom }}"
+                                    style="max-width: 700px" />
                             </a>
+
                             <div id="list-thumb">
-                                <a href=""
-                                    data-image="https://media3.scdn.vn/img2/2017/10_30/sxlpFs_simg_ab1f47_350x350_maxb.jpg"
-                                    data-zoom-image="https://media3.scdn.vn/img2/2017/10_30/sxlpFs_simg_70aaf2_700x700_maxb.jpg">
-                                    <img id="zoom"
-                                        src="https://media3.scdn.vn/img2/2017/10_30/sxlpFs_simg_02d57e_50x50_maxb.jpg" />
+                                <a href="" data-image="{{ asset('') }}{{ $product->feature_image }}"
+                                    data-zoom-image="{{ asset('') }}{{ $product->image_zoom }}">
+                                    <img id="zoom" src="{{ asset('') }}{{ $product->feature_image }}"
+                                        style="max-width: 50px; " />
                                 </a>
-                                <a href=""
-                                    data-image="https://media3.scdn.vn/img2/2017/10_30/BlccRg_simg_ab1f47_350x350_maxb.jpg"
-                                    data-zoom-image="https://media3.scdn.vn/img2/2017/10_30/BlccRg_simg_70aaf2_700x700_maxb.jpg">
-                                    <img id="zoom"
-                                        src="https://media3.scdn.vn/img2/2017/10_30/BlccRg_simg_02d57e_50x50_maxb.jpg" />
-                                </a>
-                                <a href=""
-                                    data-image="https://media3.scdn.vn/img2/2017/10_30/sxlpFs_simg_ab1f47_350x350_maxb.jpg"
-                                    data-zoom-image="https://media3.scdn.vn/img2/2017/10_30/sxlpFs_simg_70aaf2_700x700_maxb.jpg">
-                                    <img id="zoom"
-                                        src="https://media3.scdn.vn/img2/2017/10_30/sxlpFs_simg_02d57e_50x50_maxb.jpg" />
-                                </a>
-                                <a href=""
-                                    data-image="https://media3.scdn.vn/img2/2017/10_30/BlccRg_simg_ab1f47_350x350_maxb.jpg"
-                                    data-zoom-image="https://media3.scdn.vn/img2/2017/10_30/BlccRg_simg_70aaf2_700x700_maxb.jpg">
-                                    <img id="zoom"
-                                        src="https://media3.scdn.vn/img2/2017/10_30/BlccRg_simg_02d57e_50x50_maxb.jpg" />
-                                </a>
-                                <a href=""
-                                    data-image="https://media3.scdn.vn/img2/2017/10_30/sxlpFs_simg_ab1f47_350x350_maxb.jpg"
-                                    data-zoom-image="https://media3.scdn.vn/img2/2017/10_30/sxlpFs_simg_70aaf2_700x700_maxb.jpg">
-                                    <img id="zoom"
-                                        src="https://media3.scdn.vn/img2/2017/10_30/sxlpFs_simg_02d57e_50x50_maxb.jpg" />
-                                </a>
-                                <a href=""
-                                    data-image="https://media3.scdn.vn/img2/2017/10_30/BlccRg_simg_ab1f47_350x350_maxb.jpg"
-                                    data-zoom-image="https://media3.scdn.vn/img2/2017/10_30/BlccRg_simg_70aaf2_700x700_maxb.jpg">
-                                    <img id="zoom"
-                                        src="https://media3.scdn.vn/img2/2017/10_30/BlccRg_simg_02d57e_50x50_maxb.jpg" />
-                                </a>
+
+                                @foreach ($product_images as $item)
+                                    <a href="" data-image="{{ asset('') }}{{ $item->image }}"
+                                        data-zoom-image="{{ asset('') }}{{ $item->image_zoom }}">
+                                        <img id="zoom" src="{{ asset('') }}{{ $item->image }}"
+                                            style="max-width: 50px; " />
+                                    </a>
+                                @endforeach
+
+
                             </div>
                         </div>
                         <div class="thumb-respon-wp fl-left">
                             <img src="client/images/img-pro-01.png" alt="">
                         </div>
                         <div class="info fl-right">
-                            <h3 class="product-name">Laptop HP Probook 440 G2 LED Backlit</h3>
+                            <h3 class="product-name">{{ $product->name }}</h3>
                             <div class="desc">
-                                <p>Bộ vi xử lý :Intel Core i505200U 2.2 GHz (3MB L3)</p>
-                                <p>Cache upto 2.7 GHz</p>
-                                <p>Bộ nhớ RAM :4 GB (DDR3 Bus 1600 MHz)</p>
-                                <p>Đồ họa :Intel HD Graphics</p>
-                                <p>Ổ đĩa cứng :500 GB (HDD)</p>
+                                <p>{!! $product->configuration !!}</p>
                             </div>
                             <div class="num-product">
                                 <span class="title">Sản phẩm: </span>
-                                <span class="status">Còn hàng</span>
+                                <span class="status"></span>
                             </div>
-                            <p class="price">14.700.000đ</p>
-                            <div id="num-order-wp">
-                                <a title="" id="minus"><i class="fa fa-minus"></i></a>
-                                <input type="text" name="num-order" value="1" id="num-order">
-                                <a title="" id="plus"><i class="fa fa-plus"></i></a>
-                            </div>
-                            <a href="?page=cart" title="Thêm giỏ hàng" class="add-cart">Thêm giỏ hàng</a>
-                            <a href="?page=cart" title="Thêm giỏ hàng" style="background-color: red" class="add-cart">Mua ngay</a>
+                            <p class="price">{{ number_format($product->price, 0, ',', '.') }}đ</p>
+                            <form action="{{ asset('cart/add/' . $product->id . '') }}" method="post">
+                                @csrf
+                                <div id="num-order-wp">
+                                    <a title="" id="minus"><i class="fa fa-minus"></i></a>
+                                    <input type="text" name="num-order" value="1" id="num-order">
+                                    <a title="" id="plus"><i class="fa fa-plus"></i></a>
+                                </div>
+                                <button type="submit" title="Thêm giỏ hàng" class="btn add-cart">Thêm giỏ hàng</button>
+                                <button title="Mua ngay" style="background-color: red" class="btn add-cart">Mua
+                                    ngay</button>
+                            </form>
+
                         </div>
                     </div>
                 </div>
@@ -95,18 +76,7 @@
                         <h3 class="section-title">Mô tả sản phẩm</h3>
                     </div>
                     <div class="section-detail">
-                        <p>Máy tính xách tay HP Probook 440 G2 là dòng máy tính xách tay thích hợp cho doanh nghiệp và những
-                            người làm văn phòng. Do đó, ngoài cấu hình tốt, thiết kế bền bỉ, máy tính xách tay HP Probook
-                            440 G2 còn có khả năng bảo mật toàn diện giúp bạn luôn yên tâm về dữ liệu của mình.</p>
-                        <p>Máy tính xách tay HP Probook 440 G2 là dòng máy tính xách tay thích hợp cho doanh nghiệp và những
-                            người làm văn phòng. Do đó, ngoài cấu hình tốt, thiết kế bền bỉ, máy tính xách tay HP Probook
-                            440 G2 còn có khả năng bảo mật toàn diện giúp bạn luôn yên tâm về dữ liệu của mình.</p>
-                        <p>Máy tính xách tay HP Probook 440 G2 là dòng máy tính xách tay thích hợp cho doanh nghiệp và những
-                            người làm văn phòng. Do đó, ngoài cấu hình tốt, thiết kế bền bỉ, máy tính xách tay HP Probook
-                            440 G2 còn có khả năng bảo mật toàn diện giúp bạn luôn yên tâm về dữ liệu của mình.</p>
-                        <p>Máy tính xách tay HP Probook 440 G2 là dòng máy tính xách tay thích hợp cho doanh nghiệp và những
-                            người làm văn phòng. Do đó, ngoài cấu hình tốt, thiết kế bền bỉ, máy tính xách tay HP Probook
-                            440 G2 còn có khả năng bảo mật toàn diện giúp bạn luôn yên tâm về dữ liệu của mình.</p>
+                        {!! $product->content !!}
                     </div>
                 </div>
                 <div class="section" id="same-category-wp">
@@ -117,7 +87,7 @@
                         <ul class="list-item">
                             <li>
                                 <a href="" title="" class="thumb">
-                                    <img src="{{asset('client/images/img-pro-17.png')}}">
+                                    <img src="{{ asset('client/images/img-pro-17.png') }}">
                                 </a>
                                 <a href="" title="" class="product-name">Laptop HP Probook 4430s</a>
                                 <div class="price">
@@ -129,7 +99,7 @@
                                     <a href="" title="" class="buy-now fl-right">Mua ngay</a>
                                 </div>
                             </li>
-                            
+
 
                         </ul>
                     </div>

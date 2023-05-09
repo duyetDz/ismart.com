@@ -1,3 +1,8 @@
+@if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+@endif
 @extends('layouts.app')
 
 @section('content')
@@ -48,6 +53,7 @@
                                         {{ __('Remember Me') }}
                                     </label>
                                 </div>
+                                <div>Admin123@</div>
                             </div>
                         </div>
 

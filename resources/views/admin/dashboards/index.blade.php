@@ -220,7 +220,7 @@
                                 <div class="d-flex">
                                     <div class="flex-shrink-0">
                                         <div class="bg-light rounded-2">
-                                            <img class="p-2" src="img/icons/brand-4.svg">
+                                            <img class="p-2" src="">
                                         </div>
                                     </div>
                                     <div class="flex-grow-1 ms-3">
@@ -255,7 +255,7 @@
                                 <div class="d-flex">
                                     <div class="flex-shrink-0">
                                         <div class="bg-light rounded-2">
-                                            <img class="p-2" src="img/icons/brand-1.svg">
+                                            <img class="p-2" src="">
                                         </div>
                                     </div>
                                     <div class="flex-grow-1 ms-3">
@@ -290,7 +290,7 @@
                                 <div class="d-flex">
                                     <div class="flex-shrink-0">
                                         <div class="bg-light rounded-2">
-                                            <img class="p-2" src="img/icons/brand-5.svg">
+                                            <img class="p-2" src="">
                                         </div>
                                     </div>
                                     <div class="flex-grow-1 ms-3">
@@ -325,7 +325,7 @@
                                 <div class="d-flex">
                                     <div class="flex-shrink-0">
                                         <div class="bg-light rounded-2">
-                                            <img class="p-2" src="img/icons/brand-2.svg">
+                                            <img class="p-2" src="">
                                         </div>
                                     </div>
                                     <div class="flex-grow-1 ms-3">
@@ -360,7 +360,7 @@
                                 <div class="d-flex">
                                     <div class="flex-shrink-0">
                                         <div class="bg-light rounded-2">
-                                            <img class="p-2" src="img/icons/brand-3.svg">
+                                            <img class="p-2" src="">
                                         </div>
                                     </div>
                                     <div class="flex-grow-1 ms-3">

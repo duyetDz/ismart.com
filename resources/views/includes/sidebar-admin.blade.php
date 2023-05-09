@@ -17,7 +17,7 @@
         <div class="sidebar-user">
             <div class="d-flex justify-content-center">
                 <div class="flex-shrink-0">
-                    <img src="{{ asset('') }}admin/img/avatars/avatar.jpg"
+                    <img src="{{ asset('storage/photos/2/giangvanduyet.jpg') }}"
                         class="avatar img-fluid rounded me-1" alt="Charles Hall" />
                 </div>
                 <div class="flex-grow-1 ps-2">
@@ -78,7 +78,7 @@
                 </span>
                 <ul id="setting" class="sidebar-dropdown list-unstyled collapse "
                     data-bs-parent="#sidebar">
-                    <li class="sidebar-item"><a class="sidebar-link" href="">Hình ảnh</a>
+                    <li class="sidebar-item"><a href="{{route('admin.product_image')}}" class="sidebar-link" href="">Hình ảnh</a>
                     </li>
                     <li class="sidebar-item"><a class="sidebar-link" href="">Hỗ trợ trực tuyến</a>
                     </li>
@@ -89,7 +89,20 @@
                 </ul>
             </li>
 
-            
+            <li class="sidebar-item">
+                <span data-bs-target="#client" href="" data-bs-toggle="collapse" class="sidebar-link collapsed">
+                    <i class="align-middle" data-feather="layout"></i> <span
+                        class="align-middle">Quản trị Thành viên</span>
+                </span>
+                <ul id="client" class="sidebar-dropdown list-unstyled collapse "
+                    data-bs-parent="#client">
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{route('admin.member.list')}}">Danh sách thanh viên</a>
+                    </li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{route('admin.order.list')}}">Quản lý đơn hàng</a>
+                    </li>
+                    
+                </ul>
+            </li>
         </ul>
 
         
