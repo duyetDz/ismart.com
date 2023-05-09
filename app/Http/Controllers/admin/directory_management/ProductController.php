@@ -14,8 +14,8 @@ use Image;
 
 class ProductController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct() {
+        
     }
     //
     public function index()
@@ -27,30 +27,31 @@ class ProductController extends Controller
 
     public function search(Request $request)
     {
-
+        
         $category = Category::all();
         $input = $request->input('ValuetoSearch');
         $select = $request->input('select');
         $products = null;
-        if ($select == 'name') {
-            if (!empty($input)) {
+        if($select == 'name'){
+            if(!empty($input)){
                 $products = Product::where('name', $input)->get();
             } else {
                 $products = Product::all();
             }
         } else {
-            if (!empty($input)) {
-
-                $categories = Category::select('id')->where('name', 'Like', '%' . $input . '%')->get();
-                $categoryIds = $categories->pluck('id')->toArray();
-                $products = Product::where('name', 'LIKE', '%' . $input . '%')->orwhereIn('category_id', $categoryIds)->get();
+            if(!empty($input)){
+                
+                $categories = Category::select('id')-> where('name','Like','%' . $input . '%')->get();
+                $categoryIds = $categories->pluck('id')->toArray();            
+                $products = Product::where('name', 'LIKE', '%' . $input . '%')->orwhereIn('category_id', $categoryIds)->get();  
             } else {
                 $products = Product::all();
+                
             }
         }
 
-
-        return view('admin/directory_management/product', ['title' => 'Trang sản phẩm', 'products' => $products, 'category' => $category]);
+        
+        return view('admin/directory_management/product',['title' => 'Trang sản phẩm','products' => $products, 'category' => $category]);
     }
 
     public function create()
@@ -85,17 +86,11 @@ class ProductController extends Controller
 
         $image = $request->file('feature_image');
         $file_name = $image->getClientOriginalName();
-
         $image_resize = Image::make($image->getRealPath());
-        $image_resize->resize(300, 300);
-        $image_resize->save(public_path('storage/images/' . $file_name));
-
-        $image_zoom = Image::make($image->getRealPath());
-        $image_zoom->resize(700, 700);
-        $image_zoom->save(public_path('storage/images/700' . $file_name));
+        $image_resize->resize(300,300);
+        $image_resize->save(public_path('storage/images/'.$file_name)); 
 
         $product->feature_image = 'storage/images/' . basename($file_name);
-        $product->image_zoom = 'storage/images/700' . basename($file_name);
         $product->name = $request->name;
         $product->price = $request->price;
         $product->quantity = $request->quantity;
@@ -151,21 +146,9 @@ class ProductController extends Controller
             ]);
             if (file_exists($product->feature_image)) {
                 unlink($product->feature_image);
-                unlink($product->image_zoom);
             }
-            $image = $request->file('feature_image');
-            $file_name = $image->getClientOriginalName();
-    
-            $image_resize = Image::make($image->getRealPath());
-            $image_resize->resize(300, 300);
-            $image_resize->save(public_path('storage/images/' . $file_name));
-    
-            $image_zoom = Image::make($image->getRealPath());
-            $image_zoom->resize(700, 700);
-            $image_zoom->save(public_path('storage/images/700' . $file_name));
-    
-            $product->feature_image = 'storage/images/' . basename($file_name);
-            $product->image_zoom = 'storage/images/700' . basename($file_name);
+            $path = $request->file('feature_image')->store('images', 'public');
+            $product->feature_image = 'storage/images/' . basename($path);
         }
 
 
@@ -192,7 +175,6 @@ class ProductController extends Controller
 
         if (file_exists($product->feature_image)) {
             unlink($product->feature_image);
-            unlink($product->image_zoom);
         }
 
         if ($product) {
