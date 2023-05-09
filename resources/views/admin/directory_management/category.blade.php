@@ -3,8 +3,6 @@
 @section('content')
     @include('includes.header-main-admin', ['name' => 'Quản trị danh mục', 'key' => 'Loại danh mục'])
 
-    <!-- Modal add user -->
-
     <div class="modal fade" id="userAddModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -24,10 +22,6 @@
                             @error('name')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="">Slug (trường này có thể để trống)</label>
-                            <input type="text" name="slug" id="slug_add" class="form-control" />
                         </div>
                         <div class="mb-3">
                             <label class="col-sm-3 col-form-lable" for="parent_id_add">Danh mục cha</label>
@@ -54,15 +48,12 @@
         </div>
     </div>
 
-    <!-- End modal User -->
 
-
-    <!-- Edit Student Modal -->
     <div class="modal fade" id="categoryEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Update User</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Update Category</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="updateCategory" method="POST">
@@ -77,10 +68,6 @@
                         <div class="mb-3">
                             <label for="">Name</label>
                             <input type="text" name="name" id="view_name" class="form-control" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="">Main_major</label>
-                            <input type="text" name="main_major" id="view_main_major" class="form-control" />
                         </div>
                         <div class="mb-3">
                             <label class="col-sm-3 col-form-lable" for="view_parent_id">Ngôn ngữ</label>
@@ -99,7 +86,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Update User</button>
+                        <button type="submit" class="btn btn-primary">Update Categoty</button>
                     </div>
                 </form>
             </div>
@@ -111,7 +98,13 @@
 
     <div class="container">
         <div class="d-flex float-end" style="margin-bottom: 10px;">
-            
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#userAddModal"
+                style="
+                height: 32px;
+                margin-right: 5px;
+                ">
+                <i class="fa-sharp fa-solid fa-plus"></i> Add
+            </button>
 
             <form action="" method="GET" >
                 <div class="d-flex">

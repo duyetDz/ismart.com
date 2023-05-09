@@ -88,8 +88,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <button name="btn-add" class="btn btn-primary" value="true" type="submit">Update sản
-                                    phẩm</button>
+                                <button name="btn-add" class="btn btn-primary" value="true" type="submit">Update thông tin</button>
                             </div>
                         </div>
 

@@ -43,12 +43,12 @@
                         All
                     </th>
                     <th scope="col" class="col-1 text-center">STT</th>
-                    <th scope="col" class="col text-center">Ảnh avatar</th>
-                    <th scope="col" class="col text-center">Tên sản phẩm</th>
-                    <th scope="col" class="col text-center">Tên danh mục</th>
-                    <th scope="col" class="col text-center">Giá</th>
-                    <th scope="col" class="col text-center">Số lượng</th>
-                    <th scope="col" class="col text-center">Tác vụ</th>
+                    <th scope="col" class="col-2 text-center">Ảnh avatar</th>
+                    <th scope="col" class="col-1 text-center">Tên sản phẩm</th>
+                    <th scope="col" class="col-2 text-center">Tên danh mục</th>
+                    <th scope="col" class="col-1 text-center">Giá</th>
+                    <th scope="col" class="col-1 text-center">Số lượng</th>
+                    <th scope="col" class="col-3 text-center">Tác vụ</th>
                 </tr>
             </thead>
             <tbody>
@@ -66,9 +66,10 @@
                                 style="width: 70px; height: 70px;" alt="...">
                         </td>
                         <td class="text-center">
-                            {{ $product->name }}
+                            {!! Str::limit($product->name, 20, '...') !!}
                         </td>
                         <td class="text-center">
+                            
                             {{ $product->category->name }}
                         </td>
                         <td class="text-center">
@@ -77,7 +78,7 @@
                         <td class="text-center">
                             {{ $product->quantity }}
                         </td>
-                        <td class="text-center">
+                        <td class="text-center" >
                             <a href="product/upload/{{ $product->id }}" class="btn btn-success" name="btn_=upload"
                                 id="btn_=upload"><i class="fa-solid fa-image"></i></a>
                             <a href="product/update/{{ $product->id }}" class="btn btn-primary" value=""
