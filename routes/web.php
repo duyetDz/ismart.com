@@ -51,19 +51,31 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 
-    Route::get('/blog/detail', [BlogController::class, 'detail'])->name('blog.detail');
+    Route::get('/blog/detail/{id}', [BlogController::class, 'detail'])->name('blog.detail');
 
     // Product
 
     Route::get('/products', [ProductsController::class, 'index'])->name('products');
 
-    Route::get('/products/detail', [ProductsController::class, 'detail'])->name('products.detail');
+    Route::get('/products/sort/{category}', [ProductsController::class, 'getProductsByCategory'])->name('products.getProductsByCategory');
+
+    Route::post('/products/filter', [ProductsController::class, 'filterProductsByCategory'])->name('products.filterProductsByCategory');
+
+    Route::get('/products/detail/{id}', [ProductsController::class, 'detail'])->name('products.detail');
 
 
     // Checkout
 
     Route::get('/cart', [CartController::class, 'index'])->name('cart');
+    
+    Route::get('/cart/add/{id}', [CartController::class, 'add_one'])->name('cart.add_one');
 
+    Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+
+    Route::get('/cart/delete/{rowId}', [CartController::class, 'delete'])->name('cart.delete');
+
+    Route::get('/cart/destroy', [CartController::class, 'destroy'])->name('cart.destroy');
+    
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 });
 

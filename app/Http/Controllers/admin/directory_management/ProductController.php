@@ -9,6 +9,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+// use Intervention\Image\ImageManagerStatic as Image;
+use Image;
 
 class ProductController extends Controller
 {
@@ -79,12 +81,19 @@ class ProductController extends Controller
             'feature_image.image' => "Tệp thêm vào phải là hình ảnh",
             'feature_image.max' => "Hình ảnh thêm vào có kích thước k vượt quá 2048 KB"
         ]);
-        $path = $request->file('feature_image')->store('images', 'public');
         $product = new Product();
+        // $path = $request->file('feature_image')->store('images', 'public');
+
+        $image = $request->file('feature_image');
+        $file_name = $image->getClientOriginalName();
+        $image_resize = Image::make($image->getRealPath());
+        $image_resize->resize(300,300);
+        $image_resize->save(public_path('storage/images/'.$file_name)); 
+
+        $product->feature_image = 'storage/images/' . basename($file_name);
         $product->name = $request->name;
         $product->price = $request->price;
         $product->quantity = $request->quantity;
-        $product->feature_image = 'storage/images/' . basename($path);
         $product->configuration = $request->configuration;
         $product->content = $request->description;
         $product->user_id = $request->user_id;
