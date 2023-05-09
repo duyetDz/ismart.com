@@ -52,7 +52,12 @@ class InterfaceManagementController extends Controller
                 $image_resize->resize(300,300);
                 $image_resize->save(public_path('storage/images/'.$file_name)); 
 
+                $image_zoom = Image::make($image->getRealPath());
+                $image_zoom->resize(700,700);
+                $image_zoom->save(public_path('storage/images/700'.$file_name)); 
+
                 $product_images->image = 'storage/images/' . basename($file_name);
+                $product_images->image_zoom = 'storage/images/700' . basename($file_name);
                 $product_images->save();
             }
 
@@ -81,10 +86,19 @@ class InterfaceManagementController extends Controller
             ]);
             if (file_exists($product_image->image)) {
                 unlink($product_image->image);
+                unlink($product_image->image_zoom);
             }
-            $path = $request->file('image')->store('images', 'public');
+            $file_name = $image->getClientOriginalName();
+            $image_resize = Image::make($image->getRealPath());
+            $image_resize->resize(300,300);
+            $image_resize->save(public_path('storage/images/'.$file_name)); 
 
-            $product_image->image = 'storage/images/' . basename($path);
+            $image_zoom = Image::make($image->getRealPath());
+            $image_zoom->resize(700,700);
+            $image_zoom->save(public_path('storage/images/700'.$file_name)); 
+
+            $product_image->image = 'storage/images/' . basename($file_name);
+            $product_image->image_zoom = 'storage/images/700' . basename($file_name);
         }
 
         if ($product_image->save()) {
@@ -100,6 +114,7 @@ class InterfaceManagementController extends Controller
 
         if (file_exists($product_image->image)) {
             unlink($product_image->image);
+            unlink($product_image->image_zoom);
         }
 
         if ($product_image) {

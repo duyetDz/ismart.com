@@ -20,23 +20,21 @@
                     <div class="section-detail clearfix">
                         <div class="thumb-wp fl-left" style="width: 100%; max-width: 350px; ">
                             <a href="" title="" id="main-thumb">
-                                <img id="zoom"
-                                    src="https://media3.scdn.vn/img2/2017/10_30/sxlpFs_simg_ab1f47_350x350_maxb.jpg"
-                                    data-zoom-image="https://media3.scdn.vn/img2/2017/10_30/sxlpFs_simg_70aaf2_700x700_maxb.jpg"
+                                <img id="zoom" src="{{ asset('') }}{{ $product->feature_image }}"
+                                    data-zoom-image="{{ asset('') }}{{ $product->image_zoom }}"
                                     style="max-width: 700px" />
                             </a>
 
                             <div id="list-thumb">
-                                <a href=""
-                                    data-image="https://media3.scdn.vn/img2/2017/10_30/sxlpFs_simg_ab1f47_350x350_maxb.jpg"
-                                    data-zoom-image="https://media3.scdn.vn/img2/2017/10_30/sxlpFs_simg_70aaf2_700x700_maxb.jpg">
-                                    <img id="zoom"
-                                        src="https://media3.scdn.vn/img2/2017/10_30/sxlpFs_simg_02d57e_50x50_maxb.jpg" />
+                                <a href="" data-image="{{ asset('') }}{{ $product->feature_image }}"
+                                    data-zoom-image="{{ asset('') }}{{ $product->image_zoom }}">
+                                    <img id="zoom" src="{{ asset('') }}{{ $product->feature_image }}"
+                                        style="max-width: 50px; " />
                                 </a>
 
                                 @foreach ($product_images as $item)
                                     <a href="" data-image="{{ asset('') }}{{ $item->image }}"
-                                        data-zoom-image="{{ asset('') }}{{ $item->image }}">
+                                        data-zoom-image="{{ asset('') }}{{ $item->image_zoom }}">
                                         <img id="zoom" src="{{ asset('') }}{{ $item->image }}"
                                             style="max-width: 50px; " />
                                     </a>
@@ -58,7 +56,7 @@
                                 <span class="status"></span>
                             </div>
                             <p class="price">{{ number_format($product->price, 0, ',', '.') }}đ</p>
-                            <form action="{{asset('cart/add/'.$product->id.'')}}" method="post">
+                            <form action="{{ asset('cart/add/' . $product->id . '') }}" method="post">
                                 @csrf
                                 <div id="num-order-wp">
                                     <a title="" id="minus"><i class="fa fa-minus"></i></a>

@@ -108,7 +108,7 @@
                                     </div>
                                     <div class="action clearfix text-center">
                                         <div class="action clearfix">
-                                            <a href="cart/add/9" title="Thêm giỏ hàng" class=" fl-left"
+                                            <a href="cart/add/{{$item->id}}" title="Thêm giỏ hàng" class=" fl-left"
                                                 style="padding: 0px;">
                                                 <div class="btn btn-primary" style="padding: 8px 30px 8px 30px;"><i
                                                         class="fa-solid fa-cart-plus" style="font-size: 20px;"></i></div>
