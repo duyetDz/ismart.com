@@ -108,12 +108,12 @@
                                     </div>
                                     <div class="action clearfix text-center">
                                         <div class="action clearfix">
-                                            <a href="cart/add/{{$item->id}}" title="Thêm giỏ hàng" class=" fl-left"
+                                            <a onclick="AddCart({{ $item->id }})" title="Thêm giỏ hàng" class=" fl-left"
                                                 style="padding: 0px;">
                                                 <div class="btn btn-primary" style="padding: 8px 30px 8px 30px;"><i
                                                         class="fa-solid fa-cart-plus" style="font-size: 20px;"></i></div>
                                             </a>
-                                            <a href="?page=checkout" title="Mua ngay" class="btn btn-danger fl-right"
+                                            <a href="{{asset('')}}cart/buy_now/{{$item->id}}" title="Mua ngay" class="btn btn-danger fl-right"
                                                 style="padding: 10px 20px 10px 20px;">Mua ngay</a>
                                         </div>
                                     </div>
@@ -146,7 +146,7 @@
                                                 <div class="btn btn-primary" style="padding: 8px 30px 8px 30px;"><i
                                                         class="fa-solid fa-cart-plus" style="font-size: 20px;"></i></div>
                                             </a>
-                                            <a href="?page=checkout" title="Mua ngay" class="btn btn-danger fl-right"
+                                            <a href="{{asset('')}}cart/buy_now/{{$item->id}}" title="Mua ngay" class="btn btn-danger fl-right"
                                                 style="padding: 10px 20px 10px 20px;">Mua ngay</a>
                                         </div>
                                     </div>
@@ -205,4 +205,28 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script>
+        
+
+        function AddCart(id) {
+            $.ajax({
+                type: "GET",
+                url: "cart/add/" + id,
+
+                success: function(response) {
+                    $('.charge-item-card').empty();
+                    console.log(response);
+                    $('.charge-item-card').html(response);
+                    toastr.options = {
+                        "closeButton": true,
+                        "progetBar": true
+                    }
+                    toastr.success("Bạn đã Thêm Thành công ")
+                }
+            });
+        }
+    </script>
 @endsection

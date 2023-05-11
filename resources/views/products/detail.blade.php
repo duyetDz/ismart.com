@@ -1,6 +1,8 @@
 @extends('templates.tpl_default')
 
 @section('content')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <div id="main-content-wp" class="clearfix detail-product-page">
         <div class="wp-inner">
             <div class="secion" id="breadcrumb-wp">
@@ -56,15 +58,17 @@
                                 <span class="status"></span>
                             </div>
                             <p class="price">{{ number_format($product->price, 0, ',', '.') }}đ</p>
-                            <form action="{{ asset('cart/add/' . $product->id . '') }}" method="post">
+                            <form action="{{asset('')}}cart/buy_nows/{{$product->id}}" method="post">
                                 @csrf
                                 <div id="num-order-wp">
                                     <a title="" id="minus"><i class="fa fa-minus"></i></a>
+                                    <input type="hidden" class="product_id" value="{{ $product->id }}">
                                     <input type="text" name="num-order" value="1" id="num-order">
                                     <a title="" id="plus"><i class="fa fa-plus"></i></a>
                                 </div>
-                                <button type="submit" title="Thêm giỏ hàng" class="btn add-cart">Thêm giỏ hàng</button>
-                                <button title="Mua ngay" style="background-color: red" class="btn add-cart">Mua
+                                <a onclick="AddCart({{ $product->id }})" title="Thêm giỏ hàng" class="btn add-cart">Thêm
+                                    giỏ hàng</a>
+                                <button type="submit" title="Mua ngay" style="background-color: red" class="btn add-cart">Mua
                                     ngay</button>
                             </form>
 
@@ -95,7 +99,7 @@
                                     <span class="old">20.900.000đ</span>
                                 </div>
                                 <div class="action clearfix">
-                                    <a href="" title="" class="add-cart fl-left">Thêm giỏ hàng</a>
+                                    <a title="" class="add-cart fl-left">Thêm giỏ hàng</a>
                                     <a href="" title="" class="buy-now fl-right">Mua ngay</a>
                                 </div>
                             </li>
@@ -112,52 +116,12 @@
                     </div>
                     <div class="secion-detail">
                         <ul class="list-item">
-                            <li>
-                                <a href="?page=category_product" title="">Điện thoại</a>
-                                <ul class="sub-menu">
-                                    <li>
-                                        <a href="?page=category_product" title="">Iphone</a>
-                                    </li>
-                                    <li>
-                                        <a href="?page=category_product" title="">Samsung</a>
-                                        <ul class="sub-menu">
-                                            <li>
-                                                <a href="?page=category_product" title="">Iphone X</a>
-                                            </li>
-                                            <li>
-                                                <a href="?page=category_product" title="">Iphone 8</a>
-                                            </li>
-                                            <li>
-                                                <a href="?page=category_product" title="">Iphone 8 Plus</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="?page=category_product" title="">Oppo</a>
-                                    </li>
-                                    <li>
-                                        <a href="?page=category_product" title="">Bphone</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="?page=category_product" title="">Máy tính bảng</a>
-                            </li>
-                            <li>
-                                <a href="?page=category_product" title="">laptop</a>
-                            </li>
-                            <li>
-                                <a href="?page=category_product" title="">Tai nghe</a>
-                            </li>
-                            <li>
-                                <a href="?page=category_product" title="">Thời trang</a>
-                            </li>
-                            <li>
-                                <a href="?page=category_product" title="">Đồ gia dụng</a>
-                            </li>
-                            <li>
-                                <a href="?page=category_product" title="">Thiết bị văn phòng</a>
-                            </li>
+                            @foreach ($categories as $item)
+                                <li>
+                                    <a href="{{ asset('') }}products/sort/{{ $item->id }}"
+                                        title="">{{ $item->name }}</a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -171,4 +135,41 @@
             </div>
         </div>
     </div>
+@endsection
+
+
+@section('js')
+    <script>
+        function AddCart(id) {
+            var productId = $('.product_id').val();
+            var numOrder = $('#num-order').val();
+
+            var data = {
+                'productId': productId,
+                'numOrder': numOrder,
+            }
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "/carts/add/" + productId,
+                data: data,
+                success: function(response) {
+                    $('.charge-item-card').empty();
+                    $('.charge-item-card').html(response);
+                    toastr.options = {
+                        "closeButton": true,
+                        "progetBar": true
+                    }
+                    toastr.success("Bạn đã Thêm Thành công ")
+                }, 
+                error: function (xhr, ajaxOptions, thrownError) { console.log(xhr.responseText) }
+            });
+        }
+    </script>
 @endsection

@@ -66,13 +66,21 @@ Route::middleware(['auth'])->group(function () {
 
     // Checkout
 
+
+
     Route::get('/cart', [CartController::class, 'index'])->name('cart');
+
+    Route::post('/cart/buy_nows/{id}', [CartController::class, 'buy_nows'])->name('cart.buy_nows');
+
+    Route::get('/cart/buy_now/{id}', [CartController::class, 'buy_now'])->name('cart.buy_now');
     
     Route::get('/cart/add/{id}', [CartController::class, 'add_one'])->name('cart.add_one');
 
-    Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+    Route::post('/carts/add/{id}', [CartController::class, 'add'])->name('cart.add');
 
-    Route::get('/cart/delete/{rowId}', [CartController::class, 'delete'])->name('cart.delete');
+    Route::post('/carts/update', [CartController::class, 'update'])->name('cart.update');
+
+    Route::post('/cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
 
     Route::get('/cart/destroy', [CartController::class, 'destroy'])->name('cart.destroy');
     

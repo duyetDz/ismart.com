@@ -22,9 +22,9 @@
                         <div class="filter-wp fl-right">
                             <p class="desc">Hiển thị {{ $products->count() }} trên 50 sản phẩm</p>
                             <div class="form-filter d-flex">
-                                <form method="POST" action="{{asset('products/filter')}}">
+                                <form method="POST" action="{{ asset('products/filter') }}">
                                     @csrf
-                                    <input type="hidden" name="category" value="{{ $name_category }}" >
+                                    <input type="hidden" name="category" value="{{ $name_category }}">
                                     <select class="custom-select" name="select" style="width: 70%">
                                         <option value="1">Từ A-Z</option>
                                         <option value="2">Từ Z-A</option>
@@ -42,23 +42,24 @@
                             @if (count($products) > 0)
                                 @foreach ($products as $item)
                                     <li>
-                                        <a href="{{ asset('') }}products/detail/{{ $item->id }}" title="" class="thumb">
+                                        <a href="{{ asset('') }}products/detail/{{ $item->id }}" title=""
+                                            class="thumb">
                                             <img src="{{ asset('') }}{{ $item->feature_image }}">
                                         </a>
                                         <a href="" title="" class="product-name">{!! Str::limit($item->name, 20, '...') !!}</a>
                                         <div class="price">
                                             <span class="new">{{ number_format($item->price, 0, ',', '.') }}đ</span>
                                             <span
-                                                class="old">{{ number_format(($item->price * 30) / 100, 0, ',', '.') }}đ</span>
+                                                class="old">{{ number_format(($item->price * 130) / 100, 0, ',', '.') }}đ</span>
                                         </div>
-                                        
+
                                         <div class="action clearfix">
-                                            <a href="{{ asset('') }}cart/add/{{ $item->id }}" title="Thêm giỏ hàng" class=" fl-left"
-                                                style="padding: 0px;">
+                                            <a onclick="AddCart({{ $item->id }})" title="Thêm giỏ hàng"
+                                                class=" fl-left" style="padding: 0px;">
                                                 <div class="btn btn-primary" style="padding: 8px 30px 8px 30px;"><i
                                                         class="fa-solid fa-cart-plus" style="font-size: 20px;"></i></div>
                                             </a>
-                                            <a href="?page=checkout" title="Mua ngay" class="btn btn-danger fl-right"
+                                            <a href="{{asset('')}}cart/buy_now/{{$item->id}}" title="Mua ngay" class="btn btn-danger fl-right"
                                                 style="padding: 10px 20px 10px 20px;">Mua ngay</a>
                                         </div>
                                     </li>
@@ -96,7 +97,8 @@
                         <ul class="list-item">
                             @foreach ($categories as $item)
                                 <li>
-                                    <a href="{{asset('')}}products/sort/{{ $item->id }}" title="">{{ $item->name }}</a>
+                                    <a href="{{ asset('') }}products/sort/{{ $item->id }}"
+                                        title="">{{ $item->name }}</a>
                                 </li>
                             @endforeach
                         </ul>
@@ -205,7 +207,7 @@
                 var price = $('input[name=r-price]:checked').val();
                 var category = $('input[name=r-category]:checked').val();
 
-                console.log('Lọc cho sản phẩm có giá: ' + selectedPrice);
+                
                 // $.ajax({
                 //     type: "POST",
                 //     url: "your_url",
@@ -219,6 +221,28 @@
                 //     }
                 // });
             });
+
+
+
+
+
         });
+
+        function AddCart(id) {
+            $.ajax({
+                type: "GET",
+                url: "cart/add/" + id,
+
+                success: function(response) {
+                    $('.charge-item-card').empty();
+                    $('.charge-item-card').html(response);
+                    toastr.options = {
+                        "closeButton": true,
+                        "progetBar": true
+                    }
+                    toastr.success("Bạn đã Thêm Thành công ")
+                }
+            });
+        }
     </script>
 @endsection

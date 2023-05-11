@@ -28,10 +28,13 @@ class ProductsController extends Controller
 
     public function detail($id)
     {
+        $catIds = Product::distinct('category_id')->pluck('category_id')->toArray();
+        $categories = Category::whereIn('id', $catIds)->get();
+
         $product = Product::find($id);
         $product_images = Product_image::where('product_id', $id)->get();
 
-        return view('products/detail', ['product' => $product, 'product_images' => $product_images]);
+        return view('products/detail', ['product' => $product, 'product_images' => $product_images,'categories' => $categories]);
     }
 
     public function getProductsByCategory($category_id)
