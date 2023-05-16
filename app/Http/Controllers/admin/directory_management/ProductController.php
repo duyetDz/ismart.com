@@ -20,7 +20,7 @@ class ProductController extends Controller
     //
     public function index()
     {
-        $products = Product::all();
+        $products = Product::paginate(10);
         $category = Category::all();
         return view('admin/directory_management/product', ['title' => 'Trang sản phẩm', 'products' => $products, 'category' => $category]);
     }
@@ -34,18 +34,18 @@ class ProductController extends Controller
         $products = null;
         if ($select == 'name') {
             if (!empty($input)) {
-                $products = Product::where('name', $input)->get();
+                $products = Product::where('name', 'LIKE', '%' . $input . '%')->paginate(10);
             } else {
-                $products = Product::all();
+                $products = Product::paginate(10);
             }
         } else {
             if (!empty($input)) {
 
                 $categories = Category::select('id')->where('name', 'Like', '%' . $input . '%')->get();
                 $categoryIds = $categories->pluck('id')->toArray();
-                $products = Product::where('name', 'LIKE', '%' . $input . '%')->orwhereIn('category_id', $categoryIds)->get();
+                $products = Product::where('name', 'LIKE', '%' . $input . '%')->orwhereIn('category_id', $categoryIds)->paginate(10);
             } else {
-                $products = Product::all();
+                $products = Product::paginate(10);
             }
         }
 

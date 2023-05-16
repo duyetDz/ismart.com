@@ -1,5 +1,5 @@
 /*HEADER*/
-#head-top{ background: #d9263c;}
+#head-top{ background: #2a30f1;}
 #head-top #main-menu li{ float: left;}
 #head-top #payment-link{
     position: relative;
@@ -20,7 +20,7 @@
     padding: 10px 15px;
 }
 #head-top #main-menu li:last-child a{ padding-right: 0!important;}
-#head-body{ background: #f12a43;}
+#head-body{ background: #2a30f1;}
 #head-body #logo{
     display: block;
     text-transform: uppercase;
@@ -75,7 +75,7 @@
     content: '';
     width: 1px;
     height: 50%;
-    background: #da263c;
+    background: #2a30f1;
     top: 50%;
     right: 0;
     transform: translateY(-50%);
@@ -118,7 +118,7 @@
     top: 90px;
     right: 0;
     width: 250px;
-    min-height: 250px;
+    min-height: 120px;
     padding: 10px;
     background: #fff;
     border: 1px solid #e1e1e1;
@@ -147,7 +147,7 @@
 #cart-wp .list-cart .thumb{ width: 25%;}
 #cart-wp .list-cart .info{ width: 75%; padding-left: 15px;}
 #cart-wp #dropdown .desc{ margin-bottom: 15px; color: #333;}
-#cart-wp #dropdown .desc span{ color: #d9263c; font-family: 'Roboto Medium';}
+#cart-wp #dropdown .desc span{ color: #2a30f1; font-family: 'Roboto Medium';}
 #cart-wp #dropdown .list-cart .info .product-name{
     display: block;
     font-size: 13px;
@@ -181,17 +181,69 @@
     font-size: 12px;
 }
 #cart-wp #dropdown .action-cart a.view-cart{ background: #ddd; color: #333;}
-#cart-wp #dropdown .action-cart a.checkout{ background: #d9263c; color: #fff;}
+#cart-wp #dropdown .action-cart a.checkout{ background: #2a30f1; color: #fff;}
 #cart-wp #dropdown .action-cart a.view-cart:hover{ background: #ccc;}
-#cart-wp #dropdown .action-cart a.checkout:hover{ background: #af1427;}
+#cart-wp #dropdown .action-cart a.checkout:hover{ background: #2a30f1;}
 
 #dropdown-item:hover {
     color: #fff;
     text-decoration: none;
-    background-color: red;
+    background-color: #2a30f1;
 }
 
 #dropdown-menu {
     background: black;
 }
 
+
+.header__search-history-item a {
+    text-decoration: none;
+    font-size: 0.8rem;
+    line-height: 38px;
+    color: var(--text-color);
+    display: block;
+}
+
+.header__search-history-item:hover {
+    background-color: #fafafa;
+}
+
+.header__search-history-heading {
+    margin: 6px 12px;
+    font-size: 1rem;
+    color: #999;
+    font-weight: 400;
+}
+
+
+
+.header__search-history {
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 0;
+    width: calc(100% - 58px);
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 1px 5px rgb(196, 196, 196);
+    display: block;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.header__search-history-item {
+    height: 38px;
+    padding: 0 16px;
+}
+
+.header__search-history-list {
+    padding-left: 0;
+    list-style: none;
+    margin: 6px 0 0;
+}
+
+.header__search-history-list {
+    height: 200px;
+    /* đặt kích thước cố định */
+    overflow-y: scroll;
+    /* tạo thanh cuộn dọc */
+}

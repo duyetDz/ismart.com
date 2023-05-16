@@ -42,17 +42,7 @@
                 </div>
                 <div class="section" id="paging-wp">
                     <div class="section-detail">
-                        <ul class="list-item clearfix">
-                            <li>
-                                <a href="" title="">1</a>
-                            </li>
-                            <li>
-                                <a href="" title="">2</a>
-                            </li>
-                            <li>
-                                <a href="" title="">3</a>
-                            </li>
-                        </ul>
+                        {{$blogs->onEachSide(1)->links('templatepagination')}}
                     </div>
                 </div>
             </div>
@@ -80,13 +70,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="section" id="banner-wp">
-                    <div class="section-detail">
-                        <a href="?page=detail_blog_product" title="" class="thumb">
-                            <img src="client/images/banner.png" alt="">
-                        </a>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>

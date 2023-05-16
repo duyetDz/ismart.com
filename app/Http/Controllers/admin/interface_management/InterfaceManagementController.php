@@ -14,7 +14,7 @@ class InterfaceManagementController extends Controller
 {
     public function index()
     {
-        $product_images = Product_image::all();
+        $product_images = Product_image::paginate(10);
         $categories = Category::all();
         return view('admin.interface_management.index', ['title' => "Danh sách hình ảnh", 'product_images' => $product_images, 'categories' => $categories]);
     }
@@ -133,17 +133,17 @@ class InterfaceManagementController extends Controller
         $product_images = null;
         if ($select == 'name') {
             if (!empty($input)) {
-                $products = Product::where('name', $input)->get();
+                $products = Product::where('name', $input)->paginate(10);
             } else {
-                $products = Product::all();
+                $products = Product::paginate(10);
             }
         } else if ($select == 'updated_at') {
 
             if (!empty($input)) {
 
-                $product_images = Product_image::where('updated_at', 'LIKE', '%' . $input . '%')->get();
+                $product_images = Product_image::where('updated_at', 'LIKE', '%' . $input . '%')->paginate(10);
             } else {
-                $product_images = Product_image::all();
+                $product_images = Product_image::paginate(10);
             }
 
             return view('admin.interface_management.index', ['title' => "Danh sách hình ảnh", 'product_images' => $product_images, 'categories' => $category]);
@@ -159,7 +159,7 @@ class InterfaceManagementController extends Controller
         }
 
         $productIds = $products->pluck('id')->toArray();
-        $product_images = Product_image::whereIn('product_id', $productIds)->get();
+        $product_images = Product_image::whereIn('product_id', $productIds)->paginate(10);
 
         return view('admin.interface_management.index', ['title' => "Danh sách hình ảnh", 'product_images' => $product_images, 'categories' => $category]);
     }

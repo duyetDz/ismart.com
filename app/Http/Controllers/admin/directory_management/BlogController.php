@@ -13,7 +13,7 @@ class BlogController extends Controller
     //
     public function index()
     {
-        $blogs = Blog::all();
+        $blogs = Blog::paginate(10);
 
         return view('admin/directory_management/blog', ['title' => 'Danh sách bài viết', 'blogs' => $blogs]);
     }
@@ -26,17 +26,17 @@ class BlogController extends Controller
 
         if($select == 'title'){
             if(!empty($input)){
-                $blogs = Blog::Where('title','LIKE', '%' . $input . '%')->get();
+                $blogs = Blog::Where('title','LIKE', '%' . $input . '%')->paginate(10);
             } else {
-                $blogs = Blog::all();
+                $blogs = Blog::paginate(10);
             }
             
         } else if($select == 'updated_at'){
             
             if(!empty($input)){
-                $blogs = Blog::Where('updated_at','LIKE', '%' . $input . '%')->get();
+                $blogs = Blog::Where('updated_at','LIKE', '%' . $input . '%')->paginate(10);
             } else {
-                $blogs = Blog::all();
+                $blogs = Blog::paginate(10);
             }
         }
 

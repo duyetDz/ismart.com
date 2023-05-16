@@ -12,6 +12,15 @@ class CartController extends Controller
 {
     public function index()
     {
+        if (Cart::content()) {
+            foreach (Cart::content() as $item) {
+                if ($item->options->remainingQty < $item->qty) {
+                    $rowId = $item->rowId;
+                    Cart::update($rowId, ['qty' => $item->options->remainingQty]);
+                }
+            }
+        }
+
         return view('cart/index');
     }
 
@@ -24,8 +33,11 @@ class CartController extends Controller
             'name' => $product->name,
             'qty' => 1,
             'price' => $product->price,
-            'options' => ['image' => $product->feature_image]
+            'options' => ['image' => $product->feature_image, 'remainingQty' => $product->quantity],
+
         ]);
+
+
 
         return redirect(route('cart'))->with('status', "Bạn đã thêm thành công");
     }
@@ -39,8 +51,10 @@ class CartController extends Controller
             'name' => $product->name,
             'qty' => $request['num-order'],
             'price' => $product->price,
-            'options' => ['image' => $product->feature_image]
+            'options' => ['image' => $product->feature_image, 'remainingQty' => $product->quantity],
+
         ]);
+
 
         return redirect(route('cart'))->with('status', "Bạn đã thêm thành công");
     }
@@ -48,13 +62,13 @@ class CartController extends Controller
     public function add_one($id)
     {
         $product = Product::find($id);
-
         Cart::add([
             'id' => $product->id,
             'name' => $product->name,
             'qty' => 1,
             'price' => $product->price,
-            'options' => ['image' => $product->feature_image]
+            'options' => ['image' => $product->feature_image, 'remainingQty' => $product->quantity],
+
         ]);
 
         $cartContent = Cart::content();
@@ -66,31 +80,42 @@ class CartController extends Controller
     {
         $product = Product::find($id);
 
-        Cart::add([
-            'id' => $product->id,
-            'name' => $product->name,
-            'qty' => $request['numOrder'],
-            'price' => $product->price,
-            'options' => ['image' => $product->feature_image]
-        ]);
+        if ($product->quantity >= $request['numOrder']) {
+            Cart::add([
+                'id' => $product->id,
+                'name' => $product->name,
+                'qty' => $request['numOrder'],
+                'price' => $product->price,
+                'options' => ['image' => $product->feature_image, 'remainingQty' => $product->quantity],
+
+            ]);
+        } else {
+            Cart::add([
+                'id' => $product->id,
+                'name' => $product->name,
+                'qty' => $product->quantity,
+                'price' => $product->price,
+                'options' => ['image' => $product->feature_image, 'remainingQty' => $product->quantity],
+
+            ]);
+        };
         $cartContent = Cart::content();
 
-        return view('cart_dropdown', compact('cartContent'));
+        return view('cart_dropdown', compact('cartContent', $product));
     }
 
     public function update(Request $request)
     {
         $rowId = $request['rowId'];
         $qty = $request['qty'];
-        
-       
+
+
         Cart::update($rowId, ['qty' => $qty]);
 
         $cartContent = Cart::content();
         $cart_dropdown = view('cart_dropdown', compact('cartContent'));
         $cart_table_ajax = view('cart_table', compact('cartContent'));
         return $cart_dropdown;
-
     }
 
     public function delete(Request $request, $id)
