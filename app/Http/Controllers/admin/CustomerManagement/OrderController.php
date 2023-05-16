@@ -52,7 +52,7 @@ class OrderController extends Controller
     public function detail($id)
     {
         $order = Order::find($id);
-        $orderItems = $order->order_items;
+        $orderItems = $order->orderItems;
         
         $list_product = null;
         $seeder = null;
@@ -60,8 +60,6 @@ class OrderController extends Controller
             $list_product[] = $item->product;
             $seeder[] = $item->product->user;
         }
-
-        $client = $order->user;
         $totalAmount = $this->total($id);
         
         return view('admin.customer_management.order_detail', ['title' => 'Danh sách đơn hàng','order'=> $order,'orderItems' => $orderItems, 'seeder' => $seeder,'totalAmount' => $totalAmount]);

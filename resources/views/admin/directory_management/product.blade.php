@@ -79,15 +79,15 @@
                             {{ $product->quantity }}
                         </td>
                         <td class="text-center" >
-                            <a href="product/upload/{{ $product->id }}" class="btn btn-success" name="btn_=upload"
+                            <a href="{{ asset('') }}admin/product/upload/{{ $product->id }}" class="btn btn-success" name="btn_=upload"
                                 id="btn_=upload"><i class="fa-solid fa-image"></i></a>
-                            <a href="product/update/{{ $product->id }}" class="btn btn-primary" value=""
+                            <a href="{{ asset('') }}admin/product/update/{{ $product->id }}" class="btn btn-primary" value=""
                                 name="btn_update" id="btn_update"
                                 style="margin-right: 7px;
                                 margin-left: 7px;"><i
                                     class="fa-solid fa-pen-to-square"></i></a>
 
-                            <a href="product/delete/{{ $product->id }}" class="btn btn-danger" name="btn_delete"
+                            <a href="{{ asset('') }}admin/product/delete/{{ $product->id }}" class="btn btn-danger" name="btn_delete"
                                 id="btn_delete"><i class="fa-solid fa-xmark"></i></a>
                         </td>
                     </tr>
@@ -97,15 +97,7 @@
         </table>
         <nav aria-label="...">
             <ul class="pagination">
-                <li class="page-item disabled">
-                    <span class="page-link">Previous</span>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="">1</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="">Next</a>
-                </li>
+                {{$products->onEachSide(1)->links('templatepagination')}}
             </ul>
         </nav>
     </div>

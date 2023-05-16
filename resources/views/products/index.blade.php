@@ -56,7 +56,7 @@
                                         <div class="action clearfix">
                                             <a onclick="AddCart({{ $item->id }})" title="Thêm giỏ hàng"
                                                 class=" fl-left" style="padding: 0px;">
-                                                <div class="btn btn-primary" style="padding: 8px 30px 8px 30px;"><i
+                                                <div class="btn btn-light" style="padding: 8px 30px 8px 30px; border: 1px solid;"><i
                                                         class="fa-solid fa-cart-plus" style="font-size: 20px;"></i></div>
                                             </a>
                                             <a href="{{asset('')}}cart/buy_now/{{$item->id}}" title="Mua ngay" class="btn btn-danger fl-right"
@@ -74,17 +74,9 @@
                 </div>
                 <div class="section" id="paging-wp">
                     <div class="section-detail">
-                        <ul class="list-item clearfix">
-                            <li>
-                                <a href="" title="">1</a>
-                            </li>
-                            <li>
-                                <a href="" title="">2</a>
-                            </li>
-                            <li>
-                                <a href="" title="">3</a>
-                            </li>
-                        </ul>
+                        
+                            {{$products->onEachSide(1)->links('templatepagination')}}
+                        
                     </div>
                 </div>
             </div>
@@ -109,7 +101,7 @@
                         <h3 class="section-title">Bộ lọc</h3>
                     </div>
                     <div class="section-detail">
-                        <form method="POST" action="">
+                        <form method="get" action="">
                             <table>
                                 <thead>
                                     <tr>

@@ -26,7 +26,7 @@
                                 <div class="dropdown">
                                     <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                        style="background-color: #d9263c; color : #fff; padding-top: 10px;">
+                                        style="background-color: #2a30f1; color : #fff; padding-top: 10px;">
                                         <?php
                                             if (!empty( Auth::user()->name )) {
                                                echo Auth::user()->name
@@ -35,7 +35,7 @@
                                     <div id="dropdown-menu" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" id="dropdown-item"
                                             href="{{ route('users.profile') }}">Hồ sơ</a>
-                                        <a class="dropdown-item" id="dropdown-item">Đơn mua</a>
+                                        <a href="{{asset('order/history')}}" class="dropdown-item" id="dropdown-item">Quản lý đơn hàng</a>
                                         <a id="dropdown-item" class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -75,11 +75,19 @@
                 <a href="{{ route('index') }}" title="" id="logo" class="fl-left"><img
                         src="{{ asset('client/images/logo.png') }}" /></a>
                 <div id="search-wp" class="fl-left">
-                    <form method="POST" action="">
-                        <input type="text" name="s" id="s"
-                            placeholder="Nhập từ khóa tìm kiếm tại đây!">
-                        <button type="submit" id="sm-s">Tìm kiếm</button>
+                    <form method="POST" action="" style="position: relative">
+                        <input type="text" class="header__search-imput" name="search-imput" id="search-imput"
+                            placeholder="Nhập từ khóa tìm kiếm tại đây!" style="padding:5px; width: 450px;">
+                        <button
+                            style="position: absolute;left: 87%;/* top: 0.5px; */height: 36px;width: 57px;margin: 1px 0px;padding: 0px;"
+                            type="submit" class="btn btn-black float-right" id="sm-s"><i
+                                class="fa-solid fa-magnifying-glass"></i></button>
+                        <div class="search_results">
+                            
+                        </div>
+                        
                     </form>
+
                 </div>
                 <div id="action-wp" class="fl-right">
                     <div id="advisory-wp" class="fl-left">
@@ -94,7 +102,8 @@
                     <div id="cart-wp" class="fl-right">
                         <div class="charge-item-card">
                             <div id="btn-cart">
-                                <a style="color: #fff"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                <a href="{{ route('cart') }}" style="color: #fff"><i class="fa fa-shopping-cart"
+                                        aria-hidden="true"></i>
                                     @if (Cart::content()->count())
                                         <span id="num">{{ Cart::content()->count() }}</span>
                                     @endif

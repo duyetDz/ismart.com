@@ -38,32 +38,34 @@
                                     $stt = 0;
                                 @endphp
 
-                                @foreach (Cart::content() as $product)
+                                @foreach (Cart::content() as $item)
                                     @php
                                         $stt += 1;
                                     @endphp
                                     <tr>
                                         <td>{{ $stt }}</td>
-                                        <td>{{ $product->id }}</td>
+                                        <td>{{ $item->id }}</td>
                                         <td>
                                             <a href="" title="" class="thumb">
-                                                <img src="{{ asset($product->options->image) }}" alt="">
+                                                <img src="{{ asset($item->options->image) }}" alt="">
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="" title="" class="name-product">{{ $product->name }}</a>
+                                            <a href="" title="" class="name-product">{{ $item->name }}</a>
                                         </td>
-                                        <td>{{ number_format($product->price, 0, ',', '.') }}đ</td>
+                                        <td>{{ number_format($item->price, 0, ',', '.') }}đ</td>
                                         <td>
-                                            <input type="number" onchange="updateValue({{ $product->id }})"
-                                                name="num-order" value="{{ $product->qty }}" class="num-order-{{$product->id}}"
-                                                step="1" min="1" style="width: 100px; text-align: center">
+                                            <input type="number" onchange="updateValue({{ $item->id }})"
+                                                name="num-order" value="{{ $item->qty }}"
+                                                class="num-order-{{ $item->id }}" step="1" min="1"
+                                                style="width: 100px; text-align: center" max="{{ $item->options->remainingQty }}">
                                         </td>
-                                        <td>{{ number_format($product->price * $product->qty, 0, ',', '.') }}đ</td>
+                                        <td>{{ number_format($item->price * $item->qty, 0, ',', '.') }}đ</td>
                                         <td>
-                                            <input type="hidden" class="rowId-{{$product->id}}" value="{{ $product->rowId }}">
-                                            <input type="hidden" class="price_product" value="{{ $product->price }}">
-                                            <a onclick="Delete({{ $product->id }})" title="" class="del-product"><i
+                                            <input type="hidden" class="rowId-{{ $item->id }}"
+                                                value="{{ $item->rowId }}">
+                                            <input type="hidden" class="price_product" value="{{ $item->price }}">
+                                            <a onclick="Delete({{ $item->id }})" title="" class="del-product"><i
                                                     class="fa fa-trash-o"></i></a>
                                         </td>
                                     </tr>
@@ -117,7 +119,7 @@
 @section('js')
     <script>
         function Delete(id) {
-            var rowId = $('.rowId').val();;
+            var rowId = $('.rowId-' + id).val();
             var data = {
                 'rowId': rowId,
             }
@@ -134,7 +136,7 @@
                 success: function(response) {
                     $('.charge-item-card').empty();
                     $('.charge-item-card').html(response);
-                    toastr.options = {
+                    toastr.options = {  
                         "closeButton": true,
                         "progetBar": true
                     }
@@ -162,8 +164,8 @@
         }
 
         function updateValue(id) {
-            var qty = $('.num-order-'+id).val();
-             var rowId = $('.rowId-'+id).val();
+            var qty = $('.num-order-' + id).val();
+            var rowId = $('.rowId-' + id).val();
             var data = {
                 'rowId': rowId,
                 'qty': qty,
@@ -180,11 +182,6 @@
                 success: function(response) {
                     $('.charge-item-card').empty();
                     $('.charge-item-card').html(response);
-                    toastr.options = {
-                        "closeButton": true,
-                        "progetBar": true
-                    }
-                    toastr.success("Bạn đã update Thành công ")
                     $('.table').load(location.href + " .table");
                 }
             });

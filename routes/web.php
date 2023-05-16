@@ -12,6 +12,7 @@ use App\Http\Controllers\client\BlogController;
 use App\Http\Controllers\client\CartController;
 use App\Http\Controllers\client\CheckoutController;
 use App\Http\Controllers\client\HomeController;
+use App\Http\Controllers\client\OrderHistoryController;
 use App\Http\Controllers\client\ProductsController;
 use App\Http\Controllers\client\UsersController;
 use Illuminate\Support\Facades\Auth;
@@ -36,6 +37,8 @@ Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
+Route::get('/search_now/{name}', [HomeController::class, 'search_now'])->name('search_now');
+
 
 Route::middleware(['auth'])->group(function () {
     //User 
@@ -59,14 +62,12 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/products/sort/{category}', [ProductsController::class, 'getProductsByCategory'])->name('products.getProductsByCategory');
 
-    Route::post('/products/filter', [ProductsController::class, 'filterProductsByCategory'])->name('products.filterProductsByCategory');
+    Route::get('/products/filter', [ProductsController::class, 'filterProductsByCategory'])->name('products.filterProductsByCategory');
 
     Route::get('/products/detail/{id}', [ProductsController::class, 'detail'])->name('products.detail');
 
 
-    // Checkout
-
-
+    // Cart
 
     Route::get('/cart', [CartController::class, 'index'])->name('cart');
 
@@ -83,8 +84,20 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
 
     Route::get('/cart/destroy', [CartController::class, 'destroy'])->name('cart.destroy');
+
+    // Checkout
     
+    
+
+    Route::get('/order/history', [OrderHistoryController::class, 'index'])->name('order.history');
+
+    Route::get('/order/detail/{id}', [OrderHistoryController::class, 'detail'])->name('order.detail');
+
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+
+    Route::post('/checkout/add', [CheckoutController::class, 'store'])->name('checkout.store');
+
+    
 });
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
