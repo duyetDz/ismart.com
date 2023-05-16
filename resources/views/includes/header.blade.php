@@ -35,7 +35,8 @@
                                     <div id="dropdown-menu" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" id="dropdown-item"
                                             href="{{ route('users.profile') }}">Hồ sơ</a>
-                                        <a href="{{asset('order/history')}}" class="dropdown-item" id="dropdown-item">Quản lý đơn hàng</a>
+                                        <a href="{{ asset('order/history') }}" class="dropdown-item"
+                                            id="dropdown-item">Quản lý đơn hàng</a>
                                         <a id="dropdown-item" class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -75,18 +76,21 @@
                 <a href="{{ route('index') }}" title="" id="logo" class="fl-left"><img
                         src="{{ asset('client/images/logo.png') }}" /></a>
                 <div id="search-wp" class="fl-left">
-                    <form method="POST" action="" style="position: relative">
-                        <input type="text" class="header__search-imput" name="search-imput" id="search-imput"
-                            placeholder="Nhập từ khóa tìm kiếm tại đây!" style="padding:5px; width: 450px;">
-                        <button
-                            style="position: absolute;left: 87%;/* top: 0.5px; */height: 36px;width: 57px;margin: 1px 0px;padding: 0px;"
-                            type="submit" class="btn btn-black float-right" id="sm-s"><i
-                                class="fa-solid fa-magnifying-glass"></i></button>
+                    <div style="position: relative">
+                        <form action="{{route('search_all')}}" method="get">
+                            <input type="text" class="header__search-imput" name="search-imput" id="search-imput"
+                                placeholder="Nhập từ khóa tìm kiếm tại đây!" style="padding:5px; width: 450px;">
+                            <button type="submit"
+                                style="position: absolute;left: 87%;/* top: 0.5px; */height: 36px;width: 57px;margin: 1px 0px;padding: 0px;"
+                                class="btn btn-black float-right" id="sm-s"><i
+                                    class="fa-solid fa-magnifying-glass"></i></button></a>
+                        </form>
+
                         <div class="search_results">
-                            
+
                         </div>
-                        
-                    </form>
+
+                    </div>
 
                 </div>
                 <div id="action-wp" class="fl-right">

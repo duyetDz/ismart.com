@@ -10,9 +10,15 @@ use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
-    
+
     public function index()
     {
+
+        $bestSellers = Product::whereHas('orderItems', function ($query) {
+            $query->whereHas('order', function ($query) {
+                $query->where('status', 'Giao hàng thành công');
+            });
+        })->distinct()->get();
 
         $catIds = Product::distinct('category_id')->pluck('category_id')->toArray();
         $categories = Category::whereIn('id', $catIds)->get();
@@ -23,10 +29,10 @@ class ProductsController extends Controller
 
         $products = Product::whereIn('category_id', $categoryIds)->paginate(20);
         # code...
-        return view('products/index', ['categories' => $categories, 'products' => $products, 'name_category' => 'Điện thoại']);
+        return view('products/index', ['categories' => $categories, 'products' => $products, 'name_category' => 'Điện thoại','bestSellers' => $bestSellers]);
     }
 
-   
+
 
 
     public function detail($id)
@@ -39,7 +45,7 @@ class ProductsController extends Controller
 
         $products = Product::where('category_id', $product->category_id)->paginate(10);
 
-        return view('products/detail', ['product' => $product, 'product_images' => $product_images, 'categories' => $categories,'products'=>$products]);
+        return view('products/detail', ['product' => $product, 'product_images' => $product_images, 'categories' => $categories, 'products' => $products]);
     }
 
     public function getProductsByCategory($category_id)
@@ -73,7 +79,6 @@ class ProductsController extends Controller
 
         if ($select == 3) {
             $products = Product::where('category_id', $select)->orderBy('price', 'desc')->paginate(20);
-            
         }
 
         if ($select == 4) {

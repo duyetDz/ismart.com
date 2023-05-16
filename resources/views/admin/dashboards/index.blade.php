@@ -1,398 +1,189 @@
 @extends('templates.tpl_admin_default')
 
 @section('content')
-    @include('includes.header-main-admin',['name' => 'Dashboards', 'key'=> 'Home'])
-    <div class="row mb-2 mb-xl-3">
-        <div class="col-auto ms-auto text-end mt-n1">
-            <a href="#" class="btn btn-light bg-white me-2">Invite a Friend</a>
-            <a href="#" class="btn btn-primary">New Project</a>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-6 col-xl-3">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col mt-0">
-                            <h5 class="card-title">Income</h5>
-                        </div>
-
-                        <div class="col-auto">
-                            <div class="stat text-primary">
-                                <i class="align-middle" data-feather="dollar-sign"></i>
+    @include('includes.header-main-admin', ['name' => 'Dashboards', 'key' => 'Home'])
+    <main>
+        <div class="container-fluid">
+            
+            <div class="row">
+                <div class="row row-sm">
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="card-item">
+                                    <div class="card-item-icon card-icon"> <svg class="text-primary"
+                                            xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24"
+                                            height="24" viewBox="0 0 24 24" width="24">
+                                            <g>
+                                                <rect height="14" opacity=".3" width="14" x="5"
+                                                    y="5"></rect>
+                                                <g>
+                                                    <rect fill="none" height="24" width="24"></rect>
+                                                    <g>
+                                                        <path
+                                                            d="M19,3H5C3.9,3,3,3.9,3,5v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V5C21,3.9,20.1,3,19,3z M19,19H5V5h14V19z">
+                                                        </path>
+                                                        <rect height="5" width="2" x="7" y="12">
+                                                        </rect>
+                                                        <rect height="10" width="2" x="15" y="7">
+                                                        </rect>
+                                                        <rect height="3" width="2" x="11" y="14">
+                                                        </rect>
+                                                        <rect height="2" width="2" x="11" y="10">
+                                                        </rect>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </svg> </div>
+                                    <div class="card-item-title mb-2"> <label
+                                            class="main-content-label tx-13 font-weight-bold mb-1">Tông doanh thu</label>
+                                        <span class="d-block tx-12 mb-0 text-muted">Tháng trước so với tháng này</span>
+                                    </div>
+                                    <div class="card-item-body">
+                                        <div class="card-item-stat">
+                                            <h4 class="font-weight-bold">$5,900.00</h4> <small><b
+                                                    class="text-success">55%</b> higher</small>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <h1 class="mt-1 mb-3">$47.482</h1>
-                    <div class="mb-0">
-                        <span class="badge badge-success-light"> <i class="mdi mdi-arrow-bottom-right"></i> 3.65%
-                        </span>
-                        <span class="text-muted">Since last week</span>
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="card-item">
+                                    <div class="card-item-icon card-icon"> <svg xmlns="http://www.w3.org/2000/svg"
+                                            height="24" viewBox="0 0 24 24" width="24">
+                                            <path d="M0 0h24v24H0V0z" fill="none"></path>
+                                            <path
+                                                d="M12 4c-4.41 0-8 3.59-8 8 0 1.82.62 3.49 1.64 4.83 1.43-1.74 4.9-2.33 6.36-2.33s4.93.59 6.36 2.33C19.38 15.49 20 13.82 20 12c0-4.41-3.59-8-8-8zm0 9c-1.94 0-3.5-1.56-3.5-3.5S10.06 6 12 6s3.5 1.56 3.5 3.5S13.94 13 12 13z"
+                                                opacity=".3"></path>
+                                            <path
+                                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM7.07 18.28c.43-.9 3.05-1.78 4.93-1.78s4.51.88 4.93 1.78C15.57 19.36 13.86 20 12 20s-3.57-.64-4.93-1.72zm11.29-1.45c-1.43-1.74-4.9-2.33-6.36-2.33s-4.93.59-6.36 2.33C4.62 15.49 4 13.82 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8c0 1.82-.62 3.49-1.64 4.83zM12 6c-1.94 0-3.5 1.56-3.5 3.5S10.06 13 12 13s3.5-1.56 3.5-3.5S13.94 6 12 6zm0 5c-.83 0-1.5-.67-1.5-1.5S11.17 8 12 8s1.5.67 1.5 1.5S12.83 11 12 11z">
+                                            </path>
+                                        </svg> </div>
+                                    <div class="card-item-title mb-2"> <label
+                                            class="main-content-label tx-13 font-weight-bold mb-1">Số thành viên</label>
+                                        <span class="d-block tx-12 mb-0 text-muted">Nhân viên đã tham gia tháng này</span>
+                                    </div>
+                                    <div class="card-item-body">
+                                        <div class="card-item-stat">
+                                            <h4 class="font-weight-bold">15</h4> <small><b class="text-success">5%</b>
+                                                Increased</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-4">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="card-item">
+                                    <div class="card-item-icon card-icon"> <svg class="text-primary"
+                                            xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24"
+                                            width="24">
+                                            <path d="M0 0h24v24H0V0z" fill="none"></path>
+                                            <path
+                                                d="M12 4c-4.41 0-8 3.59-8 8s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8zm1.23 13.33V19H10.9v-1.69c-1.5-.31-2.77-1.28-2.86-2.97h1.71c.09.92.72 1.64 2.32 1.64 1.71 0 2.1-.86 2.1-1.39 0-.73-.39-1.41-2.34-1.87-2.17-.53-3.66-1.42-3.66-3.21 0-1.51 1.22-2.48 2.72-2.81V5h2.34v1.71c1.63.39 2.44 1.63 2.49 2.97h-1.71c-.04-.97-.56-1.64-1.94-1.64-1.31 0-2.1.59-2.1 1.43 0 .73.57 1.22 2.34 1.67 1.77.46 3.66 1.22 3.66 3.42-.01 1.6-1.21 2.48-2.74 2.77z"
+                                                opacity=".3"></path>
+                                            <path
+                                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.31-8.86c-1.77-.45-2.34-.94-2.34-1.67 0-.84.79-1.43 2.1-1.43 1.38 0 1.9.66 1.94 1.64h1.71c-.05-1.34-.87-2.57-2.49-2.97V5H10.9v1.69c-1.51.32-2.72 1.3-2.72 2.81 0 1.79 1.49 2.69 3.66 3.21 1.95.46 2.34 1.15 2.34 1.87 0 .53-.39 1.39-2.1 1.39-1.6 0-2.23-.72-2.32-1.64H8.04c.1 1.7 1.36 2.66 2.86 2.97V19h2.34v-1.67c1.52-.29 2.72-1.16 2.73-2.77-.01-2.2-1.9-2.96-3.66-3.42z">
+                                            </path>
+                                        </svg> </div>
+                                    <div class="card-item-title  mb-2"> <label
+                                            class="main-content-label tx-13 font-weight-bold mb-1">Total Expenses</label>
+                                        <span class="d-block tx-12 mb-0 text-muted">Previous month vs this months</span>
+                                    </div>
+                                    <div class="card-item-body">
+                                        <div class="card-item-stat">
+                                            <h4 class="font-weight-bold">$8,500</h4> <small><b class="text-danger">12%</b>
+                                                decrease</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+                            Area Chart Example
+                        </div>
+                        <div class="card-body">
+                            <canvas class="chart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+                            Area Chart Example
+                        </div>
+                        <div class="card-body">
+                            <canvas class="chart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <span><i class="bi bi-table me-2"></i></span> Data Table
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="example" class="table table-striped data-table" style="width: 100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Office</th>
+                                            <th>Age</th>
+                                            <th>Start date</th>
+                                            <th>Salary</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Tiger Nixon</td>
+                                            <td>System Architect</td>
+                                            <td>Edinburgh</td>
+                                            <td>61</td>
+                                            <td>2011/04/25</td>
+                                            <td>$320,800</td>
+                                        </tr>
+
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Office</th>
+                                            <th>Age</th>
+                                            <th>Start date</th>
+                                            <th>Salary</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 col-xl-3">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col mt-0">
-                            <h5 class="card-title">Orders</h5>
-                        </div>
-
-                        <div class="col-auto">
-                            <div class="stat text-primary">
-                                <i class="align-middle" data-feather="shopping-bag"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <h1 class="mt-1 mb-3">2.542</h1>
-                    <div class="mb-0">
-                        <span class="badge badge-danger-light"> <i class="mdi mdi-arrow-bottom-right"></i> -5.25%
-                        </span>
-                        <span class="text-muted">Since last week</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-xl-3">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col mt-0">
-                            <h5 class="card-title">Activity</h5>
-                        </div>
-
-                        <div class="col-auto">
-                            <div class="stat text-primary">
-                                <i class="align-middle" data-feather="activity"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <h1 class="mt-1 mb-3">16.300</h1>
-                    <div class="mb-0">
-                        <span class="badge badge-success-light"> <i class="mdi mdi-arrow-bottom-right"></i> 4.65%
-                        </span>
-                        <span class="text-muted">Since last week</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-xl-3">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col mt-0">
-                            <h5 class="card-title">Revenue</h5>
-                        </div>
-
-                        <div class="col-auto">
-                            <div class="stat text-primary">
-                                <i class="align-middle" data-feather="shopping-cart"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <h1 class="mt-1 mb-3">$20.120</h1>
-                    <div class="mb-0">
-                        <span class="badge badge-success-light"> <i class="mdi mdi-arrow-bottom-right"></i> 2.35%
-                        </span>
-                        <span class="text-muted">Since last week</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12 col-lg-8 d-flex">
-            <div class="card flex-fill w-100">
-                <div class="card-header">
-                    <div class="float-end">
-                        <form class="row g-2">
-                            <div class="col-auto">
-                                <select class="form-select form-select-sm bg-light border-0">
-                                    <option>Jan</option>
-                                    <option value="1">Feb</option>
-                                    <option value="2">Mar</option>
-                                    <option value="3">Apr</option>
-                                </select>
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control form-control-sm bg-light rounded-2 border-0"
-                                    style="width: 100px;" placeholder="Search..">
-                            </div>
-                        </form>
-                    </div>
-                    <h5 class="card-title mb-0">Total Revenue</h5>
-                </div>
-                <div class="card-body pt-2 pb-3">
-                    <div class="chart chart-md">
-                        <canvas id="chartjs-dashboard-line"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-lg-4 d-flex">
-            <div class="card flex-fill w-100">
-                <div class="card-header">
-                    <div class="float-end">
-                        <form class="row g-2">
-                            <div class="col-auto">
-                                <select class="form-select form-select-sm bg-light border-0">
-                                    <option>Jan</option>
-                                    <option value="1">Feb</option>
-                                    <option value="2">Mar</option>
-                                    <option value="3">Apr</option>
-                                </select>
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control form-control-sm bg-light rounded-2 border-0"
-                                    style="width: 100px;" placeholder="Search..">
-                            </div>
-                        </form>
-                    </div>
-                    <h5 class="card-title mb-0">Sales by State</h5>
-                </div>
-                <div class="card-body px-4">
-                    <div id="usa_map" style="height:294px;"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12 col-lg-4 col-xxl-3 d-flex">
-            <div class="card flex-fill w-100">
-                <div class="card-header">
-                    <div class="card-actions float-end">
-                        <div class="dropdown position-relative">
-                            <a href="#" data-bs-toggle="dropdown" data-bs-display="static">
-                                <i class="align-middle" data-feather="more-horizontal"></i>
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </div>
-                    </div>
-                    <h5 class="card-title mb-0">Sales/Revenue</h5>
-                </div>
-                <div class="card-body d-flex w-100">
-                    <div class="align-self-center chart chart-lg">
-                        <canvas id="chartjs-dashboard-bar"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-lg-8 col-xxl-9 d-flex">
-            <div class="card flex-fill">
-                <div class="card-header">
-                    <div class="card-actions float-end">
-                        <div class="dropdown position-relative">
-                            <a href="#" data-bs-toggle="dropdown" data-bs-display="static">
-                                <i class="align-middle" data-feather="more-horizontal"></i>
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </div>
-                    </div>
-                    <h5 class="card-title mb-0">Top Selling Products</h5>
-                </div>
-                <table class="table table-borderless my-0">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th class="d-none d-xxl-table-cell">Company</th>
-                            <th class="d-none d-xl-table-cell">Assigned</th>
-                            <th class="d-none d-xl-table-cell text-end">Orders</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="d-flex">
-                                    <div class="flex-shrink-0">
-                                        <div class="bg-light rounded-2">
-                                            <img class="p-2" src="">
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1 ms-3">
-                                        <strong>Aurora</strong>
-                                        <div class="text-muted">
-                                            UI Kit
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="d-none d-xxl-table-cell">
-                                <strong>Lechters</strong>
-                                <div class="text-muted">
-                                    Real Estate
-                                </div>
-                            </td>
-                            <td class="d-none d-xl-table-cell">
-                                <strong>Vanessa Tucker</strong>
-                                <div class="text-muted">
-                                    HTML, JS, React
-                                </div>
-                            </td>
-                            <td class="d-none d-xl-table-cell text-end">
-                                520
-                            </td>
-                            <td>
-                                <span class="badge badge-success-light">In progress</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="d-flex">
-                                    <div class="flex-shrink-0">
-                                        <div class="bg-light rounded-2">
-                                            <img class="p-2" src="">
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1 ms-3">
-                                        <strong>Bender</strong>
-                                        <div class="text-muted">
-                                            Dashboard
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="d-none d-xxl-table-cell">
-                                <strong>Cellophane Transportation</strong>
-                                <div class="text-muted">
-                                    Transportation
-                                </div>
-                            </td>
-                            <td class="d-none d-xl-table-cell">
-                                <strong>William Harris</strong>
-                                <div class="text-muted">
-                                    HTML, JS, Vue
-                                </div>
-                            </td>
-                            <td class="d-none d-xl-table-cell text-end">
-                                240
-                            </td>
-                            <td>
-                                <span class="badge badge-warning-light">Paused</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="d-flex">
-                                    <div class="flex-shrink-0">
-                                        <div class="bg-light rounded-2">
-                                            <img class="p-2" src="">
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1 ms-3">
-                                        <strong>Camelot</strong>
-                                        <div class="text-muted">
-                                            Dashboard
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="d-none d-xxl-table-cell">
-                                <strong>Clemens</strong>
-                                <div class="text-muted">
-                                    Insurance
-                                </div>
-                            </td>
-                            <td class="d-none d-xl-table-cell">
-                                <strong>Darwin</strong>
-                                <div class="text-muted">
-                                    HTML, JS, Laravel
-                                </div>
-                            </td>
-                            <td class="d-none d-xl-table-cell text-end">
-                                180
-                            </td>
-                            <td>
-                                <span class="badge badge-success-light">In progress</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="d-flex">
-                                    <div class="flex-shrink-0">
-                                        <div class="bg-light rounded-2">
-                                            <img class="p-2" src="">
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1 ms-3">
-                                        <strong>Edison</strong>
-                                        <div class="text-muted">
-                                            UI Kit
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="d-none d-xxl-table-cell">
-                                <strong>Affinity Investment Group</strong>
-                                <div class="text-muted">
-                                    Finance
-                                </div>
-                            </td>
-                            <td class="d-none d-xl-table-cell">
-                                <strong>Vanessa Tucker</strong>
-                                <div class="text-muted">
-                                    HTML, JS, React
-                                </div>
-                            </td>
-                            <td class="d-none d-xl-table-cell text-end">
-                                410
-                            </td>
-                            <td>
-                                <span class="badge badge-danger-light">Cancelled</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="d-flex">
-                                    <div class="flex-shrink-0">
-                                        <div class="bg-light rounded-2">
-                                            <img class="p-2" src="">
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1 ms-3">
-                                        <strong>Fusion</strong>
-                                        <div class="text-muted">
-                                            Dashboard
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="d-none d-xxl-table-cell">
-                                <strong>Konsili</strong>
-                                <div class="text-muted">
-                                    Retail
-                                </div>
-                            </td>
-                            <td class="d-none d-xl-table-cell">
-                                <strong>Christina Mason</strong>
-                                <div class="text-muted">
-                                    HTML, JS, Vue
-                                </div>
-                            </td>
-                            <td class="d-none d-xl-table-cell text-end">
-                                250
-                            </td>
-                            <td>
-                                <span class="badge badge-warning-light">Paused</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+    </main>
+    <script src="{{ asset('') }}admin/js/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+    <script src="{{ asset('') }}admin/js/js/jquery-3.5.1.js"></script>
+    <script src="{{ asset('') }}admin/js/js/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('') }}admin/js/js/dataTables.bootstrap5.min.js"></script>
+    <script src="{{ asset('') }}admin/js/js/script.js"></script>
 @endsection

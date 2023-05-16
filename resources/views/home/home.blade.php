@@ -79,7 +79,8 @@
                                         <div class="action clearfix">
                                             <a onclick="AddCart({{ $item->id }})" title="Thêm giỏ hàng" class=" fl-left"
                                                 style="padding: 0px;">
-                                                <div class="btn btn-light" style="padding: 8px 30px 8px 30px; border: 1px solid;"><i
+                                                <div class="btn btn-light"
+                                                    style="padding: 8px 30px 8px 30px; border: 1px solid;"><i
                                                         class="fa-solid fa-cart-plus" style="font-size: 20px;"></i></div>
                                             </a>
                                             <a href="{{ asset('') }}cart/buy_now/{{ $item->id }}" title="Mua ngay"
@@ -115,7 +116,8 @@
                                         <div class="action clearfix">
                                             <a onclick="AddCart({{ $item->id }})" title="Thêm giỏ hàng"
                                                 class=" fl-left" style="padding: 0px;">
-                                                <div class="btn btn-light" style="padding: 8px 30px 8px 30px; border: 1px solid;"><i
+                                                <div class="btn btn-light"
+                                                    style="padding: 8px 30px 8px 30px; border: 1px solid;"><i
                                                         class="fa-solid fa-cart-plus" style="font-size: 20px; "></i></div>
                                             </a>
                                             <a href="{{ asset('') }}cart/buy_now/{{ $item->id }}" title="Mua ngay"
@@ -138,8 +140,8 @@
                         <ul class="list-item clearfix">
                             @foreach ($laptops as $item)
                                 <li style="max-height: 353px">
-                                    <a href="products/detail/{{ $item->id }}" title="" class="thumb">
-                                        <img src="{{ $item->feature_image }}">
+                                    <a href="{{asset('')}}products/detail/{{ $item->id }}" title="" class="thumb">
+                                        <img src="{{asset('')}}{{ $item->feature_image }}">
                                     </a>
                                     <a href="" title="" class="product-name">{!! Str::limit($item->name, 20, '...') !!}</a>
                                     <div class="price">
@@ -150,7 +152,8 @@
                                         <div class="action clearfix">
                                             <a onclick="AddCart({{ $item->id }})" title="Thêm giỏ hàng"
                                                 class=" fl-left" style="padding: 0px;">
-                                                <div class="btn btn-light" style="padding: 8px 30px 8px 30px; border: 1px solid;"><i
+                                                <div class="btn btn-light"
+                                                    style="padding: 8px 30px 8px 30px; border: 1px solid;"><i
                                                         class="fa-solid fa-cart-plus" style="font-size: 20px;"></i></div>
                                             </a>
                                             <a href="{{ asset('') }}cart/buy_now/{{ $item->id }}"
@@ -186,20 +189,22 @@
                     </div>
                     <div class="section-detail">
                         <ul class="list-item">
-                            <li class="clearfix">
-                                <a href="" title="" class="thumb fl-left">
-                                    <img src="client/images/img-pro-13.png" alt="">
-                                </a>
-                                <div class="info fl-right">
-                                    <a href="" title="" class="product-name">Laptop
-                                        Asus A540UP I5</a>
-                                    <div class="price">
-                                        <span class="new">5.190.000đ</span>
-                                        <span class="old">7.190.000đ</span>
+                            @foreach ($bestSellers as $item)
+                                <li class="clearfix">
+                                    <a href="{{asset('')}}products/detail/{{ $item->id }}" title="" class="thumb fl-left">
+                                        <img src="{{asset('')}}{{ $item->feature_image }}" alt="">
+                                    </a>
+                                    <div class="info fl-right">
+                                        <a href="" title="" class="product-name">{{ $item->name }}</a>
+                                        <div class="price">
+                                            <span class="new">{{ number_format($item->price, 0, ',', '.') }}đ</span>
+                                        <span class="old">{{ number_format($item->price * 1.3, 0, ',', '.') }}đ</span>
+                                        </div>
+                                        <a href="" title="" class="buy-now">Mua ngay</a>
                                     </div>
-                                    <a href="" title="" class="buy-now">Mua ngay</a>
-                                </div>
-                            </li>
+                                </li>
+                            @endforeach
+
                         </ul>
                     </div>
                 </div>

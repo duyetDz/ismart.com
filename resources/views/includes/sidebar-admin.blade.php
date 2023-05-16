@@ -1,6 +1,6 @@
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
-        <a class="sidebar-brand" href="index.html">
+        <a class="sidebar-brand" href="{{route('admin.index')}}">
             <span class="sidebar-brand-text align-middle">
                 AdminKit
                 <sup><small class="badge bg-primary text-uppercase">Pro</small></sup>

@@ -39,6 +39,8 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 
 Route::get('/search_now/{name}', [HomeController::class, 'search_now'])->name('search_now');
 
+Route::get('/search_all', [HomeController::class, 'search_all'])->name('search_all');
+
 
 Route::middleware(['auth'])->group(function () {
     //User 

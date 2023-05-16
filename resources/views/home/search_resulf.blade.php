@@ -10,7 +10,7 @@
                             <a href="" title="">Trang chủ</a>
                         </li>
                         <li>
-                            <a href="" title="">{{ $name_category }}</a>
+                            <a href="" title="">Sản Phẩm</a>
                         </li>
                     </ul>
                 </div>
@@ -18,23 +18,9 @@
             <div class="main-content fl-right">
                 <div class="section" id="list-product-wp">
                     <div class="section-head clearfix">
-                        <h3 class="section-title fl-left">{{ $name_category }}</h3>
+                        <h3 class="section-title fl-left">Sản Phẩm</h3>
                         <div class="filter-wp fl-right">
                             <p class="desc">Hiển thị {{ $products->count() }} sản phẩm</p>
-                            <div class="form-filter d-flex">
-                                <form method="POST" action="{{ asset('products/filter') }}">
-                                    @csrf
-                                    <input type="hidden" name="category" value="{{ $name_category }}">
-                                    <select class="custom-select" name="select" style="width: 70%">
-                                        <option value="1">Từ A-Z</option>
-                                        <option value="2">Từ Z-A</option>
-                                        <option value="3">Giá cao xuống thấp</option>
-                                        <option value="4">Giá thấp lên cao</option>
-                                    </select>
-                                    <button class="btn btn-secondary" type="submit"
-                                        style="padding: 6px 15px;margin-left: 5px;">Lọc</button>
-                                </form>
-                            </div>
                         </div>
                     </div>
                     <div class="section-detail">

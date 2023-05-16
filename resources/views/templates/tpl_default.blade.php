@@ -99,14 +99,14 @@
 
         // Bắt sự kiện khi click chuột ra chỗ khác trên trang web
         document.addEventListener('click', function(event) {
-                    const isClickInsideSearchInput = searchInput.contains(event.target);
-                    const isClickInsideSearchResults = searchResults.contains(event.target);
+            const isClickInsideSearchInput = searchInput.contains(event.target);
+            const isClickInsideSearchResults = searchResults.contains(event.target);
 
-                    if (!isClickInsideSearchInput && !isClickInsideSearchResults) {
-                        // Ẩn kết quả tìm kiếm
-                        searchResults.style.display = 'none';
-                    }
-                })
+            if (!isClickInsideSearchInput && !isClickInsideSearchResults) {
+                // Ẩn kết quả tìm kiếm
+                searchResults.style.display = 'none';
+            }
+        })
     </script>
 
     @yield('js')
