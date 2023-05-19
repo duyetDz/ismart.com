@@ -43,34 +43,42 @@
                                     @foreach ($orders as $item)
                                         <tr>
                                             <td class="text-center">
-                                                {{$t += 1}}
+                                                {{ $t += 1 }}
                                             </td>
                                             <td class="text-center">
-                                                {{$item->order_code}}
+                                                {{ $item->order_code }}
                                             </td>
                                             <td class="text-center">
-                                                {{$item->name}}
+                                                {{ $item->name }}
                                             </td>
                                             <td class="text-center">
-                                                {{$item->address}}
+                                                {{ $item->address }}
                                             </td>
                                             <td class="text-center">
-                                                {{$item->payment}}
+                                                {{ $item->payment }}
                                             </td>
                                             <td class="text-center">
-                                                {{$item->status}}
+                                                {{ $item->status }}
                                             </td>
                                             <td class="text-center">
-                                                {{$item->created_at}}
+                                                {{ $item->created_at }}
                                             </td>
                                             <td class="text-center">
-                                                <a href="{{ asset('order/detail/'.$item->id) }}">Chi tiết</a>
+                                                <a href="{{ asset('order/detail/' . $item->id) }}">Chi tiết</a>
                                             </td>
 
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
+
+                            <div class="section" id="paging-wp">
+                                <div class="section-detail">
+
+                                    {{ $orders->onEachSide(1)->links('templatepagination') }}
+
+                                </div>
+                            </div>
 
                         </div>
                     </div>

@@ -77,15 +77,21 @@
                                     </div>
                                     <div class="action clearfix text-center">
                                         <div class="action clearfix">
-                                            <a onclick="AddCart({{ $item->id }})" title="Thêm giỏ hàng" class=" fl-left"
-                                                style="padding: 0px;">
-                                                <div class="btn btn-light"
-                                                    style="padding: 8px 30px 8px 30px; border: 1px solid;"><i
-                                                        class="fa-solid fa-cart-plus" style="font-size: 20px;"></i></div>
-                                            </a>
-                                            <a href="{{ asset('') }}cart/buy_now/{{ $item->id }}" title="Mua ngay"
-                                                class="btn btn-danger fl-right" style="padding: 10px 20px 10px 20px;">Mua
-                                                ngay</a>
+                                            @if ($item->quantity > 0)
+                                                <a onclick="AddCart({{ $item->id }})" title="Thêm giỏ hàng"
+                                                    class=" fl-left" style="padding: 0px;">
+                                                    <div class="btn btn-light"
+                                                        style="padding: 8px 30px 8px 30px; border: 1px solid;"><i
+                                                            class="fa-solid fa-cart-plus" style="font-size: 20px;"></i>
+                                                    </div>
+                                                </a>
+                                                <a href="{{ asset('') }}cart/buy_now/{{ $item->id }}"
+                                                    title="Mua ngay" class="btn btn-danger fl-right"
+                                                    style="padding: 10px 20px 10px 20px;">Mua ngay</a>
+                                            @else
+                                                <button title="Tạm hết hàng" class="btn btn-danger"
+                                                     disabled>Tạm hết hàng</button>
+                                            @endif
                                         </div>
                                     </div>
                                 </li>
@@ -114,15 +120,21 @@
                                     </div>
                                     <div class="action clearfix text-center">
                                         <div class="action clearfix">
-                                            <a onclick="AddCart({{ $item->id }})" title="Thêm giỏ hàng"
-                                                class=" fl-left" style="padding: 0px;">
-                                                <div class="btn btn-light"
-                                                    style="padding: 8px 30px 8px 30px; border: 1px solid;"><i
-                                                        class="fa-solid fa-cart-plus" style="font-size: 20px; "></i></div>
-                                            </a>
-                                            <a href="{{ asset('') }}cart/buy_now/{{ $item->id }}" title="Mua ngay"
-                                                class="btn btn-danger fl-right" style="padding: 10px 20px 10px 20px;">Mua
-                                                ngay</a>
+                                            @if ($item->quantity > 0)
+                                                <a onclick="AddCart({{ $item->id }})" title="Thêm giỏ hàng"
+                                                    class=" fl-left" style="padding: 0px;">
+                                                    <div class="btn btn-light"
+                                                        style="padding: 8px 30px 8px 30px; border: 1px solid;"><i
+                                                            class="fa-solid fa-cart-plus" style="font-size: 20px;"></i>
+                                                    </div>
+                                                </a>
+                                                <a href="{{ asset('') }}cart/buy_now/{{ $item->id }}"
+                                                    title="Mua ngay" class="btn btn-danger fl-right"
+                                                    style="padding: 10px 20px 10px 20px;">Mua ngay</a>
+                                            @else
+                                                <button title="Tạm hết hàng" class="btn btn-danger"
+                                                     disabled>Tạm hết hàng</button>
+                                            @endif
                                         </div>
                                     </div>
                                 </li>
@@ -140,8 +152,9 @@
                         <ul class="list-item clearfix">
                             @foreach ($laptops as $item)
                                 <li style="max-height: 353px">
-                                    <a href="{{asset('')}}products/detail/{{ $item->id }}" title="" class="thumb">
-                                        <img src="{{asset('')}}{{ $item->feature_image }}">
+                                    <a href="{{ asset('') }}products/detail/{{ $item->id }}" title=""
+                                        class="thumb">
+                                        <img src="{{ asset('') }}{{ $item->feature_image }}">
                                     </a>
                                     <a href="" title="" class="product-name">{!! Str::limit($item->name, 20, '...') !!}</a>
                                     <div class="price">
@@ -150,15 +163,22 @@
                                     </div>
                                     <div class="action clearfix text-center">
                                         <div class="action clearfix">
-                                            <a onclick="AddCart({{ $item->id }})" title="Thêm giỏ hàng"
-                                                class=" fl-left" style="padding: 0px;">
-                                                <div class="btn btn-light"
-                                                    style="padding: 8px 30px 8px 30px; border: 1px solid;"><i
-                                                        class="fa-solid fa-cart-plus" style="font-size: 20px;"></i></div>
-                                            </a>
-                                            <a href="{{ asset('') }}cart/buy_now/{{ $item->id }}"
-                                                title="Mua ngay" class="btn btn-danger fl-right"
-                                                style="padding: 10px 20px 10px 20px;">Mua ngay</a>
+                                            @if ($item->quantity > 0)
+                                                <a onclick="AddCart({{ $item->id }})" title="Thêm giỏ hàng"
+                                                    class=" fl-left" style="padding: 0px;">
+                                                    <div class="btn btn-light"
+                                                        style="padding: 8px 30px 8px 30px; border: 1px solid;"><i
+                                                            class="fa-solid fa-cart-plus" style="font-size: 20px;"></i>
+                                                    </div>
+                                                </a>
+                                                <a href="{{ asset('') }}cart/buy_now/{{ $item->id }}"
+                                                    title="Mua ngay" class="btn btn-danger fl-right"
+                                                    style="padding: 10px 20px 10px 20px;">Mua ngay</a>
+                                            @else
+                                                <a title="Tạm hết hàng" class="btn btn-danger fl-right"
+                                                    style="padding: 10px 20px 10px 20px;">Tạm hết hàng</a>
+                                            @endif
+
                                         </div>
                                     </div>
                                 </li>
@@ -191,16 +211,17 @@
                         <ul class="list-item">
                             @foreach ($bestSellers as $item)
                                 <li class="clearfix">
-                                    <a href="{{asset('')}}products/detail/{{ $item->id }}" title="" class="thumb fl-left">
-                                        <img src="{{asset('')}}{{ $item->feature_image }}" alt="">
+                                    <a href="{{ asset('') }}products/detail/{{ $item->id }}" title=""
+                                        class="thumb fl-left">
+                                        <img src="{{ asset('') }}{{ $item->feature_image }}" alt="">
                                     </a>
                                     <div class="info fl-right">
                                         <a href="" title="" class="product-name">{{ $item->name }}</a>
                                         <div class="price">
                                             <span class="new">{{ number_format($item->price, 0, ',', '.') }}đ</span>
-                                        <span class="old">{{ number_format($item->price * 1.3, 0, ',', '.') }}đ</span>
+                                            <span
+                                                class="old">{{ number_format($item->price * 1.3, 0, ',', '.') }}đ</span>
                                         </div>
-                                        <a href="" title="" class="buy-now">Mua ngay</a>
                                     </div>
                                 </li>
                             @endforeach
@@ -226,11 +247,10 @@
         function AddCart(id) {
             $.ajax({
                 type: "GET",
-                url: "cart/add/" + id,
+                url: "/cart/add/" + id,
 
                 success: function(response) {
                     $('.charge-item-card').empty();
-                    console.log(response);
                     $('.charge-item-card').html(response);
                     toastr.options = {
                         "closeButton": true,

@@ -17,10 +17,10 @@
                                 <a href="{{ route('blog') }}" title="">Blog</a>
                             </li>
                             <li>
-                                <a href="{{ route('index') }}" title="">Giới thiệu</a>
+                                <a href="{{ route('introduce') }}" title="">Giới thiệu</a>
                             </li>
                             <li>
-                                <a href="{{ route('index') }}" title="">Liên hệ</a>
+                                <a href="{{ route('contact') }}" title="">Liên hệ</a>
                             </li>
                             <li>
                                 <div class="dropdown">
@@ -78,7 +78,7 @@
                 <div id="search-wp" class="fl-left">
                     <div style="position: relative">
                         <form action="{{route('search_all')}}" method="get">
-                            <input type="text" class="header__search-imput" name="search-imput" id="search-imput"
+                            <input type="text" class="header__search-imput" value="{{ request('search-imput') }}" name="search-imput" id="search-imput"
                                 placeholder="Nhập từ khóa tìm kiếm tại đây!" style="padding:5px; width: 450px;">
                             <button type="submit"
                                 style="position: absolute;left: 87%;/* top: 0.5px; */height: 36px;width: 57px;margin: 1px 0px;padding: 0px;"

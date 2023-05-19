@@ -11,14 +11,14 @@
                 <ul id="save_msgList"></ul>
                 <div class="mb-3">
                     <label for="name">Name</label>
-                    <input type="text" name="name"  id="name" class="form-control" />
+                    <input type="text" name="name" value = "{{old('name')}}"  id="name" class="form-control" />
                     @error('name')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label for="email">Email</label>
-                    <input type="text" id="email" name="email"   class="form-control" />
+                    <input type="text" id="email" name="email" value = "{{old('email')}}"  class="form-control" />
                     @error('email')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -26,7 +26,7 @@
 
                 <div class="mb-3">
                     <label for="password">Mật khẩu</label>
-                    <input type="password" id="password" name="password"   class="form-control" />
+                    <input type="password" id="password" name="password" value = "{{old('password')}}"  class="form-control" />
                     @error('password')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -34,7 +34,7 @@
 
                 <div class="mb-3">
                     <label for="address">Địa chỉ</label>
-                    <input type="text" id="address" name="address"   class="form-control" />
+                    <input value = "{{old('address')}}"  type="text" id="address" name="address"   class="form-control" />
                     @error('address')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -42,7 +42,7 @@
 
                 <div class="mb-3">
                     <label for="phone_number">Số điện thoại</label>
-                    <input type="text" id="phone_number" name="phone_number"   class="form-control" />
+                    <input value = "{{old('phone_number')}}" type="text" id="phone_number" name="phone_number"   class="form-control" />
                     @error('phone_number')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror

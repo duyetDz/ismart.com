@@ -24,15 +24,21 @@ class UsersController extends Controller
         $user = Auth::user();
         $user = User::find($user->id);
         $validatedData = $request->validate([
-            'name' => 'required|max:255',
-            'email' => 'required',
+            'name' => 'required|max:255|',
+            'email' => 'required|email',
             'address' => 'required',
-            'phone_number' => 'required',
+            'phone_number' => 'regex:/^(0[0-9]*)$/|min:10',
         ], [
             'name.required' => "Bạn không được để trống tên người dùng",
             'email.required' => "Bạn không được để trống email người dùng",
+
+            'email.email' => "Bạn nhập email không đúng định dạng",
             'address.required' => "Bạn không được để trống địa chỉ người dùng",
             'phone_number.required' => "Bạn không được để trống số điện thoại người dùng",
+            
+            'phone_number.min' => "Số điện thoại nhập vào phải từ 10 số",
+            'phone_number.regex' => "Số điện thoại nhập vào không đúng định dạng phải bắt đầu từ 0, không chứa kí tự đặc biệt",
+
         ]);
         
         $user->name = $request->name;

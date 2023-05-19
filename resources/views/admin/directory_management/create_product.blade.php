@@ -11,28 +11,28 @@
                 <ul id="save_msgList"></ul>
                 <div class="mb-3">
                     <label for="">Name</label>
-                    <input type="text" name="name" id="name_add" class="form-control" />
+                    <input type="text" name="name" id="name_add" value="{{old('name')}}" class="form-control" />
                     @error('name')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label for="">Price</label>
-                    <input type="text" name="price" id="price_add" class="form-control" />
+                    <input type="text" name="price" id="price_add" value="{{old('price')}}"  class="form-control" />
                     @error('price')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label for="">quantity</label>
-                    <input type="text" name="quantity" id="quantity_add" class="form-control" />
+                    <input type="text" name="quantity" value=""{{old('quantity')}} id="quantity_add" class="form-control" />
                     @error('quantity')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label for="">feature_image</label>
-                    <input type="file" name='feature_image' class="form-control" onchange="preview()">
+                    <input type="file" name='feature_image' value=""{{old('feature_image')}} class="form-control" onchange="preview()">
                     <img id="frame" src="" style="max-width: 200px;margin-top: 15px;">
                     @error('feature_image')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -41,7 +41,7 @@
 
                 <div class="mb-3">
                     <label for="configuration">Tóm tắt cấu hình</label>
-                    <textarea class="form-control" name="configuration" placeholder="Tóm tắt cấu hình" id="configuration"></textarea>
+                    <textarea class="form-control" value = '' name="configuration" placeholder="Tóm tắt cấu hình" id="configuration"></textarea>
                     @error('configuration')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror

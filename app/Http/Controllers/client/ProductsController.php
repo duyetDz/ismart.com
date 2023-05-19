@@ -27,7 +27,7 @@ class ProductsController extends Controller
         $cat = Category::where('name', 'like', '%Điện thoại%')->get();
         $categoryIds = $cat->pluck('id')->toArray();
 
-        $products = Product::whereIn('category_id', $categoryIds)->paginate(20);
+        $products = Product::whereIn('category_id', $categoryIds)->paginate(15);
         # code...
         return view('products/index', ['categories' => $categories, 'products' => $products, 'name_category' => 'Điện thoại','bestSellers' => $bestSellers]);
     }
@@ -53,7 +53,7 @@ class ProductsController extends Controller
         $catIds = Product::distinct('category_id')->pluck('category_id')->toArray();
         $categories = Category::whereIn('id', $catIds)->get();
         $name_category = Category::find($category_id);
-        $products = Product::where('category_id', 'like', $category_id)->paginate(20);;
+        $products = Product::where('category_id', 'like', '%'.$category_id.'%' )->paginate(20);
         return view('products/index', ['categories' => $categories, 'products' => $products, 'name_category' => $name_category['name']]);
     }
 
@@ -67,24 +67,23 @@ class ProductsController extends Controller
         $categories = Category::whereIn('id', $catIds)->get();
 
         $products = Product::where('category_id', 1)->paginate(20);
-        $name_category = Category::select('name')->find($select);
-
+        $category_id = Category::where('name', 'like', '%'.$category.'%')->distinct('name')->get();
         if ($select == 1) {
-            $products = Product::where('category_id', $select)->orderBy('name', 'asc')->paginate(20);
+            $products = Product::where('category_id', $category_id[0]->id)->orderBy('name', 'asc')->paginate(20);
         }
 
         if ($select == 2) {
-            $products = Product::where('category_id', $select)->orderBy('name', 'desc')->paginate(20);
+            $products = Product::where('category_id', $category_id[0]->id)->orderBy('name', 'desc')->paginate(20);
         }
 
         if ($select == 3) {
-            $products = Product::where('category_id', $select)->orderBy('price', 'desc')->paginate(20);
+            $products = Product::where('category_id', $category_id[0]->id)->orderBy('price', 'desc')->paginate(20);
         }
 
         if ($select == 4) {
-            $products = Product::where('category_id', $select)->orderBy('price', 'asc')->paginate(20);
+            $products = Product::where('category_id', $category_id[0]->id)->orderBy('price', 'asc')->paginate(20);
         }
 
-        return view('products/index', ['categories' => $categories, 'products' => $products, 'name_category' => $name_category->name]);
+        return view('products/index', ['categories' => $categories, 'products' => $products, 'name_category' => $category]);
     }
 }

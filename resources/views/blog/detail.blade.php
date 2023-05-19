@@ -46,21 +46,21 @@
                     </div>
                     <div class="section-detail">
                         <ul class="list-item">
-                            <li class="clearfix">
-                                <a href="?page=detail_product" title="" class="thumb fl-left">
-                                    <img src="{{asset('client/images/img-pro-13.png')}}" alt="">
-                                </a>
-                                <div class="info fl-right">
-                                    <a href="?page=detail_product" title="" class="product-name">Laptop Asus A540UP
-                                        I5</a>
-                                    <div class="price">
-                                        <span class="new">5.190.000đ</span>
-                                        <span class="old">7.190.000đ</span>
+                            @foreach ($bestSellers as $item)
+                                <li class="clearfix">
+                                    <a href="{{asset('')}}products/detail/{{ $item->id }}" title="" class="thumb fl-left">
+                                        <img src="{{asset('')}}{{ $item->feature_image }}" alt="">
+                                    </a>
+                                    <div class="info fl-right">
+                                        <a href="" title="" class="product-name">{{ $item->name }}</a>
+                                        <div class="price">
+                                            <span class="new">{{ number_format($item->price, 0, ',', '.') }}đ</span>
+                                        <span class="old">{{ number_format($item->price * 1.3, 0, ',', '.') }}đ</span>
+                                        </div>
                                     </div>
-                                    <a href="" title="" class="buy-now">Mua ngay</a>
-                                </div>
-                            </li>
-                            
+                                </li>
+                            @endforeach
+
                         </ul>
                     </div>
                 </div>

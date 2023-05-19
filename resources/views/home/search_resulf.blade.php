@@ -61,7 +61,7 @@
                 <div class="section" id="paging-wp">
                     <div class="section-detail">
                         
-                            {{$products->onEachSide(1)->links('templatepagination')}}
+                            {{$products->appends(['search-imput' => request('search-imput')])->onEachSide(1)->links('templatepagination')}}
                         
                     </div>
                 </div>
@@ -82,7 +82,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="section" id="filter-product-wp">
+                {{-- <div class="section" id="filter-product-wp">
                     <div class="section-head">
                         <h3 class="section-title">Bộ lọc</h3>
                     </div>
@@ -169,7 +169,7 @@
                             </table>
                         </form>
                     </div>
-                </div>
+                </div> --}}
 
             </div>
         </div>

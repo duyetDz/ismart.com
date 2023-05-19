@@ -25,9 +25,9 @@
                                 <div class="col-sm-9">
                                     <select name="status" class="form-select" aria-label="Default select example">
                                         <option value="Chờ xác nhận" selected>Chờ xác nhận</option>
-                                        <option value="Đang giao hàng">Đang giao hàng</option>
-                                        <option value="Đã giao">Đã giao</option>
+                                        <option value="Đã xác nhận đơn hàng">Đã xác nhận đơn hàng</option>
                                         <option value="Giao hàng thành công">Giao hàng thành công</option>
+                                        <option value="Hủy đơn hàng" selected>Hủy đơn hàng</option>
                                       </select>
                                 </div>
                             </div>

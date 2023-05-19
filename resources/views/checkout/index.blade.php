@@ -114,7 +114,7 @@
                                     <input type="radio" id="payment-home" name="payment_method" value="Thanh toán tại nhà">
                                     <label for="payment-home">Thanh toán tại nhà</label>
                                 </li>
-                                @error('payment-method')
+                                @error('payment_method')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </ul>

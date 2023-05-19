@@ -37,6 +37,10 @@ Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
+Route::get('/introduce', [HomeController::class, 'introduce'])->name('introduce');
+
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+
 Route::get('/search_now/{name}', [HomeController::class, 'search_now'])->name('search_now');
 
 Route::get('/search_all', [HomeController::class, 'search_all'])->name('search_all');
@@ -118,6 +122,10 @@ Route::prefix('admin')->middleware(['is_admin'])->group(function () {
 
     Route::get('/category', [CategoryController::class, 'index'])->name('admin.category');
 
+    Route::get('/category/search', [CategoryController::class, 'search'])->name('admin.category.search');
+
+    Route::get('/category/create', [CategoryController::class, 'create'])->name('admin.category.create');
+
     Route::post('/category/store', [CategoryController::class, 'store'])->name('admin.category.store');
 
     Route::get('/category/update/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');
@@ -162,6 +170,8 @@ Route::prefix('admin')->middleware(['is_admin'])->group(function () {
 
     Route::post('/member/store', [CustomerManagementUserController::class, 'store'])->name('admin.member.store');
 
+    Route::get('/member/search', [CustomerManagementUserController::class, 'search'])->name('admin.member.search');
+
     Route::get('/member/update/{id}', [CustomerManagementUserController::class, 'edit'])->name('admin/member/edit');
 
     Route::post('/member/update/{id}', [CustomerManagementUserController::class, 'update']);
@@ -186,6 +196,8 @@ Route::prefix('admin')->middleware(['is_admin'])->group(function () {
 
 
     Route::get('/order/list',[OrderController::class ,'index'])->name('admin.order.list');
+
+    Route::get('/order/search',[OrderController::class ,'search'])->name('admin.order.search');
 
     Route::get('/order/update/{id}',[OrderController::class ,'edit'])->name('admin.order.edit');
 

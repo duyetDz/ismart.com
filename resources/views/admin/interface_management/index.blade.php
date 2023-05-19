@@ -9,15 +9,16 @@
             <form action="{{route('admin.product_image.search')}}" method="get">
                
                 <div class="d-flex">
-                    <input type="text" value="" placeholder="Search" name="ValuetoSearch" class="form-control">
+                    <input type="text" value="{{ request('ValuetoSearch') }}" placeholder="Search" name="ValuetoSearch"
+                        class="form-control">
                     <!-- End Modal add user  -->
                     <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
                 <select name="select" class="form-select d-flex mt-2" aria-label="Default select example">
-                    <option value="name" selected>Tên sản phẩm</option>
-                    <option value="updated_at" >Thời gian cập nhập</option>
-                    @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    <option value="name" @if (request('select') == 'name') selected @endif>Tên sản phẩm</option>
+                    @foreach ($categories as $item)
+                        <option value="{{ $item->id }}" @if (request('select') == $item->id) selected @endif>
+                            {{ $item->name }}</option>
                     @endforeach
                 </select>
             </form>
@@ -31,10 +32,6 @@
             <thead>
 
                 <tr>
-                    <th scope="col" class="col-1 text-center">
-                        <input class="form-check-input me-1" id="checkboxAll" type="checkbox">
-                        All
-                    </th>
                     <th scope="col" class="col-1 text-center">STT</th>
                     <th scope="col" class="col text-center">Ảnh avatar</th>
                     <th scope="col" class="col text-center">Tên sản phẩm</th>
@@ -44,14 +41,13 @@
                 </tr>
             </thead>
             <tbody>
-                
+                @php
+                    $stt = ($product_images->currentPage() - 1) * $product_images->perPage() + 1;
+                @endphp
                 @foreach ($product_images as $key => $product_image)
                     <tr id="">
                         <td class="text-center">
-                            <input class="form-check-input me-1" id="chkboxname" value="" type="checkbox">
-                        </td>
-                        <td class="text-center">
-                            {{$key += 1}}
+                            {{$stt ++}}
                         </td>
                         <td class="text-center">
                             <img src="{{asset('')}}{{$product_image->image}}" class="img-thumbnail" style="width: 70px; height: 70px;" alt="...">
@@ -66,12 +62,12 @@
                             {{$product_image->updated_at}}
                         </td>
                         <td class="text-center">
-                            <a href="interface/update/{{$product_image->id}}" class="btn btn-primary" value="" name="btn_update"
+                            <a href="{{asset('')}}admin/interface/update/{{$product_image->id}}" class="btn btn-primary" value="" name="btn_update"
                                 id="btn_update" style="margin-right: 7px;
                             margin-left: 7px;"><i
                                     class="fa-solid fa-pen-to-square"></i></a>
 
-                            <a href="interface/delete/{{$product_image->id}}" class="btn btn-danger" name="btn_delete" id="btn_delete"><i
+                            <a href="{{asset('')}}admin/interface/delete/{{$product_image->id}}" class="btn btn-danger" name="btn_delete" id="btn_delete"><i
                                     class="fa-solid fa-xmark"></i></a>
                         </td>
                     </tr>
@@ -80,17 +76,7 @@
             </tbody>
         </table>
         <nav aria-label="...">
-            <ul class="pagination">
-                <li class="page-item disabled">
-                    <span class="page-link">Previous</span>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="">1</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="">Next</a>
-                </li>
-            </ul>
+            {{ $product_images->appends(['ValuetoSearch' => request('ValuetoSearch'), 'select' => request('select')])->links('templatepagination') }}
         </nav>
     </div>
 @endsection
