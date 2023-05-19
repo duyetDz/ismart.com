@@ -62,6 +62,7 @@ class CartController extends Controller
     public function add_one($id)
     {
         $product = Product::find($id);
+        
         Cart::add([
             'id' => $product->id,
             'name' => $product->name,

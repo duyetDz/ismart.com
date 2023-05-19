@@ -15,7 +15,7 @@ class OrderHistoryController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $orders = Order::where('customer_id', 'like', '%' . $user->id . '%')->orderBy('created_at', 'desc')->get();
+        $orders = Order::where('customer_id', 'like', '%' . $user->id . '%')->orderBy('created_at', 'desc')->paginate(10);
 
         
 

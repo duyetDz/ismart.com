@@ -13,17 +13,21 @@
                 <i class="fa-sharp fa-solid fa-plus"></i> Add
             </a>
 
-            <form action="{{route('admin.blog.search')}}" method="GET" >
+            <form action="{{ route('admin.blog.search') }}" method="GET">
                 <div class="d-flex">
-                    <input type="text" value="" placeholder="Search" name="ValuetoSearch" class="form-control">
-                    <!-- End Modal add user  -->
+                    <input type="text" value="{{ request('ValuetoSearch') }}" placeholder="Search" name="ValuetoSearch"
+                        class="form-control">
                     <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
+                <input type="date" value="{{ request('date') }}" placeholder="Search" name="date"
+                    class="form-control">
                 <select name="select" class="form-select d-flex mt-2" aria-label="Default select example">
-                    <option value="title" selected>Tiêu đề</option>
-                    <option value="updated_at" >Thời gian cập nhập</option>
+                    <option value="title" {{ request('select') === 'title' ? 'selected' : '' }}>Tiêu đề</option>
+                    <option value="updated_at" {{ request('select') === 'updated_at' ? 'selected' : '' }}>Thời gian cập nhập
+                    </option>
                 </select>
             </form>
+
         </div>
 
 
@@ -33,10 +37,6 @@
         <table id="myTable" class="table table-bordered caption-top">
             <thead>
                 <tr>
-                    <th scope="col" class="col-1 text-center">
-                        <input class="form-check-input me-1" id="checkboxAll" type="checkbox">
-                        All
-                    </th>
                     <th scope="col" class="col-1 text-center">STT</th>
                     <th scope="col" class="col text-center">Tiêu đề</th>
                     <th scope="col" class="col text-center">Nội dung</th>
@@ -45,13 +45,13 @@
                 </tr>
             </thead>
             <tbody>
+                @php
+                    $stt = ($blogs->currentPage() - 1) * $blogs->perPage() + 1;
+                @endphp
                 @foreach ($blogs as $key => $blog)
                     <tr id="">
                         <td class="text-center">
-                            <input class="form-check-input me-1" id="chkboxname" value="" type="checkbox">
-                        </td>
-                        <td class="text-center">
-                            {{ $key +=1 }}
+                            {{ $stt++ }}
                         </td>
                         <td class="text-center">
                             {{ $blog->title }}
@@ -79,7 +79,7 @@
             </tbody>
         </table>
         <nav aria-label="...">
-            {{$blogs->onEachSide(1)->links('templatepagination')}}
+            {{ $blogs->appends(['ValuetoSearch' => request('ValuetoSearch'),'date' => request('date'),'select' => request('select')])->links('templatepagination') }}
         </nav>
     </div>
 @endsection

@@ -12,101 +12,82 @@ class CategoryController extends Controller
     //
     public function index()
     {
-        $list_category = Category::all();
-        # code...
+        $list_category = Category::paginate(5);
+        // # code...
+        return view('admin/directory_management/category', ['title' => 'Quản trị danh mục', 'list_category' => $list_category]);
+    }
+
+    public function search(Request $request)
+    {
+        $searchTerm = $request->search;
+        $list_category = Category::where('name', 'like', '%' . $searchTerm . '%')->paginate(5);
         return view('admin/directory_management/category', ['title' => 'Quản trị danh mục', 'list_category' => $list_category]);
     }
 
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'name' => 'required|max:255',
+            'parent_id' => 'required'
         ], [
             'name.required' => "Bạn không được để trống tên danh mục",
-            'name.max' => "Tên danh mục không được vượt quá 255 kí tự"
+            'parent_id.required' => "Bạn không được để trống danh mục gốc",
         ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 400,
-                'errors' => $validator->errors()
-            ]);
-        } else {
-            $category = new Category();
-            $category->name = $request->name;
-            if ($request->slug != null) {
-                $category->slug = $request->slug;
-            } else {
-                $category->slug = "null";
-            }
-            $category->parent_id = $request->parent_id;
+        $category = new Category();
+        $category->name = $request->name;
+        $category->parent_id = $request->parent_id;
 
-            $resuft = $category->save();
+        $resuft = $category->save();
 
-            return response()->json([
-                'status' => 200,
-                'massage' => "Thêm thành công danh mục!"
-            ]);
-        }
+        return redirect(route('admin.category'))->with('status', "Bạn đã thêm thành công");
     }
+
+    public function create()
+    {
+        $list_category = Category::all();
+
+        return view('admin/directory_management/create_category', ['title' => 'Quản trị danh mục', 'list_category' => $list_category]);
+    }
+
 
     public function edit($id)
     {
-        # code...
         $list_category = Category::all();
         $category = Category::find($id);
-        return response()->json([
-            'status' => 200,
-            'category' => $category,
-        ]);
+        return view('admin/directory_management/edit_category', ['title' => 'Quản trị danh mục', 'list_category' => $list_category, 'category' => $category]);
     }
 
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
-         
-        # code...
-        $validator = Validator::make($request->all(), [
+
+        $request->validate([
             'name' => 'required|max:255',
+            'parent_id' => 'required'
         ], [
-            'name.required' => "Bạn không được để trống tên danh mục",
-            'name.max' => "Tên danh mục không được vượt quá 255 kí tự"
+            'name.required' => "Bạn không được để trống hình ảnh sản phẩm",
+            'parent_id.required' => "Bạn không được để trống hình ảnh sản phẩm",
         ]);
+        $category = new Category();
+        $category = Category::find($id);
+        $category->name = $request->name;
+        $category->parent_id = $request->parent_id;
 
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 400,
-                'errors' => $validator->errors()
-            ]);
-        } else {
-            // $category = new Category();
-            $category = Category::find($id);
-            $category->name = $request->name;
-            if ($request->slug != null) {
-                $category->slug = $request->slug;
-            } else {
-                $category->slug = "null";
-            }
-            $category->parent_id = $request->parent_id;
-
-            $resuft = $category->update();
-
-            return response()->json([
-                'status' => 200,
-                'massage' => "Update thành công danh mục!"
-            ]);
-        }
-
-        
+        $category->update();
+        return redirect(route('admin.category'))->with('status', "Bạn đã update thành công");
     }
+
+
+
+
+
+
 
     public function delete($id)
     {
         # code...
         $category = Category::find($id);
         $category->delete();
-        return response()->json([
-            'status' => 200,
-            'massage' => "Xóa thành công danh mục!"
-        ]);
+        return back()->with('status', 'Danh mục đã bị xóa');
     }
 }

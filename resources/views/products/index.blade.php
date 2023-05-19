@@ -22,14 +22,17 @@
                         <div class="filter-wp fl-right">
                             <p class="desc">Hiển thị {{ $products->count() }} sản phẩm</p>
                             <div class="form-filter d-flex">
-                                <form method="POST" action="{{ asset('products/filter') }}">
-                                    @csrf
+                                <form method="GET" action="{{ asset('products/filter') }}">
                                     <input type="hidden" name="category" value="{{ $name_category }}">
                                     <select class="custom-select" name="select" style="width: 70%">
-                                        <option value="1">Từ A-Z</option>
-                                        <option value="2">Từ Z-A</option>
-                                        <option value="3">Giá cao xuống thấp</option>
-                                        <option value="4">Giá thấp lên cao</option>
+                                        <option value="1" @if (request()->input('select') == '1') selected @endif>Từ A-Z
+                                        </option>
+                                        <option value="2" @if (request()->input('select') == '2') selected @endif>Từ Z-A
+                                        </option>
+                                        <option value="3" @if (request()->input('select') == '3') selected @endif>Giá cao
+                                            xuống thấp</option>
+                                        <option value="4" @if (request()->input('select') == '4') selected @endif>Giá thấp
+                                            lên cao</option>
                                     </select>
                                     <button class="btn btn-secondary" type="submit"
                                         style="padding: 6px 15px;margin-left: 5px;">Lọc</button>
@@ -53,14 +56,22 @@
                                                 class="old">{{ number_format(($item->price * 130) / 100, 0, ',', '.') }}đ</span>
                                         </div>
 
-                                        <div class="action clearfix">
-                                            <a onclick="AddCart({{ $item->id }})" title="Thêm giỏ hàng"
-                                                class=" fl-left" style="padding: 0px;">
-                                                <div class="btn btn-light" style="padding: 8px 30px 8px 30px; border: 1px solid;"><i
-                                                        class="fa-solid fa-cart-plus" style="font-size: 20px;"></i></div>
-                                            </a>
-                                            <a href="{{asset('')}}cart/buy_now/{{$item->id}}" title="Mua ngay" class="btn btn-danger fl-right"
-                                                style="padding: 10px 20px 10px 20px;">Mua ngay</a>
+                                        <div class="action clearfix" style=" text-align: center; ">
+                                            @if ($item->quantity > 0)
+                                                <a onclick="AddCart({{ $item->id }})" title="Thêm giỏ hàng"
+                                                    class=" fl-left" style="padding: 0px;">
+                                                    <div class="btn btn-light"
+                                                        style="padding: 8px 30px 8px 30px; border: 1px solid;"><i
+                                                            class="fa-solid fa-cart-plus" style="font-size: 20px;"></i>
+                                                    </div>
+                                                </a>
+                                                <a href="{{ asset('') }}cart/buy_now/{{ $item->id }}"
+                                                    title="Mua ngay" class="btn btn-danger fl-right"
+                                                    style="padding: 10px 20px 10px 20px;">Mua ngay</a>
+                                            @else
+                                                <button title="Tạm hết hàng" class="btn btn-danger" disabled>Tạm hết
+                                                    hàng</button>
+                                            @endif
                                         </div>
                                     </li>
                                 @endforeach
@@ -74,9 +85,9 @@
                 </div>
                 <div class="section" id="paging-wp">
                     <div class="section-detail">
-                        
-                            {{$products->onEachSide(1)->links('templatepagination')}}
-                        
+
+                        {{ $products->onEachSide(1)->links('templatepagination') }}
+
                     </div>
                 </div>
             </div>
@@ -96,7 +107,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="section" id="filter-product-wp">
+                {{-- <div class="section" id="filter-product-wp">
                     <div class="section-head">
                         <h3 class="section-title">Bộ lọc</h3>
                     </div>
@@ -183,7 +194,7 @@
                             </table>
                         </form>
                     </div>
-                </div>
+                </div> --}}
 
             </div>
         </div>
@@ -199,7 +210,7 @@
                 var price = $('input[name=r-price]:checked').val();
                 var category = $('input[name=r-category]:checked').val();
 
-                
+
                 // $.ajax({
                 //     type: "POST",
                 //     url: "your_url",
@@ -221,11 +232,13 @@
         });
 
         function AddCart(id) {
+
             $.ajax({
                 type: "GET",
-                url: "cart/add/" + id,
+                url: "/cart/add/" + id,
 
                 success: function(response) {
+
                     $('.charge-item-card').empty();
                     $('.charge-item-card').html(response);
                     toastr.options = {

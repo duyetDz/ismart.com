@@ -242,7 +242,7 @@
 }
 
 .header__search-history-list {
-    height: 200px;
+    max-height: 200px;
     /* đặt kích thước cố định */
     overflow-y: scroll;
     /* tạo thanh cuộn dọc */

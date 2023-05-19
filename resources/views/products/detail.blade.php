@@ -50,13 +50,13 @@
                         <div class="info fl-right">
                             <h3 class="product-name">{{ $product->name }}</h3>
                             <div class="desc">
-                                <p>{!! $product->configuration !!}</p>
+                                {!! $product->configuration !!}
                             </div>
                             <div class="num-product">
                                 <span class="title">Trạng thái </span>
                                 <span class="status">
-                                    @if ($product->price > 0)
-                                        Còn hàng
+                                    @if ($product->quantity > 0)
+                                        Còn hàng ({{ $product->quantity }})
                                     @else
                                         Tạm hết hàng
                                     @endif
@@ -70,13 +70,14 @@
 
                             <form action="{{ asset('') }}cart/buy_nows/{{ $product->id }}" method="post">
                                 @csrf
-                                <div id="num-order-wp">
-                                    <a title="" id="minus"><i class="fa fa-minus"></i></a>
-                                    <input type="hidden" class="product_id" value="{{ $product->id }}">
-                                    <input type="text" name="num-order" value="1" id="num-order">
-                                    <a title="" id="plus"><i class="fa fa-plus"></i></a>
-                                </div>
-                                @if ($product->price > 0)
+
+                                @if ($product->quantity > 0)
+                                    <div id="num-order-wp">
+                                        <a title="" id="minus"><i class="fa fa-minus"></i></a>
+                                        <input type="hidden" class="product_id" value="{{ $product->id }}">
+                                        <input type="text" name="num-order" value="1" id="num-order">
+                                        <a title="" id="plus"><i class="fa fa-plus"></i></a>
+                                    </div>
                                     <a onclick="AddCart({{ $product->id }})" title="Thêm giỏ hàng"
                                         class="btn add-cart">Thêm
                                         giỏ hàng</a>
@@ -84,8 +85,8 @@
                                         class="btn add-cart">Mua
                                         ngay</button>
                                 @else
-                                <a  title="Thêm giỏ hàng"
-                                    class="btn add-cart">Liên hệ</a>
+                                    <button title="Tạm hết hàng" class="btn btn-danger" disabled>Tạm hết
+                                        hàng</button>
                                 @endif
 
                             </form>
@@ -117,11 +118,22 @@
                                         <span class="new">{{ number_format($item->price, 0, ',', '.') }}đ</span>
                                         <span class="old">{{ number_format($item->price * 1.3, 0, ',', '.') }}đ</span>
                                     </div>
-                                    <div class="action clearfix">
-                                        <a onclick="addCart({{ $item->id }})" class="add-cart fl-left">Thêm giỏ
-                                            hàng</a>
-                                        <a href="{{ asset('') }}cart/buy_now/{{ $item->id }}" title=""
-                                            class="buy-now fl-right">Mua ngay</a>
+                                    <div class="action clearfix" style=" text-align: center; ">
+                                        @if ($item->quantity > 0)
+                                            <a onclick="AddCart({{ $item->id }})" title="Thêm giỏ hàng"
+                                                class=" fl-left" style="padding: 0px;">
+                                                <div class="btn btn-light"
+                                                    style="padding: 8px 30px 8px 30px; border: 1px solid;"><i
+                                                        class="fa-solid fa-cart-plus" style="font-size: 20px;"></i>
+                                                </div>
+                                            </a>
+                                            <a href="{{ asset('') }}cart/buy_now/{{ $item->id }}"
+                                                title="Mua ngay" class="btn btn-danger fl-right"
+                                                style="padding: 10px 20px 10px 20px;">Mua ngay</a>
+                                        @else
+                                            <button title="Tạm hết hàng" class="btn btn-danger" disabled>Tạm hết
+                                                hàng</button>
+                                        @endif
                                     </div>
                                 </li>
                             @endforeach

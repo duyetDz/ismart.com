@@ -80,10 +80,11 @@
             if (keyword) {
                 $.ajax({
                     type: "get",
-                    url: "http://127.0.0.1:8000/search_now/" + keyword,
+                    url: "/search_now/" + keyword,
                     success: function(response) {
                         $('.search_results').empty();
-                        $('.search_results').html(response);
+                        $('.search_results').html(response[0]);
+                        // console.log(response);
                     }
                 });
             } else {

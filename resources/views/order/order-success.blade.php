@@ -84,7 +84,8 @@
                                         <p>Số điện thoại: {{$order->phone_number}}</p>
                                         <p>Địa chỉ : {{$order->address}} </p>
                                         <p>Phương thức thanh toán: {{$order->payment}}</p>
-                                        </p>
+                                        <p>Trạng thái: {{$order->status}}</p>
+                                        
                                     </div>
 
                                 </div>

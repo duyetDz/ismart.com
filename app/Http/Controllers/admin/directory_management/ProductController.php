@@ -27,31 +27,39 @@ class ProductController extends Controller
 
     public function search(Request $request)
     {
-
         $category = Category::all();
         $input = $request->input('ValuetoSearch');
         $select = $request->input('select');
         $products = null;
-        if ($select == 'name') {
+
+        if (empty($select) || $select == 'name') {
+            // Tìm kiếm theo tên sản phẩm
             if (!empty($input)) {
-                $products = Product::where('name', 'LIKE', '%' . $input . '%')->paginate(10);
+                $products = Product::where('name', 'LIKE', '%' . $input . '%');
             } else {
-                $products = Product::paginate(10);
+                $products = Product::query();
             }
         } else {
+            // Tìm kiếm theo danh mục sản phẩm
             if (!empty($input)) {
-
-                $categories = Category::select('id')->where('name', 'Like', '%' . $input . '%')->get();
-                $categoryIds = $categories->pluck('id')->toArray();
-                $products = Product::where('name', 'LIKE', '%' . $input . '%')->orwhereIn('category_id', $categoryIds)->paginate(10);
+                $products = Product::where('name', 'LIKE', '%' . $input . '%')
+                    ->where('category_id', $select);
             } else {
-                $products = Product::paginate(10);
+                $products = Product::where('category_id', $select);
             }
         }
 
+        $products = $products->paginate(10);
 
-        return view('admin/directory_management/product', ['title' => 'Trang sản phẩm', 'products' => $products, 'category' => $category]);
+        return view('admin/directory_management/product', [
+            'title' => 'Trang sản phẩm',
+            'products' => $products,
+            'category' => $category,
+            'selectedCategory' => $select,
+            'searchValue' => $input
+        ]);
     }
+
 
     public function create()
     {
@@ -155,15 +163,15 @@ class ProductController extends Controller
             }
             $image = $request->file('feature_image');
             $file_name = $image->getClientOriginalName();
-    
+
             $image_resize = Image::make($image->getRealPath());
             $image_resize->resize(300, 300);
             $image_resize->save(public_path('storage/images/' . $file_name));
-    
+
             $image_zoom = Image::make($image->getRealPath());
             $image_zoom->resize(700, 700);
             $image_zoom->save(public_path('storage/images/700' . $file_name));
-    
+
             $product->feature_image = 'storage/images/' . basename($file_name);
             $product->image_zoom = 'storage/images/700' . basename($file_name);
         }
@@ -197,7 +205,7 @@ class ProductController extends Controller
 
         if ($product) {
             $product->delete();
-            return redirect(route('admin.product'))->with('status', 'Sản Phẩm đã bị xóa');
+            return back()->with('status', 'Sản Phẩm đã bị xóa');
         }
         return redirect(route('admin.product'))->with('status', 'Sản Phẩm chưa bị xóa');
     }
