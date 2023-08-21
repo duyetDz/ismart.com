@@ -38,6 +38,7 @@
                                                 <th scope="col" class="col-1 text-center">STT</th>
                                                 <th scope="col" class="col-2 text-center">Ảnh avatar</th>
                                                 <th scope="col" class="col-3 text-center">Tên sản phẩm</th>
+                                                <th scope="col" class="col-3 text-center">Giá sản phẩm</th>
                                                 <th scope="col" class="col-3 text-center">Số lượng</th>
                                                 <th scope="col" class="col-3 text-center">Ngày đặt</th>
                                             </tr>
@@ -58,6 +59,9 @@
                                                     </td>
                                                     <td class="text-center">
                                                         {{$item->product->name}}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{ number_format($item->price, 0, ',', '.') }}đ
                                                     </td>
                                                     <td class="text-center">
                                                         {{$item->quantity}}
@@ -84,6 +88,8 @@
                                         <p>Số điện thoại: {{$order->phone_number}}</p>
                                         <p>Địa chỉ : {{$order->address}} </p>
                                         <p>Phương thức thanh toán: {{$order->payment}}</p>
+                                        <p>Tổng tiền: {{ number_format($order->total_price, 0, ',', '.') }}đ</p>
+                                        
                                         <p>Trạng thái: {{$order->status}}</p>
                                         
                                     </div>

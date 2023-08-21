@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Order_item;
 use App\Models\Product;
-use Gloudemans\Shoppingcart\Cart as ShoppingcartCart;
+// use Gloudemans\Shoppingcart\Cart as ShoppingcartCart;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -67,6 +67,8 @@ class CheckoutController extends Controller
         $order->note = $request->note;
         $order->order_code = 'ismart' . Str::random(5);
         $order->customer_id = $user->id;
+        $order->total_price = Str::replace('.', '', Cart::total());
+        
         $order->save();
 
         if (Cart::content()) {
@@ -86,15 +88,19 @@ class CheckoutController extends Controller
             $orderItem->product_id = $item->id;
             $orderItem->quantity = $item->qty;
             $orderItem->order_id = $order->id;
-            $orderItem->save();
+            $orderItem->price = $item->price;
+            $orderItem->save();  
             // Update lại số lượng sản phẩm
             $product = Product::find($item->id);
             $product->quantity = $product->quantity - $item->qty;
             $product->save();
         }
+
+       
         Cart::destroy();
 
 
         return redirect()->route('order.detail', ['id' => $order->id])->with('status', "Bạn đã đặt hàng thành công");
+       
     }
 }

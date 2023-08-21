@@ -59,7 +59,7 @@ class HomeController extends Controller
         $catIds = Product::distinct('category_id')->pluck('category_id')->toArray();
         $categories = Category::whereIn('id', $catIds)->get();
 
-        $products = Product::where('name', 'Like', '%' . $request . '%')->paginate(20);
+        $products = Product::where('name', 'Like', '%' . $request . '%')->paginate(12);
         return view('home/search_resulf', ['categories' => $categories, 'products' => $products, 'bestSellers' => $bestSellers, 'request' => $request]);
     }
 

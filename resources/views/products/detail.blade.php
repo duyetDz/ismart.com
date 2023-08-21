@@ -73,10 +73,11 @@
 
                                 @if ($product->quantity > 0)
                                     <div id="num-order-wp">
-                                        <a title="" id="minus"><i class="fa fa-minus"></i></a>
+
                                         <input type="hidden" class="product_id" value="{{ $product->id }}">
-                                        <input type="text" name="num-order" value="1" id="num-order">
-                                        <a title="" id="plus"><i class="fa fa-plus"></i></a>
+                                        <input type="number" min="1" name="num-order" value="1"
+                                            max="{{ $product->quantity }}" id="num-order">
+
                                     </div>
                                     <a onclick="AddCart({{ $product->id }})" title="Thêm giỏ hàng"
                                         class="btn add-cart">Thêm
@@ -120,7 +121,7 @@
                                     </div>
                                     <div class="action clearfix" style=" text-align: center; ">
                                         @if ($item->quantity > 0)
-                                            <a onclick="AddCart({{ $item->id }})" title="Thêm giỏ hàng"
+                                            <a onclick="addCart({{ $item->id }})" title="Thêm giỏ hàng"
                                                 class=" fl-left" style="padding: 0px;">
                                                 <div class="btn btn-light"
                                                     style="padding: 8px 30px 8px 30px; border: 1px solid;"><i
@@ -191,8 +192,21 @@
                     $('.charge-item-card').empty();
                     $('.charge-item-card').html(response);
                     toastr.options = {
-                        "closeButton": true,
-                        "progetBar": true
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-bottom-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "1000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
                     }
                     toastr.success("Bạn đã Thêm Thành công ")
                 },
@@ -206,14 +220,27 @@
 
             $.ajax({
                 type: "GET",
-                url: "http://127.0.0.1:8000/cart/add/" + id,
+                url: "/cart/add/" + id,
 
                 success: function(response) {
                     $('.charge-item-card').empty();
                     $('.charge-item-card').html(response);
                     toastr.options = {
-                        "closeButton": true,
-                        "progetBar": true
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-bottom-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "1000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
                     }
                     toastr.success("Bạn đã Thêm Thành công ")
                 }

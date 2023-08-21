@@ -45,11 +45,7 @@ Route::get('/search_now/{name}', [HomeController::class, 'search_now'])->name('s
 
 Route::get('/search_all', [HomeController::class, 'search_all'])->name('search_all');
 
-
-Route::middleware(['auth'])->group(function () {
-    //User 
-
-    Route::get('/users/profile', [UsersController::class, 'profile'])->name('users.profile');
+Route::get('/users/profile', [UsersController::class, 'profile'])->name('users.profile');
 
     Route::post('/users/profile/update', [UsersController::class,'update_profile'])->name('users.profile.update');
 
@@ -91,6 +87,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/cart/destroy', [CartController::class, 'destroy'])->name('cart.destroy');
 
+
+Route::middleware(['auth'])->group(function () {
+    //User 
+
+    
     // Checkout
     
     
