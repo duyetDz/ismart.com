@@ -136,9 +136,22 @@
                 success: function(response) {
                     $('.charge-item-card').empty();
                     $('.charge-item-card').html(response);
-                    toastr.options = {  
-                        "closeButton": true,
-                        "progetBar": true
+                    toastr.options = {
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-bottom-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "1000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
                     }
                     toastr.success("Bạn đã Xóa Thành công ")
                     $('.table').load(location.href + " .table");
@@ -154,8 +167,21 @@
                     $('.charge-item-card').empty();
                     $('.charge-item-card').html(response);
                     toastr.options = {
-                        "closeButton": true,
-                        "progetBar": true
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-bottom-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "1000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
                     }
                     toastr.success("Bạn đã Xóa Thành công ")
                     $('.table').load(location.href + " .table");

@@ -17,7 +17,7 @@
                             <p style="text-align: center;">&nbsp;</p>
                             <p style="text-align: center;">Thái Bình&nbsp;: (035).4374284</p>
                             <p style="text-align: center;">TP.Hà Nội&nbsp;: (035).4374284</p>
-                            <p style="text-align: center;">Email hỗ trợ bán hàng Online, doanh nghiệp : nghiatran101022<a
+                            <p style="text-align: center;">Email hỗ trợ bán hàng Online, doanh nghiệp : giangvanduyet<a
                                     href="mailto:giangvanduyet@gmail.com">@gmail.com</a></p>
                             <p style="text-align: center;">Mọi thông tin chi tiết về dịch vụ làm chăm sóc khách&nbsp;hàng,
                                 hãy liên hệ những thông tin bên trên Xin cảm ơn !</p>

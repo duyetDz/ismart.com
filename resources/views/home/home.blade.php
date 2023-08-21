@@ -89,8 +89,8 @@
                                                     title="Mua ngay" class="btn btn-danger fl-right"
                                                     style="padding: 10px 20px 10px 20px;">Mua ngay</a>
                                             @else
-                                                <button title="Tạm hết hàng" class="btn btn-danger"
-                                                     disabled>Tạm hết hàng</button>
+                                                <button title="Tạm hết hàng" class="btn btn-danger" disabled>Tạm hết
+                                                    hàng</button>
                                             @endif
                                         </div>
                                     </div>
@@ -132,8 +132,8 @@
                                                     title="Mua ngay" class="btn btn-danger fl-right"
                                                     style="padding: 10px 20px 10px 20px;">Mua ngay</a>
                                             @else
-                                                <button title="Tạm hết hàng" class="btn btn-danger"
-                                                     disabled>Tạm hết hàng</button>
+                                                <button title="Tạm hết hàng" class="btn btn-danger" disabled>Tạm hết
+                                                    hàng</button>
                                             @endif
                                         </div>
                                     </div>
@@ -253,8 +253,21 @@
                     $('.charge-item-card').empty();
                     $('.charge-item-card').html(response);
                     toastr.options = {
-                        "closeButton": true,
-                        "progetBar": true
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-bottom-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "1000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
                     }
                     toastr.success("Bạn đã Thêm Thành công ")
                 }
