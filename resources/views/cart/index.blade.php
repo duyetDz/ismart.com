@@ -25,7 +25,6 @@
                             <thead>
                                 <tr>
                                     <td>STT</td>
-                                    <td>Mã sản phẩm</td>
                                     <td>Ảnh sản phẩm</td>
                                     <td>Tên sản phẩm</td>
                                     <td>Giá sản phẩm</td>
@@ -44,7 +43,6 @@
                                     @endphp
                                     <tr>
                                         <td>{{ $stt }}</td>
-                                        <td>{{ $item->id }}</td>
                                         <td>
                                             <a href="" title="" class="thumb">
                                                 <img src="{{ asset($item->options->image) }}" alt="">

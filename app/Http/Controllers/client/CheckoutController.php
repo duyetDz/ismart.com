@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
+use App\Mail\DuyetMail;
 use App\Models\Order;
 use App\Models\Order_item;
 use App\Models\Product;
@@ -10,6 +11,7 @@ use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class CheckoutController extends Controller
@@ -26,13 +28,12 @@ class CheckoutController extends Controller
                 }
             }
         }
-        
-        if(Cart::count() > 0){
+
+        if (Cart::count() > 0) {
             return view('checkout.index', ['user' => $user]);
         } else {
             return redirect('products');
         }
-        
     }
 
     public function store(Request $request)
@@ -68,7 +69,7 @@ class CheckoutController extends Controller
         $order->order_code = 'ismart' . Str::random(5);
         $order->customer_id = $user->id;
         $order->total_price = Str::replace('.', '', Cart::total());
-        
+
         $order->save();
 
         if (Cart::content()) {
@@ -89,18 +90,27 @@ class CheckoutController extends Controller
             $orderItem->quantity = $item->qty;
             $orderItem->order_id = $order->id;
             $orderItem->price = $item->price;
-            $orderItem->save();  
+            $orderItem->save();
             // Update lại số lượng sản phẩm
             $product = Product::find($item->id);
             $product->quantity = $product->quantity - $item->qty;
             $product->save();
         }
 
-       
+        $data = ['cart_content' => Cart::content(),'order' => $order];
+
+        // dd($data['cart_content']);
+
+        // return view('mails.demo', ['data' => $data]);
+
+        Mail::to('giangvanduyet@gmail.com')->send(new DuyetMail($data));
+
+
+
         Cart::destroy();
 
 
         return redirect()->route('order.detail', ['id' => $order->id])->with('status', "Bạn đã đặt hàng thành công");
-       
+
     }
 }
