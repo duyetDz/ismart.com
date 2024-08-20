@@ -105,8 +105,6 @@ class CheckoutController extends Controller
 
         Mail::to('giangvanduyet@gmail.com')->send(new DuyetMail($data));
 
-
-
         Cart::destroy();
 
 

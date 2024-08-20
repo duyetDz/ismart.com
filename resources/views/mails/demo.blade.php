@@ -94,7 +94,7 @@ Nội dung maiil
                                                                        {{ $t + 1 }}
                                                                    </td>
                                                                    <td class="text-center">
-                                                                       <img src="{{ asset('') }}{{ $item->options->u image }}"
+                                                                       <img src="{{ asset('') }}{{ $item->options->image }}"
                                                                            class="img-thumbnail" style="width: 70px; height: 70px;"
                                                                            alt="...">
                                                                    </td>
