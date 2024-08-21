@@ -7,15 +7,15 @@
         <div class="d-flex float-end" style="margin-bottom: 10px;">
             
 
-            <form action="" method="GET">
+            <form action="{{route('admin.order.search')}}" method="GET">
                 <div class="d-flex">
                     <input type="text" value="" placeholder="Search" name="ValuetoSearch" class="form-control">
                     <!-- End Modal add user  -->
                     <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
                 <select name="select" class="form-select d-flex mt-2" aria-label="Default select example">
-                    <option value="title" selected>Tên người dùng</option>
-                    <option value="updated_at">Thời gian cập nhập</option>
+                    <option value="name" selected>Tên người dùng</option>
+                    <option value="order_code">Mã đơn hàng</option>
                 </select>
             </form>
         </div>
@@ -80,18 +80,12 @@
 
             </tbody>
         </table>
-        <nav aria-label="...">
-            <ul class="pagination">
-                <li class="page-item disabled">
-                    <span class="page-link">Previous</span>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="">1</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="">Next</a>
-                </li>
-            </ul>
-        </nav>
+        <div class="section" id="paging-wp">
+            <div class="section-detail">
+
+                {{ $orders->appends(['ValuetoSearch' => request('ValuetoSearch'),'select' => request('select')])->onEachSide(1)->links('templatepagination') }}
+
+            </div>
+        </div>
     </div>
 @endsection

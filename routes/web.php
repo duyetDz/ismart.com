@@ -12,8 +12,10 @@ use App\Http\Controllers\client\BlogController;
 use App\Http\Controllers\client\CartController;
 use App\Http\Controllers\client\CheckoutController;
 use App\Http\Controllers\client\HomeController;
+use App\Http\Controllers\client\OrderHistoryController;
 use App\Http\Controllers\client\ProductsController;
 use App\Http\Controllers\client\UsersController;
+use App\Http\Controllers\Testsendmail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -32,51 +34,73 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-
+Route::get('/sendmail', [Testsendmail::class, 'sendMails'])->name('sendmail');
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
+Route::get('/introduce', [HomeController::class, 'introduce'])->name('introduce');
+
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+
+Route::get('/search_now/{name}', [HomeController::class, 'search_now'])->name('search_now');
+
+Route::get('/search_all', [HomeController::class, 'search_all'])->name('search_all');
+
+Route::get('/users/profile', [UsersController::class, 'profile'])->name('users.profile');
+
+Route::post('/users/profile/update', [UsersController::class, 'update_profile'])->name('users.profile.update');
+
+
+
+
+// Blog
+
+Route::get('/blog', [BlogController::class, 'index'])->name('blog');
+
+Route::get('/blog/detail/{id}', [BlogController::class, 'detail'])->name('blog.detail');
+
+// Product
+
+Route::get('/products', [ProductsController::class, 'index'])->name('products');
+
+Route::get('/products/sort/{category}', [ProductsController::class, 'getProductsByCategory'])->name('products.getProductsByCategory');
+
+Route::get('/products/filter', [ProductsController::class, 'filterProductsByCategory'])->name('products.filterProductsByCategory');
+
+Route::get('/products/detail/{id}', [ProductsController::class, 'detail'])->name('products.detail');
+
+
+// Cart
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
+
+Route::post('/cart/buy_nows/{id}', [CartController::class, 'buy_nows'])->name('cart.buy_nows');
+
+Route::get('/cart/buy_now/{id}', [CartController::class, 'buy_now'])->name('cart.buy_now');
+
+Route::get('/cart/add/{id}', [CartController::class, 'add_one'])->name('cart.add_one');
+
+Route::post('/carts/add/{id}', [CartController::class, 'add'])->name('cart.add');
+
+Route::post('/carts/update', [CartController::class, 'update'])->name('cart.update');
+
+Route::post('/cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
+
+Route::get('/cart/destroy', [CartController::class, 'destroy'])->name('cart.destroy');
+
+
+
+
 
 Route::middleware(['auth'])->group(function () {
-    //User 
 
-    Route::get('/users/profile', [UsersController::class, 'profile'])->name('users.profile');
+    Route::get('/order/history', [OrderHistoryController::class, 'index'])->name('order.history');
 
-    Route::post('/users/profile/update', [UsersController::class,'update_profile'])->name('users.profile.update');
+    Route::get('/order/detail/{id}', [OrderHistoryController::class, 'detail'])->name('order.detail');
 
-
-
-
-    // Blog
-
-    Route::get('/blog', [BlogController::class, 'index'])->name('blog');
-
-    Route::get('/blog/detail/{id}', [BlogController::class, 'detail'])->name('blog.detail');
-
-    // Product
-
-    Route::get('/products', [ProductsController::class, 'index'])->name('products');
-
-    Route::get('/products/sort/{category}', [ProductsController::class, 'getProductsByCategory'])->name('products.getProductsByCategory');
-
-    Route::post('/products/filter', [ProductsController::class, 'filterProductsByCategory'])->name('products.filterProductsByCategory');
-
-    Route::get('/products/detail/{id}', [ProductsController::class, 'detail'])->name('products.detail');
-
-
-    // Checkout
-
-    Route::get('/cart', [CartController::class, 'index'])->name('cart');
-    
-    Route::get('/cart/add/{id}', [CartController::class, 'add_one'])->name('cart.add_one');
-
-    Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
-
-    Route::get('/cart/delete/{rowId}', [CartController::class, 'delete'])->name('cart.delete');
-
-    Route::get('/cart/destroy', [CartController::class, 'destroy'])->name('cart.destroy');
-    
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+
+    Route::post('/checkout/add', [CheckoutController::class, 'store'])->name('checkout.store');
 });
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
@@ -94,6 +118,10 @@ Route::prefix('admin')->middleware(['is_admin'])->group(function () {
 
 
     Route::get('/category', [CategoryController::class, 'index'])->name('admin.category');
+
+    Route::get('/category/search', [CategoryController::class, 'search'])->name('admin.category.search');
+
+    Route::get('/category/create', [CategoryController::class, 'create'])->name('admin.category.create');
 
     Route::post('/category/store', [CategoryController::class, 'store'])->name('admin.category.store');
 
@@ -139,6 +167,8 @@ Route::prefix('admin')->middleware(['is_admin'])->group(function () {
 
     Route::post('/member/store', [CustomerManagementUserController::class, 'store'])->name('admin.member.store');
 
+    Route::get('/member/search', [CustomerManagementUserController::class, 'search'])->name('admin.member.search');
+
     Route::get('/member/update/{id}', [CustomerManagementUserController::class, 'edit'])->name('admin/member/edit');
 
     Route::post('/member/update/{id}', [CustomerManagementUserController::class, 'update']);
@@ -162,11 +192,13 @@ Route::prefix('admin')->middleware(['is_admin'])->group(function () {
     Route::get('/interface/delete/{id}', [InterfaceManagementController::class, 'delete'])->name('admin.product_image.delete');
 
 
-    Route::get('/order/list',[OrderController::class ,'index'])->name('admin.order.list');
+    Route::get('/order/list', [OrderController::class, 'index'])->name('admin.order.list');
 
-    Route::get('/order/update/{id}',[OrderController::class ,'edit'])->name('admin.order.edit');
+    Route::get('/order/search', [OrderController::class, 'search'])->name('admin.order.search');
 
-    Route::post('/order/update/{id}',[OrderController::class ,'update'])->name('admin.order.update');
+    Route::get('/order/update/{id}', [OrderController::class, 'edit'])->name('admin.order.edit');
 
-    Route::get('/order/detail/{id}',[OrderController::class ,'detail'])->name('admin.order.detail');
+    Route::post('/order/update/{id}', [OrderController::class, 'update'])->name('admin.order.update');
+
+    Route::get('/order/detail/{id}', [OrderController::class, 'detail'])->name('admin.order.detail');
 });

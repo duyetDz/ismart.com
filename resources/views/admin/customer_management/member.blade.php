@@ -83,10 +83,18 @@
                 ">
                 <i class="fa-sharp fa-solid fa-plus"></i> Add
             </a>
-            <form action="" method="GET" class="">
-                <input type="text" value="" placeholder="Search" name="ValuetoSearch" class="form-control">
-                <!-- End Modal add user  -->
+            <form action="{{ route('admin.member.search') }}" method="get">
 
+                <div class="d-flex">
+                    <input type="text" value="{{ request('ValuetoSearch') }}" placeholder="Search" name="ValuetoSearch"
+                        class="form-control">
+                    <!-- End Modal add user  -->
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+                <select name="select" class="form-select d-flex mt-2" aria-label="Default select example">
+                    <option value="name" @if (request('select') == 'name') selected @endif>Tên người dùng</option>
+                    <option value="address" @if (request('select') == 'address') selected @endif>Địa chỉ</option>
+                </select>
             </form>
         </div>
 
@@ -97,10 +105,6 @@
         <table id="myTable" class="table table-bordered caption-top">
             <thead>
                 <tr>
-                    <th scope="col" class="col-1 text-center">
-                        <input class="form-check-input me-1" id="checkboxAll" type="checkbox">
-                        All
-                    </th>
                     <th scope="col" class="col-1 text-center">ID</th>
                     <th scope="col" class="col text-center">Họ Và tên</th>
                     <th scope="col" class="col text-center">Email</th>
@@ -113,9 +117,6 @@
 
                 @foreach ($users as $user)
                     <tr id="">
-                        <td class="text-center">
-                            <input class="form-check-input me-1" id="chkboxname" value="" type="checkbox">
-                        </td>
                         <td class="text-center">
                             {{ $user->id }}
                         </td>
@@ -135,33 +136,24 @@
                             @else
                                 Admin
                             @endif
-                </td>
-                <td class="d-flex justify-content-center">
-                    <!-- Update user -->
-                    <a href="member/update/{{$user->id}}" class="btn btn-primary" value="" name="btn_update" id="btn_update"
-                        style="margin-right: 7px;"><i class="fa-solid fa-pen-to-square"></i></a>
+                        </td>
+                        <td class="d-flex justify-content-center">
+                            <!-- Update user -->
+                            <a href="{{ asset('') }}admin/member/update/{{ $user->id }}" class="btn btn-primary"
+                                value="" name="btn_update" id="btn_update" style="margin-right: 7px;"><i
+                                    class="fa-solid fa-pen-to-square"></i></a>
 
-                    <a href="member/destroy/{{$user->id}}" class="btn btn-danger" name="btn_delete" id="btn_delete"><i
-                            class="fa-solid fa-xmark"></i></a>
-                </td>
-                </tr>
+                            <a href="{{ asset('') }}admin/member/destroy/{{ $user->id }}" class="btn btn-danger"
+                                name="btn_delete" id="btn_delete"><i class="fa-solid fa-xmark"></i></a>
+                        </td>
+                    </tr>
                 @endforeach
 
 
             </tbody>
         </table>
         <nav aria-label="...">
-            <ul class="pagination">
-                <li class="page-item disabled">
-                    <span class="page-link">Previous</span>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="">1</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="">Next</a>
-                </li>
-            </ul>
+            {{ $users->appends(['ValuetoSearch' => request('ValuetoSearch'), 'select' => request('select')])->links('templatepagination') }}
         </nav>
     </div>
 

@@ -1,6 +1,6 @@
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
-        <a class="sidebar-brand" href="index.html">
+        <a class="sidebar-brand" href="{{route('admin.index')}}">
             <span class="sidebar-brand-text align-middle">
                 AdminKit
                 <sup><small class="badge bg-primary text-uppercase">Pro</small></sup>
@@ -80,12 +80,7 @@
                     data-bs-parent="#sidebar">
                     <li class="sidebar-item"><a href="{{route('admin.product_image')}}" class="sidebar-link" href="">Hình ảnh</a>
                     </li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="">Hỗ trợ trực tuyến</a>
-                    </li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="">Thông tin</a>
-                    </li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="">Nội dung khác</a>
-                    </li>
+                   
                 </ul>
             </li>
 

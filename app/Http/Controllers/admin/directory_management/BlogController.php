@@ -13,7 +13,7 @@ class BlogController extends Controller
     //
     public function index()
     {
-        $blogs = Blog::all();
+        $blogs = Blog::paginate(10);
 
         return view('admin/directory_management/blog', ['title' => 'Danh sách bài viết', 'blogs' => $blogs]);
     }
@@ -22,21 +22,22 @@ class BlogController extends Controller
     {
         $blogs = null;
         $input = $request->input('ValuetoSearch');
+        $date = $request->input('date');
         $select = $request->input('select');
 
         if($select == 'title'){
             if(!empty($input)){
-                $blogs = Blog::Where('title','LIKE', '%' . $input . '%')->get();
+                $blogs = Blog::Where('title','LIKE', '%' . $input . '%')->paginate(10);
             } else {
-                $blogs = Blog::all();
+                $blogs = Blog::paginate(10);
             }
             
         } else if($select == 'updated_at'){
             
-            if(!empty($input)){
-                $blogs = Blog::Where('updated_at','LIKE', '%' . $input . '%')->get();
+            if(!empty($date)){
+                $blogs = Blog::Where('updated_at','LIKE', '%' . $date . '%')->paginate(10);
             } else {
-                $blogs = Blog::all();
+                $blogs = Blog::orderBy('created_at', 'desc')->paginate(10);
             }
         }
 
@@ -53,13 +54,15 @@ class BlogController extends Controller
     {
 
         $validatedData = $request->validate([
-            'feature_img' => 'required',
+            'feature_img' => 'required|image|max:2048',
             'content' => 'required',
             'title' => 'required',
         ], [
             'content.required' => "Bạn không được để trống nội dung bài viết",
             'feature_img.required' => "Bạn không được để trống ảnh đại diện bài viết",
             'title.required' => "Bạn không được để trống tiêu đề bài viết",
+            'feature_img.image' => "Tệp thêm vào phải là hình ảnh",
+            'feature_img.max' => "Hình ảnh thêm vào có kích thước k vượt quá 2048 KB"
         ]);
 
         $blog = new Blog();

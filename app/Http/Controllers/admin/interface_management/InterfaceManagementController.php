@@ -14,7 +14,7 @@ class InterfaceManagementController extends Controller
 {
     public function index()
     {
-        $product_images = Product_image::all();
+        $product_images = Product_image::paginate(5);
         $categories = Category::all();
         return view('admin.interface_management.index', ['title' => "Danh sách hình ảnh", 'product_images' => $product_images, 'categories' => $categories]);
     }
@@ -27,42 +27,41 @@ class InterfaceManagementController extends Controller
 
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'images' => 'required',
+            'images.*' => 'required|image|max:2048|mimes:jpeg,jpg,png,gif',
+        ], [
+            'images.*.required' => 'Bạn chưa chọn ảnh',
+            'images.*.image' => 'Tệp tải lên phải là hình ảnh',
+            'images.*.mimes' => 'Tệp tải lên phải là định dạng jpeg, jpg, png hoặc gif',
+            'images.*.max' => 'Dung lượng tối đa của tệp tải lên là 2MB'
+        ]);
+        
 
-        if ($request->hasFile('images')) {
-            $validator = Validator::make($request->all(), [
-                'images.*' => [
-                    'required',
-                    'image',
-                    'mimes:jpeg,jpg,png,gif',
-                    'max:2048' // giới hạn dung lượng file ảnh là 2MB
-                ]
-            ]);
+        $images = $request->file('images');
 
-            $images = $request->file('images');
-
-            foreach ($images as $image) {
+        foreach ($images as $image) {
 
 
-                // Tạo bản ghi ProductImage và liên kết với sản phẩm
-                $product_images = new Product_image();
-                $product_images->product_id    = $request->product_id;
-                
-                $file_name = $image->getClientOriginalName();
-                $image_resize = Image::make($image->getRealPath());
-                $image_resize->resize(300,300);
-                $image_resize->save(public_path('storage/images/'.$file_name)); 
+            // Tạo bản ghi ProductImage và liên kết với sản phẩm
+            $product_images = new Product_image();
+            $product_images->product_id    = $request->product_id;
 
-                $image_zoom = Image::make($image->getRealPath());
-                $image_zoom->resize(700,700);
-                $image_zoom->save(public_path('storage/images/700'.$file_name)); 
+            $file_name = $image->getClientOriginalName();
+            $image_resize = Image::make($image->getRealPath());
+            $image_resize->resize(300, 300);
+            $image_resize->save(public_path('storage/images/' . $file_name));
 
-                $product_images->image = 'storage/images/' . basename($file_name);
-                $product_images->image_zoom = 'storage/images/700' . basename($file_name);
-                $product_images->save();
-            }
+            $image_zoom = Image::make($image->getRealPath());
+            $image_zoom->resize(700, 700);
+            $image_zoom->save(public_path('storage/images/700' . $file_name));
 
-            return redirect(route('admin.product_image'))->with('status', "Bạn đã Thêm thành công");
+            $product_images->image = 'storage/images/' . basename($file_name);
+            $product_images->image_zoom = 'storage/images/700' . basename($file_name);
+            $product_images->save();
         }
+
+        return redirect(route('admin.product_image'))->with('status', "Bạn đã Thêm thành công");
     }
 
     public function edit($id)
@@ -90,12 +89,12 @@ class InterfaceManagementController extends Controller
             }
             $file_name = $image->getClientOriginalName();
             $image_resize = Image::make($image->getRealPath());
-            $image_resize->resize(300,300);
-            $image_resize->save(public_path('storage/images/'.$file_name)); 
+            $image_resize->resize(300, 300);
+            $image_resize->save(public_path('storage/images/' . $file_name));
 
             $image_zoom = Image::make($image->getRealPath());
-            $image_zoom->resize(700,700);
-            $image_zoom->save(public_path('storage/images/700'.$file_name)); 
+            $image_zoom->resize(700, 700);
+            $image_zoom->save(public_path('storage/images/700' . $file_name));
 
             $product_image->image = 'storage/images/' . basename($file_name);
             $product_image->image_zoom = 'storage/images/700' . basename($file_name);
@@ -126,41 +125,32 @@ class InterfaceManagementController extends Controller
 
     public function search(Request $request)
     {
-        $category = Category::all();
+        $categories = Category::all();
         $input = $request->input('ValuetoSearch');
         $select = $request->input('select');
         $products = null;
-        $product_images = null;
-        if ($select == 'name') {
+
+        if (empty($select) || $select == 'name') {
+            // Tìm kiếm theo tên sản phẩm
             if (!empty($input)) {
-                $products = Product::where('name', $input)->get();
+                $products = Product::where('name', 'LIKE', '%' . $input . '%');
             } else {
-                $products = Product::all();
+                $products = Product::query();
             }
-        } else if ($select == 'updated_at') {
-
-            if (!empty($input)) {
-
-                $product_images = Product_image::where('updated_at', 'LIKE', '%' . $input . '%')->get();
-            } else {
-                $product_images = Product_image::all();
-            }
-
-            return view('admin.interface_management.index', ['title' => "Danh sách hình ảnh", 'product_images' => $product_images, 'categories' => $category]);
         } else {
+            // Tìm kiếm theo danh mục sản phẩm
             if (!empty($input)) {
-
-                $categories = Category::select('id')->where('name', 'Like', $input)->get();
-                $categoryIds = $categories->pluck('id')->toArray();
-                $products = Product::where('name', 'LIKE', '%' . $input . '%')->orwhereIn('category_id', $categoryIds)->get();
+                $products = Product::where('name', 'LIKE', '%' . $input . '%')
+                    ->where('category_id', $select);
             } else {
-                $products = Product::all();
+                $products = Product::where('category_id', $select);
             }
         }
 
-        $productIds = $products->pluck('id')->toArray();
-        $product_images = Product_image::whereIn('product_id', $productIds)->get();
+        $product_ids = $products->pluck('id')->toArray();
 
-        return view('admin.interface_management.index', ['title' => "Danh sách hình ảnh", 'product_images' => $product_images, 'categories' => $category]);
+        $product_images = Product_image::whereIn('product_id', $product_ids)->paginate(5);
+
+        return view('admin.interface_management.index', ['title' => 'Danh sách hình ảnh', 'product_images' => $product_images, 'categories' => $categories]);
     }
 }

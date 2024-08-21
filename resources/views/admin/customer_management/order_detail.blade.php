@@ -14,15 +14,6 @@
                 <div>Địa chỉ : {{ $order->address }}</div>
             </div>
 
-            <div>
-                <div>Thông tin người gửi</div>
-                <div>Họ và tên: {{ $seeder[0]->name }}</div>
-                <div>Số điện thoại : {{ $seeder[0]->name }}</div>
-                <div>Email : {{ $seeder[0]->email }}</div>
-                <div>Địa chỉ : {{ $seeder[0]->address }}</div>
-            </div>
-
-
         </div>
         <div class="py-3">
             <table id="myTable" class="table table-bordered caption-top">
@@ -67,8 +58,7 @@
 
         <div class=" float-end">
             <div>Tổng giá sản phẩm:{{ number_format($totalAmount, 0, ',', '.') }}đ</div>
-            <div>Phí ship: {{ number_format($ship = 30000, 0, ',', '.') }}đ</div>
-            <div>Tổng tiền thu: {{ number_format($totalAmount+$ship, 0, ',', '.') }}đ</div>
+            <div>Tổng tiền thu: {{ number_format($totalAmount, 0, ',', '.') }}đ</div>
         </div>
 
     </div>

@@ -1,6 +1,7 @@
 @extends('templates.tpl_default')
 
 @section('content')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <div id="main-content-wp" class="clearfix detail-product-page">
         <div class="wp-inner">
             <div class="secion" id="breadcrumb-wp">
@@ -49,23 +50,46 @@
                         <div class="info fl-right">
                             <h3 class="product-name">{{ $product->name }}</h3>
                             <div class="desc">
-                                <p>{!! $product->configuration !!}</p>
+                                {!! $product->configuration !!}
                             </div>
                             <div class="num-product">
-                                <span class="title">Sản phẩm: </span>
-                                <span class="status"></span>
+                                <span class="title">Trạng thái </span>
+                                <span class="status">
+                                    @if ($product->quantity > 0)
+                                        Còn hàng ({{ $product->quantity }})
+                                    @else
+                                        Tạm hết hàng
+                                    @endif
+                                </span>
                             </div>
-                            <p class="price">{{ number_format($product->price, 0, ',', '.') }}đ</p>
-                            <form action="{{ asset('cart/add/' . $product->id . '') }}" method="post">
+                            <div class="d-flex align-items-center">
+                                <span class="mr-2">Giá:</span>
+                                <p class="price mb-0">{{ number_format($product->price, 0, ',', '.') }}đ</p>
+                            </div>
+
+
+                            <form action="{{ asset('') }}cart/buy_nows/{{ $product->id }}" method="post">
                                 @csrf
-                                <div id="num-order-wp">
-                                    <a title="" id="minus"><i class="fa fa-minus"></i></a>
-                                    <input type="text" name="num-order" value="1" id="num-order">
-                                    <a title="" id="plus"><i class="fa fa-plus"></i></a>
-                                </div>
-                                <button type="submit" title="Thêm giỏ hàng" class="btn add-cart">Thêm giỏ hàng</button>
-                                <button title="Mua ngay" style="background-color: red" class="btn add-cart">Mua
-                                    ngay</button>
+
+                                @if ($product->quantity > 0)
+                                    <div id="num-order-wp">
+
+                                        <input type="hidden" class="product_id" value="{{ $product->id }}">
+                                        <input type="number" min="1" name="num-order" value="1"
+                                            max="{{ $product->quantity }}" id="num-order">
+
+                                    </div>
+                                    <a onclick="AddCart({{ $product->id }})" title="Thêm giỏ hàng"
+                                        class="btn add-cart">Thêm
+                                        giỏ hàng</a>
+                                    <button type="submit" title="Mua ngay" style="background-color: red"
+                                        class="btn add-cart">Mua
+                                        ngay</button>
+                                @else
+                                    <button title="Tạm hết hàng" class="btn btn-danger" disabled>Tạm hết
+                                        hàng</button>
+                                @endif
+
                             </form>
 
                         </div>
@@ -85,20 +109,35 @@
                     </div>
                     <div class="section-detail">
                         <ul class="list-item">
-                            <li>
-                                <a href="" title="" class="thumb">
-                                    <img src="{{ asset('client/images/img-pro-17.png') }}">
-                                </a>
-                                <a href="" title="" class="product-name">Laptop HP Probook 4430s</a>
-                                <div class="price">
-                                    <span class="new">17.900.000đ</span>
-                                    <span class="old">20.900.000đ</span>
-                                </div>
-                                <div class="action clearfix">
-                                    <a href="" title="" class="add-cart fl-left">Thêm giỏ hàng</a>
-                                    <a href="" title="" class="buy-now fl-right">Mua ngay</a>
-                                </div>
-                            </li>
+                            @foreach ($products as $item)
+                                <li style="min-height: 353px">
+                                    <a href="" title="" class="thumb">
+                                        <img src="{{ asset('') }}{{ $item->feature_image }}">
+                                    </a>
+                                    <a href="" title="" class="product-name">{{ $item->name }}</a>
+                                    <div class="price">
+                                        <span class="new">{{ number_format($item->price, 0, ',', '.') }}đ</span>
+                                        <span class="old">{{ number_format($item->price * 1.3, 0, ',', '.') }}đ</span>
+                                    </div>
+                                    <div class="action clearfix" style=" text-align: center; ">
+                                        @if ($item->quantity > 0)
+                                            <a onclick="addCart({{ $item->id }})" title="Thêm giỏ hàng"
+                                                class=" fl-left" style="padding: 0px;">
+                                                <div class="btn btn-light"
+                                                    style="padding: 8px 30px 8px 30px; border: 1px solid;"><i
+                                                        class="fa-solid fa-cart-plus" style="font-size: 20px;"></i>
+                                                </div>
+                                            </a>
+                                            <a href="{{ asset('') }}cart/buy_now/{{ $item->id }}"
+                                                title="Mua ngay" class="btn btn-danger fl-right"
+                                                style="padding: 10px 20px 10px 20px;">Mua ngay</a>
+                                        @else
+                                            <button title="Tạm hết hàng" class="btn btn-danger" disabled>Tạm hết
+                                                hàng</button>
+                                        @endif
+                                    </div>
+                                </li>
+                            @endforeach
 
 
                         </ul>
@@ -112,63 +151,100 @@
                     </div>
                     <div class="secion-detail">
                         <ul class="list-item">
-                            <li>
-                                <a href="?page=category_product" title="">Điện thoại</a>
-                                <ul class="sub-menu">
-                                    <li>
-                                        <a href="?page=category_product" title="">Iphone</a>
-                                    </li>
-                                    <li>
-                                        <a href="?page=category_product" title="">Samsung</a>
-                                        <ul class="sub-menu">
-                                            <li>
-                                                <a href="?page=category_product" title="">Iphone X</a>
-                                            </li>
-                                            <li>
-                                                <a href="?page=category_product" title="">Iphone 8</a>
-                                            </li>
-                                            <li>
-                                                <a href="?page=category_product" title="">Iphone 8 Plus</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="?page=category_product" title="">Oppo</a>
-                                    </li>
-                                    <li>
-                                        <a href="?page=category_product" title="">Bphone</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="?page=category_product" title="">Máy tính bảng</a>
-                            </li>
-                            <li>
-                                <a href="?page=category_product" title="">laptop</a>
-                            </li>
-                            <li>
-                                <a href="?page=category_product" title="">Tai nghe</a>
-                            </li>
-                            <li>
-                                <a href="?page=category_product" title="">Thời trang</a>
-                            </li>
-                            <li>
-                                <a href="?page=category_product" title="">Đồ gia dụng</a>
-                            </li>
-                            <li>
-                                <a href="?page=category_product" title="">Thiết bị văn phòng</a>
-                            </li>
+                            @foreach ($categories as $item)
+                                <li>
+                                    <a href="{{ asset('') }}products/sort/{{ $item->id }}"
+                                        title="">{{ $item->name }}</a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
-                <div class="section" id="banner-wp">
-                    <div class="section-detail">
-                        <a href="" title="" class="thumb">
-                            <img src="client/images/banner.png" alt="">
-                        </a>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
+@endsection
+
+
+@section('js')
+    <script>
+        function AddCart(id) {
+            var productId = $('.product_id').val();
+            var numOrder = $('#num-order').val();
+
+            var data = {
+                'productId': productId,
+                'numOrder': numOrder,
+            }
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "/carts/add/" + productId,
+                data: data,
+                success: function(response) {
+                    $('.charge-item-card').empty();
+                    $('.charge-item-card').html(response);
+                    toastr.options = {
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-bottom-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "1000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
+                    toastr.success("Bạn đã Thêm Thành công ")
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    console.log(xhr.responseText)
+                }
+            });
+        }
+
+        function addCart(id) {
+
+            $.ajax({
+                type: "GET",
+                url: "/cart/add/" + id,
+
+                success: function(response) {
+                    $('.charge-item-card').empty();
+                    $('.charge-item-card').html(response);
+                    toastr.options = {
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-bottom-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "1000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
+                    toastr.success("Bạn đã Thêm Thành công ")
+                }
+            });
+        }
+    </script>
 @endsection

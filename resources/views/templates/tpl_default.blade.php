@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
         integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+
 
 </head>
 
@@ -67,6 +67,47 @@
             }
             toastr.success("{{ session('status') }}")
         @endif
+    </script>
+
+    <script>
+        // Lấy đối tượng ô tìm kiếm bằng id
+        const searchInput = document.getElementById('search-imput');
+
+        // Thêm sự kiện "input" vào ô tìm kiếm
+        searchInput.addEventListener('input', function() {
+            const keyword = searchInput.value;
+            searchResults.style.display = 'block';
+            if (keyword) {
+                $.ajax({
+                    type: "get",
+                    url: "/search_now/" + keyword,
+                    success: function(response) {
+                        $('.search_results').empty();
+                        $('.search_results').html(response[0]);
+                        // console.log(response);
+                    }
+                });
+            } else {
+                $('.search_results').empty();
+            }
+
+
+
+        });
+
+        // Lấy đối tượng kết quả tìm kiếm
+        const searchResults = document.querySelector('.search_results');
+
+        // Bắt sự kiện khi click chuột ra chỗ khác trên trang web
+        document.addEventListener('click', function(event) {
+            const isClickInsideSearchInput = searchInput.contains(event.target);
+            const isClickInsideSearchResults = searchResults.contains(event.target);
+
+            if (!isClickInsideSearchInput && !isClickInsideSearchResults) {
+                // Ẩn kết quả tìm kiếm
+                searchResults.style.display = 'none';
+            }
+        })
     </script>
 
     @yield('js')
